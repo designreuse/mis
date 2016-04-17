@@ -9,3 +9,5 @@ nbdist/
 ### Gradle ###
 .gradle
 
+
+src/main/resources/application.properties
