@@ -1,0 +1,11 @@
+### NetBeans ###
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+.nb-gradle-properties
+
+### Gradle ###
+.gradle
+
