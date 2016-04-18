@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User implements Serializable {
 
     @Id
@@ -26,10 +26,9 @@ public class User implements Serializable {
     @Column
     private String lastName;
 
-    /*
     @OneToMany(targetEntity = Role.class, cascade = ALL)
     private Set<Role> roles;
-     */
+     
     public User() {
     }
 
@@ -77,6 +76,17 @@ public class User implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+    public void setRole(Role role){
+        this.roles.add(role);
+        if(role.getUser() != this){
+            role.setUser(this);
+        }
+    }
+    
+    public Set<Role> getRole(){
+        return roles;
     }
 
     
