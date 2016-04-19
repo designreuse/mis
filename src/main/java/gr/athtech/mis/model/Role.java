@@ -25,6 +25,8 @@ public class Role implements Serializable{
     @JoinColumn(name="user_id")
     private User user;
     
+    public Role(){}
+    
     public Role(Long id, String rolename) {
         this.id = id;
         this.rolename = rolename;

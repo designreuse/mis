@@ -24,15 +24,19 @@ public class DoctorSpecialty implements Serializable{
     private Long docspecId;
     @Column
     private String speciality;
-    private final Long docspecid;
-
+    
+    
+    public DoctorSpecialty(){}
+    
+       
+    
     public DoctorSpecialty(Long docspecId, String speciality) {
-        this.docspecid = docspecId;
+        this.docspecId = docspecId;
         this.speciality = speciality;
     }
 
     public Long getDocspecid() {
-        return docspecid;
+        return docspecId;
     }
 
     public void setDocspecid(Long docspecId) {

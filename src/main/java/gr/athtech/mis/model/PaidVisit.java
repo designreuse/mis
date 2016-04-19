@@ -33,6 +33,8 @@ public class PaidVisit implements Serializable{
     private String isGroup;
     @Column
     private String comment;
+    
+    public PaidVisit(){}
 
     public PaidVisit(int idPaidVisit, String week, Date date, String hour, String isGroup, String comment) {
         this.idPaidVisit = idPaidVisit;

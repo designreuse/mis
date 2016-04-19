@@ -28,6 +28,8 @@ public class City implements Serializable{
     @OneToMany(targetEntity = Doctor.class, cascade = ALL)
     private List<Doctor> doctors;
     
+    public City(){}
+    
     public City(Long id, String cityname) {
         this.id = id;
         this.cityname = cityname;

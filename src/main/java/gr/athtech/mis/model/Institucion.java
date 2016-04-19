@@ -24,6 +24,8 @@ public class Institucion implements Serializable{
     private int institucionId;
     @Column
     private String institucionName;
+    
+    public Institucion(){}
 
     public Institucion(int institucionId, String institucionName) {
         this.institucionId = institucionId;

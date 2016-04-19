@@ -29,6 +29,9 @@ public class Cycle implements Serializable{
     @Column
     private Date endDate;
     
+    
+    public Cycle(){}
+    
     public Cycle(Long idcycle, Date startDate, Date endDate) {
         this.idcycle = idcycle;
         this.startDate = startDate;

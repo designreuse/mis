@@ -25,6 +25,8 @@ public class Doctor implements Serializable{
     private String phone;
     @Column
     private String position;
+    
+    public Doctor(){}
 
     public Doctor(Long id, String name, String address, String phone, String position) {
         this.id = id;

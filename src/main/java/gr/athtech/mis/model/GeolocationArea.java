@@ -24,6 +24,8 @@ public class GeolocationArea implements Serializable{
     private Long geoId;
     @Column
     private String area;
+    
+    public GeolocationArea(){}
 
     public GeolocationArea(Long geoId, String area) {
         this.geoId = geoId;
