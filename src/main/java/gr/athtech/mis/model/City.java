@@ -1,6 +1,7 @@
 
 package gr.athtech.mis.model;
 
+import java.io.Serializable;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "city")
-public class City {
+public class City implements Serializable{
     
     @Id
     @GeneratedValue

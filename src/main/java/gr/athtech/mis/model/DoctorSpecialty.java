@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "doctorspecialty")
-public class DoctorSpecialty {
+public class DoctorSpecialty implements Serializable{
     @Id
     @GeneratedValue
     private Long docspecId;

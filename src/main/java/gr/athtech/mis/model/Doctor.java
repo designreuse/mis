@@ -1,5 +1,6 @@
 package gr.athtech.mis.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "doctor")
-public class Doctor {
+public class Doctor implements Serializable{
     @Id
     @GeneratedValue
     private Long id;
