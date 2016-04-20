@@ -29,10 +29,11 @@ public class City implements Serializable{
     private List<Doctor> doctors;
     
     public City(){}
-    
-    public City(Long id, String cityname) {
+
+    public City(Long id, String cityname, List<Doctor> doctors) {
         this.id = id;
         this.cityname = cityname;
+        this.doctors = doctors;
     }
 
     public Long getId() {
@@ -50,5 +51,14 @@ public class City implements Serializable{
     public void setCityname(String cityname) {
         this.cityname = cityname;
     }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
+    }
+    
     
 }

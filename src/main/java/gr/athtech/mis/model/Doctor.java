@@ -25,15 +25,27 @@ public class Doctor implements Serializable{
     private String phone;
     @Column
     private String position;
+    @Column
+    private City city;
+    @Column
+    private DoctorSpecialty specialty;
+    @Column
+    private GeolocationArea area;
+    @Column
+    private Institucion institucion;
     
     public Doctor(){}
 
-    public Doctor(Long id, String name, String address, String phone, String position) {
+    public Doctor(Long id, String name, String address, String phone, String position, City city, DoctorSpecialty specialty, GeolocationArea area, Institucion institucion) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.position = position;
+        this.city = city;
+        this.specialty = specialty;
+        this.area = area;
+        this.institucion = institucion;
     }
 
     public Long getId() {
@@ -75,5 +87,36 @@ public class Doctor implements Serializable{
     public void setPosition(String position) {
         this.position = position;
     }
-   
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public DoctorSpecialty getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(DoctorSpecialty specialty) {
+        this.specialty = specialty;
+    }
+
+    public GeolocationArea getArea() {
+        return area;
+    }
+
+    public void setArea(GeolocationArea area) {
+        this.area = area;
+    }
+
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
+    } 
 }
