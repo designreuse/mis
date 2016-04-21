@@ -27,6 +27,7 @@ public class User implements Serializable {
     private String firstName;
     @Column(nullable = false)
     private String lastName;
+    //Used in order to create jointed tables for many to many relationships
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_has_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
     private Set<Role> roles;

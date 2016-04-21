@@ -27,6 +27,7 @@ public class Role {
     private int id;
     @Column(nullable = false)
     private String rolename;
+    //Used in order to create jointed tables for many to many relationships
     @ManyToMany(mappedBy="roles")
     private Set<User> users;
     
