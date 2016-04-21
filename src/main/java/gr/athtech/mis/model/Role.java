@@ -5,11 +5,13 @@
  */
 package gr.athtech.mis.model;
 
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 
 /**
@@ -23,14 +25,19 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column
+    @Column(nullable = false)
     private String rolename;
+    @ManyToMany(mappedBy="roles")
+    private Set<User> users;
+    
    
     public Role(){}
 
-    public Role(int id, String rolename, User user) {
+    
+    public Role(int id, String rolename, Set<User> users) {
         this.id = id;
         this.rolename = rolename;
+        this.users = users;
     }
 
     public int getId() {
@@ -48,5 +55,15 @@ public class Role {
     public void setRolename(String rolename) {
         this.rolename = rolename;
     }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+    
+    
 
 }
