@@ -1,22 +1,19 @@
 package gr.athtech.mis.model;
 
 import java.io.Serializable;
-import java.util.Set;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
 
 @Entity
-@Table(name = "user")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     @Column
     private String username;
     @Column
@@ -25,24 +22,23 @@ public class User implements Serializable {
     private String firstName;
     @Column
     private String lastName;
-
-    @OneToMany(targetEntity = Role.class, cascade = ALL)
-    private Set<Role> roles;
-     
+    
     public User() {
     }
 
-    public User(long id, String firstName, String lastName) {
+    public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -77,17 +73,4 @@ public class User implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
-    public void setRole(Role role){
-        this.roles.add(role);
-        if(role.getUser() != this){
-            role.setUser(this);
-        }
-    }
-    
-    public Set<Role> getRole(){
-        return roles;
-    }
-
-    
 }

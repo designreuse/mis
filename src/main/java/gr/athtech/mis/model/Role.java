@@ -1,42 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gr.athtech.mis.model;
 
-import java.io.Serializable;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
+
+/**
+ *
+ * @author it-support
+ */
 
 @Entity
-@Table(name = "roles")
-public class Role implements Serializable{
-
+public class Role {
+    
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     @Column
     private String rolename;
-    
-    @ManyToOne(targetEntity = Role.class, cascade = ALL)
-    @JoinColumn(name="user_id")
-    private User user;
-    
+   
     public Role(){}
-    
-    public Role(Long id, String rolename) {
+
+    public Role(int id, String rolename, User user) {
         this.id = id;
         this.rolename = rolename;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -47,16 +48,5 @@ public class Role implements Serializable{
     public void setRolename(String rolename) {
         this.rolename = rolename;
     }
-    
-    public User getUser()
-    {
-        return user;
-    }
-    
-    public void setUser(User user){
-        this.user = user;
-        if(!user.getRole().contains(this)){
-            user.getRole().add(this);
-        }
-    } 
+
 }

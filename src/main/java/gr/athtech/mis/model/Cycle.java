@@ -11,39 +11,37 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  *
  * @author jmone
  */
 @Entity
-@Table(name = "city")
 public class Cycle implements Serializable{
     
     @Id
     @GeneratedValue
-    private Long idcycle;
-    @Column
+    private int idcycle;
+    @Column(nullable = false)
     private Date startDate;
-    @Column
+    @Column(nullable = false)
     private Date endDate;
     
     
     public Cycle(){}
     
-    public Cycle(Long idcycle, Date startDate, Date endDate) {
+    public Cycle(int idcycle, Date startDate, Date endDate) {
         this.idcycle = idcycle;
         this.startDate = startDate;
         this.endDate = endDate;
     }
     
 
-    public Long getIdcycle() {
+    public int getIdcycle() {
         return idcycle;
     }
 
-    public void setIdcycle(Long idcycle) {
+    public void setIdcycle(int idcycle) {
         this.idcycle = idcycle;
     }
 

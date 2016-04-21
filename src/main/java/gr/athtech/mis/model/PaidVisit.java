@@ -18,20 +18,19 @@ import javax.persistence.Table;
  * @author it-support
  */
 @Entity
-@Table(name="paidVisit")
 public class PaidVisit implements Serializable{
     @Id
     @GeneratedValue
     private int idPaidVisit;
-    @Column
+    @Column(nullable = false)
     private String week;
-    @Column
+    @Column(nullable = false)
     private Date date;
-    @Column
+    @Column(nullable = false)
     private String hour;
-    @Column
+    @Column(nullable = false)
     private String isGroup;
-    @Column
+    @Column(nullable = false)
     private String comment;
     
     public PaidVisit(){}

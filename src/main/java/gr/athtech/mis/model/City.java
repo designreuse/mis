@@ -1,46 +1,41 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gr.athtech.mis.model;
 
 import java.io.Serializable;
-import java.util.List;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
- * @author jmone
+ * @author it-support
  */
 @Entity
-@Table(name = "city")
 public class City implements Serializable{
     
     @Id
     @GeneratedValue
-    private Long id;
-    @Column
+    private int id;
+    @Column(nullable = false)
     private String cityname;
-
-    @OneToMany(targetEntity = Doctor.class, cascade = ALL)
-    private List<Doctor> doctors;
     
     public City(){}
 
-    public City(Long id, String cityname, List<Doctor> doctors) {
+    public City(int id, String cityname) {
         this.id = id;
         this.cityname = cityname;
-        this.doctors = doctors;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -52,13 +47,4 @@ public class City implements Serializable{
         this.cityname = cityname;
     }
 
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
-    }
-    
-    
 }

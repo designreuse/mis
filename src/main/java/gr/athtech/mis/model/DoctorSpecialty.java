@@ -20,30 +20,26 @@ import javax.persistence.Table;
  * @author jmone
  */
 @Entity
-@Table(name = "doctorspecialty")
 public class DoctorSpecialty implements Serializable{
     @Id
     @GeneratedValue
-    private Long docspecId;
-    @Column
+    private int docspecId;
+    @Column(nullable = false)
     private String speciality;
-    @OneToMany(targetEntity = Doctor.class, cascade = ALL)
-    private List<Doctor> doctors;
     
     
     public DoctorSpecialty(){}
 
-    public DoctorSpecialty(Long docspecId, String speciality, List<Doctor> doctors) {
+    public DoctorSpecialty(int docspecId, String speciality) {
         this.docspecId = docspecId;
         this.speciality = speciality;
-        this.doctors = doctors;
     }
 
-    public Long getDocspecId() {
+    public int getDocspecId() {
         return docspecId;
     }
 
-    public void setDocspecId(Long docspecId) {
+    public void setDocspecId(int docspecId) {
         this.docspecId = docspecId;
     }
 
@@ -55,15 +51,4 @@ public class DoctorSpecialty implements Serializable{
         this.speciality = speciality;
     }
 
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
-    }
-    
-    
-    
-    
 }
