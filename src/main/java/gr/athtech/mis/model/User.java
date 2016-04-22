@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 
+
 @Entity
 public class User implements Serializable {
 
@@ -31,18 +32,21 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_has_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
     private Set<Role> roles;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "groupId"))
+    private Set<Groups> groups;
     
     public User() {
     }
 
-    
-    public User(int id, String username, String password, String firstName, String lastName, Set<Role> roles) {
+    public User(int id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Groups> groups) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.roles = roles;
+        this.groups = groups;
     }
 
     public int getId() {
@@ -91,6 +95,14 @@ public class User implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Groups> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Groups> groups) {
+        this.groups = groups;
     }
     
 }
