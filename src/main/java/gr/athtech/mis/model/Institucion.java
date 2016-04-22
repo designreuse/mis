@@ -6,10 +6,12 @@
 package gr.athtech.mis.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,13 +24,16 @@ public class Institucion implements Serializable{
     private int institucionId;
     @Column(nullable = false)
     private String institucionName;
+    @OneToMany(mappedBy="doc_institucion")
+    private List<Doctor> doctors;
 
     
     public Institucion(){}
 
-    public Institucion(int institucionId, String institucionName) {
+    public Institucion(int institucionId, String institucionName, List<Doctor> doctors) {
         this.institucionId = institucionId;
         this.institucionName = institucionName;
+        this.doctors = doctors;
     }
 
     public int getInstitucionId() {
@@ -45,6 +50,14 @@ public class Institucion implements Serializable{
 
     public void setInstitucionName(String institucionName) {
         this.institucionName = institucionName;
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
     }
 
 }

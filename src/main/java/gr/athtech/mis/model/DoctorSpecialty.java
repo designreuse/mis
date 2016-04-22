@@ -7,13 +7,11 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
@@ -26,13 +24,15 @@ public class DoctorSpecialty implements Serializable{
     private int docspecId;
     @Column(nullable = false)
     private String speciality;
-    
+    @OneToMany(mappedBy="doc_specialty")
+    private List<Doctor> doctors;
     
     public DoctorSpecialty(){}
 
-    public DoctorSpecialty(int docspecId, String speciality) {
+    public DoctorSpecialty(int docspecId, String speciality, List<Doctor> doctors) {
         this.docspecId = docspecId;
         this.speciality = speciality;
+        this.doctors = doctors;
     }
 
     public int getDocspecId() {
@@ -49,6 +49,14 @@ public class DoctorSpecialty implements Serializable{
 
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
     }
 
 }

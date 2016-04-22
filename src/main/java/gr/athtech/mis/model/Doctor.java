@@ -27,19 +27,31 @@ public class Doctor implements Serializable{
     @Column(nullable = false)
     private String position;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="city_id")
+    @JoinColumn(name="city_id", nullable = false)
     private City doc_city;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="specialty_id", nullable = false)
+    private DoctorSpecialty doc_specialty;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="area_id", nullable = false)
+    private GeolocationArea doc_area;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="institucion_id", nullable = false)
+    private Institucion doc_institucion;
+
 
     public Doctor(){}
 
-
-    public Doctor(int id, String name, String address, String phone, String position, City doc_city) {
+    public Doctor(int id, String name, String address, String phone, String position, City doc_city, DoctorSpecialty doc_specialty, GeolocationArea doc_area, Institucion doc_institucion) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.position = position;
         this.doc_city = doc_city;
+        this.doc_specialty = doc_specialty;
+        this.doc_area = doc_area;
+        this.doc_institucion = doc_institucion;
     }
 
     public int getId() {
@@ -90,5 +102,28 @@ public class Doctor implements Serializable{
         this.doc_city = doc_city;
     }
 
+    public DoctorSpecialty getDoc_specialty() {
+        return doc_specialty;
+    }
+
+    public void setDoc_specialty(DoctorSpecialty doc_specialty) {
+        this.doc_specialty = doc_specialty;
+    }
+
+    public GeolocationArea getDoc_area() {
+        return doc_area;
+    }
+
+    public void setDoc_area(GeolocationArea doc_area) {
+        this.doc_area = doc_area;
+    }
+
+    public Institucion getDoc_institucion() {
+        return doc_institucion;
+    }
+
+    public void setDoc_institucion(Institucion doc_institucion) {
+        this.doc_institucion = doc_institucion;
+    }
     
 }
