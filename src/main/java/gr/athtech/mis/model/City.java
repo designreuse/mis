@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,16 +33,20 @@ public class City implements Serializable {
     @Column(nullable = false)
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "geolocation_area_id")
+    private GeolocationArea geolocationArea;
+
     @OneToMany(mappedBy = "city")
     private List<Doctor> doctors;
 
     public City() {
     }
 
-    public City(int id, String name, List<Doctor> doctors) {
+    public City(int id, String name, GeolocationArea geolocationArea) {
         this.id = id;
         this.name = name;
-        this.doctors = doctors;
+        this.geolocationArea = geolocationArea;
     }
 
     public int getId() {
@@ -64,6 +71,14 @@ public class City implements Serializable {
 
     public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
+    }
+
+    public GeolocationArea getGeolocationArea() {
+        return geolocationArea;
+    }
+
+    public void setGeolocationArea(GeolocationArea geolocationArea) {
+        this.geolocationArea = geolocationArea;
     }
 
 }

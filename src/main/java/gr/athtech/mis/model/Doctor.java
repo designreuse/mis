@@ -40,6 +40,9 @@ public class Doctor implements Serializable {
     @Column(nullable = false)
     private String position;
 
+    @Column
+    private String email;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
@@ -62,13 +65,14 @@ public class Doctor implements Serializable {
     public Doctor() {
     }
 
-    public Doctor(int id, String firstName, String lastName, String address, String phone, String position, City city, DoctorSpecialty specialty, GeolocationArea geolocationArea, Institution institution, List<ScheduledVisit> scheduledVisits) {
+    public Doctor(int id, String firstName, String lastName, String address, String phone, String position, String email, City city, DoctorSpecialty specialty, GeolocationArea geolocationArea, Institution institution, List<ScheduledVisit> scheduledVisits) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
         this.position = position;
+        this.email = email;
         this.city = city;
         this.specialty = specialty;
         this.geolocationArea = geolocationArea;
@@ -122,6 +126,14 @@ public class Doctor implements Serializable {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public City getCity() {
