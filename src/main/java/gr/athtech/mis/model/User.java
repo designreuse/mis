@@ -1,6 +1,7 @@
 package gr.athtech.mis.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 
 
@@ -35,11 +37,14 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "groupId"))
     private Set<Groups> groups;
+    //Used in order to create jointed tables for one to many relationships
+    @OneToMany(mappedBy="medicalVisitor")
+    private List<ScheduledVisit> schVisits;
     
     public User() {
     }
 
-    public User(int id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Groups> groups) {
+    public User(int id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Groups> groups, List<ScheduledVisit> schVisits) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -47,6 +52,7 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.roles = roles;
         this.groups = groups;
+        this.schVisits = schVisits;
     }
 
     public int getId() {
@@ -103,6 +109,14 @@ public class User implements Serializable {
 
     public void setGroups(Set<Groups> groups) {
         this.groups = groups;
+    }
+
+    public List<ScheduledVisit> getSchVisits() {
+        return schVisits;
+    }
+
+    public void setSchVisits(List<ScheduledVisit> schVisits) {
+        this.schVisits = schVisits;
     }
     
 }

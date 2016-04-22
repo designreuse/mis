@@ -7,11 +7,14 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  *
@@ -32,16 +35,20 @@ public class PaidVisit implements Serializable{
     private String isGroup;
     @Column(nullable = false)
     private String comment;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="scheduledVisitId", nullable = false)
+    private ScheduledVisit scheduledVisit;
     
     public PaidVisit(){}
 
-    public PaidVisit(int idPaidVisit, String week, Date date, String hour, String isGroup, String comment) {
+    public PaidVisit(int idPaidVisit, String week, Date date, String hour, String isGroup, String comment, ScheduledVisit scheduledVisit) {
         this.idPaidVisit = idPaidVisit;
         this.week = week;
         this.date = date;
         this.hour = hour;
         this.isGroup = isGroup;
         this.comment = comment;
+        this.scheduledVisit = scheduledVisit;
     }
 
     public int getIdPaidVisit() {
@@ -91,8 +98,13 @@ public class PaidVisit implements Serializable{
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    
-    
+
+    public ScheduledVisit getScheduledVisit() {
+        return scheduledVisit;
+    }
+
+    public void setScheduledVisit(ScheduledVisit scheduledVisit) {
+        this.scheduledVisit = scheduledVisit;
+    }
     
 }

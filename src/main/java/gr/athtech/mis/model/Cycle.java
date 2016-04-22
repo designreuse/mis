@@ -7,10 +7,12 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,14 +28,16 @@ public class Cycle implements Serializable{
     private Date startDate;
     @Column(nullable = false)
     private Date endDate;
-    
+    @OneToMany(mappedBy="scheduledCycle")
+    private List<ScheduledVisit> schVisits;
     
     public Cycle(){}
     
-    public Cycle(int idcycle, Date startDate, Date endDate) {
+    public Cycle(int idcycle, Date startDate, Date endDate, List<ScheduledVisit> schVisits) {
         this.idcycle = idcycle;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.schVisits = schVisits;
     }
     
 
@@ -60,6 +64,13 @@ public class Cycle implements Serializable{
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
+
+    public List<ScheduledVisit> getSchVisits() {
+        return schVisits;
+    }
+
+    public void setSchVisits(List<ScheduledVisit> schVisits) {
+        this.schVisits = schVisits;
+    }
     
 }

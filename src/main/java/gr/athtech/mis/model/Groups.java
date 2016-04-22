@@ -25,8 +25,13 @@ public class Groups implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int groupId;
+    
     @ManyToMany(mappedBy="groups")
     private Set<User> users;
+    
+    @ManyToMany(mappedBy="groupVisits")
+    private Set<ScheduledVisit> scheduledVisits;
+    
     @OneToOne
     @JoinColumn(name = "leaderId", nullable = false)
     private User leader;
@@ -34,9 +39,10 @@ public class Groups implements Serializable{
     public Groups() {
     }
 
-    public Groups(int groupId, Set<User> users, User leader) {
+    public Groups(int groupId, Set<User> users, Set<ScheduledVisit> scheduledVisits, User leader) {
         this.groupId = groupId;
         this.users = users;
+        this.scheduledVisits = scheduledVisits;
         this.leader = leader;
     }
 
@@ -63,5 +69,13 @@ public class Groups implements Serializable{
     public void setLeader(User leader) {
         this.leader = leader;
     }
-     
+
+    public Set<ScheduledVisit> getScheduledVisits() {
+        return scheduledVisits;
+    }
+
+    public void setScheduledVisits(Set<ScheduledVisit> scheduledVisits) {
+        this.scheduledVisits = scheduledVisits;
+    }
+    
 }

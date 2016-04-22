@@ -1,6 +1,7 @@
 package gr.athtech.mis.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -38,11 +40,14 @@ public class Doctor implements Serializable{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="institucion_id", nullable = false)
     private Institucion doc_institucion;
+    @OneToMany(mappedBy="visitingDoctor")
+    private List<ScheduledVisit> schVisits;
 
 
     public Doctor(){}
 
-    public Doctor(int id, String name, String address, String phone, String position, City doc_city, DoctorSpecialty doc_specialty, GeolocationArea doc_area, Institucion doc_institucion) {
+
+    public Doctor(int id, String name, String address, String phone, String position, City doc_city, DoctorSpecialty doc_specialty, GeolocationArea doc_area, Institucion doc_institucion, List<ScheduledVisit> schVisits) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -52,6 +57,7 @@ public class Doctor implements Serializable{
         this.doc_specialty = doc_specialty;
         this.doc_area = doc_area;
         this.doc_institucion = doc_institucion;
+        this.schVisits = schVisits;
     }
 
     public int getId() {
@@ -124,6 +130,14 @@ public class Doctor implements Serializable{
 
     public void setDoc_institucion(Institucion doc_institucion) {
         this.doc_institucion = doc_institucion;
+    }
+
+    public List<ScheduledVisit> getSchVisits() {
+        return schVisits;
+    }
+
+    public void setSchVisits(List<ScheduledVisit> schVisits) {
+        this.schVisits = schVisits;
     }
     
 }
