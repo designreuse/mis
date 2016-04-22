@@ -10,45 +10,52 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author jmone
  */
 @Entity
-public class DoctorSpecialty implements Serializable{
-    @Id
-    @GeneratedValue
-    private int docspecId;
-    @Column(nullable = false)
-    private String speciality;
-    @OneToMany(mappedBy="doc_specialty")
-    private List<Doctor> doctors;
-    
-    public DoctorSpecialty(){}
+@Table(name = "doctor_specialties")
+public class DoctorSpecialty implements Serializable {
 
-    public DoctorSpecialty(int docspecId, String speciality, List<Doctor> doctors) {
-        this.docspecId = docspecId;
-        this.speciality = speciality;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "specialty")
+    private List<Doctor> doctors;
+
+    public DoctorSpecialty() {
+    }
+
+    public DoctorSpecialty(int id, String name, List<Doctor> doctors) {
+        this.id = id;
+        this.name = name;
         this.doctors = doctors;
     }
 
-    public int getDocspecId() {
-        return docspecId;
+    public int getId() {
+        return id;
     }
 
-    public void setDocspecId(int docspecId) {
-        this.docspecId = docspecId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getSpeciality() {
-        return speciality;
+    public String getName() {
+        return name;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Doctor> getDoctors() {

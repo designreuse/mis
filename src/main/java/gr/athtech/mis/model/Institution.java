@@ -10,46 +10,52 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author jmone
  */
 @Entity
-public class Institucion implements Serializable{
+@Table(name = "institutions")
+public class Institution implements Serializable {
+
     @Id
-    @GeneratedValue
-    private int institucionId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @Column(nullable = false)
-    private String institucionName;
-    @OneToMany(mappedBy="doc_institucion")
+    private String name;
+
+    @OneToMany(mappedBy = "institution")
     private List<Doctor> doctors;
 
-    
-    public Institucion(){}
+    public Institution() {
+    }
 
-    public Institucion(int institucionId, String institucionName, List<Doctor> doctors) {
-        this.institucionId = institucionId;
-        this.institucionName = institucionName;
+    public Institution(int id, String name, List<Doctor> doctors) {
+        this.id = id;
+        this.name = name;
         this.doctors = doctors;
     }
 
-    public int getInstitucionId() {
-        return institucionId;
+    public int getId() {
+        return id;
     }
 
-    public void setInstitucionId(int institucionId) {
-        this.institucionId = institucionId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getInstitucionName() {
-        return institucionName;
+    public String getName() {
+        return name;
     }
 
-    public void setInstitucionName(String institucionName) {
-        this.institucionName = institucionName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Doctor> getDoctors() {

@@ -13,38 +13,45 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
-
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     @Column(nullable = false)
     private String username;
+
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(nullable = false)
+
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+
     //Used in order to create jointed tables for many to many relationships
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_has_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "groupId"))
-    private Set<Groups> groups;
+    @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+    private Set<Group> groups;
+
     //Used in order to create jointed tables for one to many relationships
-    @OneToMany(mappedBy="medicalVisitor")
-    private List<ScheduledVisit> schVisits;
-    
+    @OneToMany(mappedBy = "medicalVisitor")
+    private List<ScheduledVisit> scheduledVisits;
+
     public User() {
     }
 
-    public User(int id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Groups> groups, List<ScheduledVisit> schVisits) {
+    public User(int id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Group> groups, List<ScheduledVisit> scheduledVisits) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -52,7 +59,7 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.roles = roles;
         this.groups = groups;
-        this.schVisits = schVisits;
+        this.scheduledVisits = scheduledVisits;
     }
 
     public int getId() {
@@ -103,20 +110,20 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public Set<Groups> getGroups() {
+    public Set<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Groups> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
 
-    public List<ScheduledVisit> getSchVisits() {
-        return schVisits;
+    public List<ScheduledVisit> getScheduledVisits() {
+        return scheduledVisits;
     }
 
-    public void setSchVisits(List<ScheduledVisit> schVisits) {
-        this.schVisits = schVisits;
+    public void setScheduledVisits(List<ScheduledVisit> scheduledVisits) {
+        this.scheduledVisits = scheduledVisits;
     }
-    
+
 }

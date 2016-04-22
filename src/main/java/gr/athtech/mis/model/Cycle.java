@@ -11,42 +11,48 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author jmone
  */
 @Entity
-public class Cycle implements Serializable{
-    
+@Table(name = "cycles")
+public class Cycle implements Serializable {
+
     @Id
-    @GeneratedValue
-    private int idcycle;
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(name="start_date", nullable = false)
     private Date startDate;
-    @Column(nullable = false)
+
+    @Column(name="end_date", nullable = false)
     private Date endDate;
-    @OneToMany(mappedBy="scheduledCycle")
-    private List<ScheduledVisit> schVisits;
-    
-    public Cycle(){}
-    
-    public Cycle(int idcycle, Date startDate, Date endDate, List<ScheduledVisit> schVisits) {
-        this.idcycle = idcycle;
+
+    @OneToMany(mappedBy = "cycle")
+    private List<ScheduledVisit> scheduledVisits;
+
+    public Cycle() {
+    }
+
+    public Cycle(int id, Date startDate, Date endDate, List<ScheduledVisit> scheduledVisits) {
+        this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.schVisits = schVisits;
-    }
-    
-
-    public int getIdcycle() {
-        return idcycle;
+        this.scheduledVisits = scheduledVisits;
     }
 
-    public void setIdcycle(int idcycle) {
-        this.idcycle = idcycle;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getStartDate() {
@@ -65,12 +71,12 @@ public class Cycle implements Serializable{
         this.endDate = endDate;
     }
 
-    public List<ScheduledVisit> getSchVisits() {
-        return schVisits;
+    public List<ScheduledVisit> getScheduledVisits() {
+        return scheduledVisits;
     }
 
-    public void setSchVisits(List<ScheduledVisit> schVisits) {
-        this.schVisits = schVisits;
+    public void setScheduledVisits(List<ScheduledVisit> scheduledVisits) {
+        this.scheduledVisits = scheduledVisits;
     }
-    
+
 }

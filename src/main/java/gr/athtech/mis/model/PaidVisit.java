@@ -11,52 +11,62 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.Table;
 
 /**
  *
  * @author it-support
  */
 @Entity
-public class PaidVisit implements Serializable{
+@Table(name = "paid_visits")
+public class PaidVisit implements Serializable {
+
     @Id
-    @GeneratedValue
-    private int idPaidVisit;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @Column(nullable = false)
     private String week;
+
     @Column(nullable = false)
     private Date date;
+
     @Column(nullable = false)
     private String hour;
+
     @Column(nullable = false)
     private String isGroup;
-    @Column(nullable = false)
-    private String comment;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="scheduledVisitId", nullable = false)
-    private ScheduledVisit scheduledVisit;
-    
-    public PaidVisit(){}
 
-    public PaidVisit(int idPaidVisit, String week, Date date, String hour, String isGroup, String comment, ScheduledVisit scheduledVisit) {
-        this.idPaidVisit = idPaidVisit;
+    @Column(nullable = false)
+    private String comments;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "scheduled_visit_id", nullable = false)
+    private ScheduledVisit scheduledVisit;
+
+    public PaidVisit() {
+    }
+
+    public PaidVisit(int id, String week, Date date, String hour, String isGroup, String comments, ScheduledVisit scheduledVisit) {
+        this.id = id;
         this.week = week;
         this.date = date;
         this.hour = hour;
         this.isGroup = isGroup;
-        this.comment = comment;
+        this.comments = comments;
         this.scheduledVisit = scheduledVisit;
     }
 
-    public int getIdPaidVisit() {
-        return idPaidVisit;
+    public int getId() {
+        return id;
     }
 
-    public void setIdPaidVisit(int idPaidVisit) {
-        this.idPaidVisit = idPaidVisit;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getWeek() {
@@ -91,12 +101,12 @@ public class PaidVisit implements Serializable{
         this.isGroup = isGroup;
     }
 
-    public String getComment() {
-        return comment;
+    public String getComments() {
+        return comments;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public ScheduledVisit getScheduledVisit() {
@@ -106,5 +116,5 @@ public class PaidVisit implements Serializable{
     public void setScheduledVisit(ScheduledVisit scheduledVisit) {
         this.scheduledVisit = scheduledVisit;
     }
-    
+
 }

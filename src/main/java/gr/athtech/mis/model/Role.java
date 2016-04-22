@@ -12,32 +12,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.Table;
 
 /**
  *
  * @author it-support
  */
-
 @Entity
+@Table(name = "roles")
 public class Role {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
     @Column(nullable = false)
-    private String rolename;
+    private String name;
+    
     //Used in order to create jointed tables for many to many relationships
-    @ManyToMany(mappedBy="roles")
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
-    
-   
-    public Role(){}
 
-    
-    public Role(int id, String rolename, Set<User> users) {
+    public Role() {
+    }
+
+    public Role(int id, String name, Set<User> users) {
         this.id = id;
-        this.rolename = rolename;
+        this.name = name;
         this.users = users;
     }
 
@@ -49,12 +50,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getName() {
+        return name;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<User> getUsers() {
@@ -64,7 +65,5 @@ public class Role {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-    
-    
 
 }

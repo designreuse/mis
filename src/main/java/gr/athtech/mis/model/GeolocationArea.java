@@ -10,46 +10,52 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author jmone
  */
 @Entity
-public class GeolocationArea implements Serializable{
-    @Id
-    @GeneratedValue
-    private int geoId;
-    @Column(nullable = false)
-    private String area;
-    @OneToMany(mappedBy="doc_area")
-    private List<Doctor> doctors;
-    
-    
-    public GeolocationArea(){}
+@Table(name = "geolocation_areas")
+public class GeolocationArea implements Serializable {
 
-    public GeolocationArea(int geoId, String area, List<Doctor> doctors) {
-        this.geoId = geoId;
-        this.area = area;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "geolocationArea")
+    private List<Doctor> doctors;
+
+    public GeolocationArea() {
+    }
+
+    public GeolocationArea(int id, String name, List<Doctor> doctors) {
+        this.id = id;
+        this.name = name;
         this.doctors = doctors;
     }
 
-    public int getGeoId() {
-        return geoId;
+    public int getId() {
+        return id;
     }
 
-    public void setGeoId(int geoId) {
-        this.geoId = geoId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getArea() {
-        return area;
+    public String getName() {
+        return name;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Doctor> getDoctors() {

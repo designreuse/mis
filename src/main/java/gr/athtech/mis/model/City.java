@@ -10,29 +10,35 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author it-support
  */
 @Entity
-public class City implements Serializable{
-    
-    @Id
-    @GeneratedValue
-    private int id;
-    @Column(nullable = false)
-    private String cityname;
-    @OneToMany(mappedBy="doc_city")
-    private List<Doctor> doctors;
-    
-    public City(){}
+@Table(name = "cities")
+public class City implements Serializable {
 
-    public City(int id, String cityname, List<Doctor> doctors) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "city")
+    private List<Doctor> doctors;
+
+    public City() {
+    }
+
+    public City(int id, String name, List<Doctor> doctors) {
         this.id = id;
-        this.cityname = cityname;
+        this.name = name;
         this.doctors = doctors;
     }
 
@@ -44,12 +50,12 @@ public class City implements Serializable{
         this.id = id;
     }
 
-    public String getCityname() {
-        return cityname;
+    public String getName() {
+        return name;
     }
 
-    public void setCityname(String cityname) {
-        this.cityname = cityname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Doctor> getDoctors() {

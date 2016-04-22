@@ -2,62 +2,78 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author jmone
  */
 @Entity
-public class Doctor implements Serializable{
+@Table(name = "doctors")
+public class Doctor implements Serializable {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(nullable = false)
-    private String name;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
     @Column(nullable = false)
     private String address;
+
     @Column(nullable = false)
     private String phone;
+
     @Column(nullable = false)
     private String position;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="city_id", nullable = false)
-    private City doc_city;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="specialty_id", nullable = false)
-    private DoctorSpecialty doc_specialty;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="area_id", nullable = false)
-    private GeolocationArea doc_area;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="institucion_id", nullable = false)
-    private Institucion doc_institucion;
-    @OneToMany(mappedBy="visitingDoctor")
-    private List<ScheduledVisit> schVisits;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
 
-    public Doctor(){}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specialty_id")
+    private DoctorSpecialty specialty;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "geolocation_area_id")
+    private GeolocationArea geolocationArea;
 
-    public Doctor(int id, String name, String address, String phone, String position, City doc_city, DoctorSpecialty doc_specialty, GeolocationArea doc_area, Institucion doc_institucion, List<ScheduledVisit> schVisits) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "institution_id")
+    private Institution institution;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<ScheduledVisit> scheduledVisits;
+
+    public Doctor() {
+    }
+
+    public Doctor(int id, String firstName, String lastName, String address, String phone, String position, City city, DoctorSpecialty specialty, GeolocationArea geolocationArea, Institution institution, List<ScheduledVisit> scheduledVisits) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
         this.phone = phone;
         this.position = position;
-        this.doc_city = doc_city;
-        this.doc_specialty = doc_specialty;
-        this.doc_area = doc_area;
-        this.doc_institucion = doc_institucion;
-        this.schVisits = schVisits;
+        this.city = city;
+        this.specialty = specialty;
+        this.geolocationArea = geolocationArea;
+        this.institution = institution;
+        this.scheduledVisits = scheduledVisits;
     }
 
     public int getId() {
@@ -68,12 +84,20 @@ public class Doctor implements Serializable{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -100,44 +124,44 @@ public class Doctor implements Serializable{
         this.position = position;
     }
 
-    public City getDoc_city() {
-        return doc_city;
+    public City getCity() {
+        return city;
     }
 
-    public void setDoc_city(City doc_city) {
-        this.doc_city = doc_city;
+    public void setCity(City city) {
+        this.city = city;
     }
 
-    public DoctorSpecialty getDoc_specialty() {
-        return doc_specialty;
+    public DoctorSpecialty getSpecialty() {
+        return specialty;
     }
 
-    public void setDoc_specialty(DoctorSpecialty doc_specialty) {
-        this.doc_specialty = doc_specialty;
+    public void setSpecialty(DoctorSpecialty specialty) {
+        this.specialty = specialty;
     }
 
-    public GeolocationArea getDoc_area() {
-        return doc_area;
+    public GeolocationArea getGeolocationArea() {
+        return geolocationArea;
     }
 
-    public void setDoc_area(GeolocationArea doc_area) {
-        this.doc_area = doc_area;
+    public void setGeolocationArea(GeolocationArea geolocationArea) {
+        this.geolocationArea = geolocationArea;
     }
 
-    public Institucion getDoc_institucion() {
-        return doc_institucion;
+    public Institution getInstitution() {
+        return institution;
     }
 
-    public void setDoc_institucion(Institucion doc_institucion) {
-        this.doc_institucion = doc_institucion;
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
     }
 
-    public List<ScheduledVisit> getSchVisits() {
-        return schVisits;
+    public List<ScheduledVisit> getScheduledVisits() {
+        return scheduledVisits;
     }
 
-    public void setSchVisits(List<ScheduledVisit> schVisits) {
-        this.schVisits = schVisits;
+    public void setScheduledVisits(List<ScheduledVisit> scheduledVisits) {
+        this.scheduledVisits = scheduledVisits;
     }
-    
+
 }

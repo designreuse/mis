@@ -7,6 +7,7 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,44 +15,58 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author it-support
  */
 @Entity
-public class Groups implements Serializable{
-    
+@Table(name = "groups")
+public class Group implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int groupId;
-    
-    @ManyToMany(mappedBy="groups")
+    private int id;
+
+    @Column
+    private String name;
+
+    @ManyToMany(mappedBy = "groups")
     private Set<User> users;
-    
-    @ManyToMany(mappedBy="groupVisits")
+
+    @ManyToMany(mappedBy = "groups")
     private Set<ScheduledVisit> scheduledVisits;
-    
+
     @OneToOne
-    @JoinColumn(name = "leaderId", nullable = false)
+    @JoinColumn(name = "leader_id", nullable = false)
     private User leader;
 
-    public Groups() {
+    public Group() {
     }
 
-    public Groups(int groupId, Set<User> users, Set<ScheduledVisit> scheduledVisits, User leader) {
-        this.groupId = groupId;
+    public Group(int id, String name, Set<User> users, Set<ScheduledVisit> scheduledVisits, User leader) {
+        this.id = id;
+        this.name = name;
         this.users = users;
         this.scheduledVisits = scheduledVisits;
         this.leader = leader;
     }
 
-    public int getGroupId() {
-        return groupId;
+    public int getId() {
+        return id;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<User> getUsers() {
@@ -77,5 +92,5 @@ public class Groups implements Serializable{
     public void setScheduledVisits(Set<ScheduledVisit> scheduledVisits) {
         this.scheduledVisits = scheduledVisits;
     }
-    
+
 }
