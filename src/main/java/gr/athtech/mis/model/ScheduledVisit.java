@@ -31,7 +31,7 @@ public class ScheduledVisit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String status;
@@ -58,7 +58,7 @@ public class ScheduledVisit implements Serializable {
     public ScheduledVisit() {
     }
 
-    public ScheduledVisit(int id, String status, User medicalVisitor, Doctor doctor, Cycle cycle, List<PaidVisit> paidVisits, Set<Group> groups) {
+    public ScheduledVisit(Long id, String status, User medicalVisitor, Doctor doctor, Cycle cycle, List<PaidVisit> paidVisits, Set<Group> groups) {
         this.id = id;
         this.status = status;
         this.medicalVisitor = medicalVisitor;
@@ -68,11 +68,11 @@ public class ScheduledVisit implements Serializable {
         this.groups = groups;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

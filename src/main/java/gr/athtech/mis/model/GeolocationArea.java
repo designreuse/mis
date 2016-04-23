@@ -25,7 +25,7 @@ public class GeolocationArea implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -39,18 +39,18 @@ public class GeolocationArea implements Serializable {
     public GeolocationArea() {
     }
 
-    public GeolocationArea(int id, String name, List<City> cities, List<Doctor> doctors) {
+    public GeolocationArea(Long id, String name, List<City> cities, List<Doctor> doctors) {
         this.id = id;
         this.name = name;
         this.cities = cities;
         this.doctors = doctors;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

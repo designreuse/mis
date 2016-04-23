@@ -26,7 +26,7 @@ public class Cycle implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name="start_date", nullable = false)
     private Date startDate;
@@ -40,18 +40,18 @@ public class Cycle implements Serializable {
     public Cycle() {
     }
 
-    public Cycle(int id, Date startDate, Date endDate, List<ScheduledVisit> scheduledVisits) {
+    public Cycle(Long id, Date startDate, Date endDate, List<ScheduledVisit> scheduledVisits) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.scheduledVisits = scheduledVisits;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -21,7 +21,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String username;
@@ -51,7 +51,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Group> groups, List<ScheduledVisit> scheduledVisits) {
+    public User(Long id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Group> groups, List<ScheduledVisit> scheduledVisits) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -62,11 +62,11 @@ public class User implements Serializable {
         this.scheduledVisits = scheduledVisits;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
