@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,13 +37,14 @@ public class DoctorController {
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index(Map<String, Object> model) {
 
         List<Doctor> doctors = doctorService.findAll();
 
-        model.addAttribute("doctors", doctors);
-
-        return "doctors";
+        logger.debug("------------------DOCTORS");
+        model.put("doctors", doctors);
+        
+        return "doctors/view";
     }
 
     /**

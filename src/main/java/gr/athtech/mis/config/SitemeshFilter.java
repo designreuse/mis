@@ -3,7 +3,7 @@ package gr.athtech.mis.config;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 
-public class MySitemeshFilter extends ConfigurableSiteMeshFilter {
+public class SitemeshFilter extends ConfigurableSiteMeshFilter {
 
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {

@@ -295,6 +295,8 @@
             </div><!-- /.row -->
         </section><!-- /.content -->
 
-
     </body>
 </html>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<c:url value='/resources/theme/dist/js/pages/dashboard2.js'/>" type="text/javascript"></script>

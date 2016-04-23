@@ -1,10 +1,15 @@
 package gr.athtech.mis.config;
 
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-//@EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 /*
+@Configuration
+@EnableWebSecurity*/
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     DataSource dataSource;
 
@@ -19,7 +24,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http
+      /*  http
                 .authorizeRequests()
                 .antMatchers("/dashboard/**").authenticated()
                 .antMatchers("/dashboard/admin/*").hasRole("ADMIN")
@@ -27,7 +32,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll();
+                .permitAll();*/
     }
-*/
+
 }
