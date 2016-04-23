@@ -32,8 +32,8 @@
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-                       <!-- <img src="resources/theme/dist/img/logo.png' />" /> -->
-                       <h4>MIS Admin Panel</h4>
+                        <!-- <img src="resources/theme/dist/img/logo.png' />" /> -->
+                        <h4>MIS Admin Panel</h4>
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
@@ -45,19 +45,23 @@
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-calendar"></i>
-                                <span>My Bookings</span>  <i class="fa fa-angle-right pull-right"></i>
+                                <i class="fa fa-user-md"></i>
+                                <span>Doctors</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value='/bookings/new'/>"><i class="fa fa-circle-o"></i> New Booking</a></li>
-                                <li><a href="<c:url value='/bookings/'/>"><i class="fa fa-circle-o"></i> View All Bookings</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Statistics</a></li>
+                                <li><a href="<c:url value='/doctors/'/>"><i class="fa fa-circle-o"></i> View doctors</a></li>
+                                <li><a href="<c:url value='/doctors/create'/>"><i class="fa fa-circle-o"></i> Create doctor</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-users"></i> <span>Customers</span>
+                                <i class="fa fa-users"></i>
+                                <span>Medical visitors</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value='/medicalVisitors/'/>"><i class="fa fa-circle-o"></i> View medical visitors</a></li>
+                                <li><a href="<c:url value='/medicalVisitors/create'/>"><i class="fa fa-circle-o"></i> Create medical visitor</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#">

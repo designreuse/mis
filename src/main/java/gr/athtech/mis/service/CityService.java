@@ -22,4 +22,11 @@ public class CityService {
 
         return cities;
     }
+    
+    
+    public City findOne(Long id) {
+        City city = repo.findOne(id);
+
+        return city;
+    }
 }

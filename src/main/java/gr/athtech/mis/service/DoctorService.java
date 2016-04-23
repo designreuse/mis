@@ -38,4 +38,15 @@ public class DoctorService {
 
         return doctor;
     }
+     
+     /**
+      * Save a new doctor instance
+      * 
+      * @param doctor
+      * @return 
+      */
+     public Doctor save(Doctor doctor){
+        doctor = repo.save(doctor);
+        return doctor;
+     }
 }
