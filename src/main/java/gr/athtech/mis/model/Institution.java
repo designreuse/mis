@@ -25,7 +25,7 @@ public class Institution implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -36,17 +36,17 @@ public class Institution implements Serializable {
     public Institution() {
     }
 
-    public Institution(int id, String name, List<Doctor> doctors) {
+    public Institution(Long id, String name, List<Doctor> doctors) {
         this.id = id;
         this.name = name;
         this.doctors = doctors;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

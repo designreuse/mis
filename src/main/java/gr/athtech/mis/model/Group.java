@@ -27,7 +27,7 @@ public class Group implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column
     private String name;
@@ -45,7 +45,7 @@ public class Group implements Serializable {
     public Group() {
     }
 
-    public Group(int id, String name, Set<User> users, Set<ScheduledVisit> scheduledVisits, User leader) {
+    public Group(Long id, String name, Set<User> users, Set<ScheduledVisit> scheduledVisits, User leader) {
         this.id = id;
         this.name = name;
         this.users = users;
@@ -53,11 +53,11 @@ public class Group implements Serializable {
         this.leader = leader;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

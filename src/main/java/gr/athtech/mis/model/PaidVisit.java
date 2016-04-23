@@ -27,7 +27,7 @@ public class PaidVisit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String week;
@@ -51,7 +51,7 @@ public class PaidVisit implements Serializable {
     public PaidVisit() {
     }
 
-    public PaidVisit(int id, String week, Date date, String hour, String isGroup, String comments, ScheduledVisit scheduledVisit) {
+    public PaidVisit(Long id, String week, Date date, String hour, String isGroup, String comments, ScheduledVisit scheduledVisit) {
         this.id = id;
         this.week = week;
         this.date = date;
@@ -61,11 +61,11 @@ public class PaidVisit implements Serializable {
         this.scheduledVisit = scheduledVisit;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
