@@ -31,10 +31,10 @@
                                             <th>Position</th>
                                             <th>Institution</th>
                                             <th>Specialty</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <c:forEach var="doctor" items="${doctors}">
                                             <tr>
                                                 <td><c:out value="${doctor.id}"/></td>
@@ -47,10 +47,16 @@
                                                 <td><c:out value="${doctor.position}"/></td>
                                                 <td><c:out value="${doctor.institution.name}"/></td>
                                                 <td><c:out value="${doctor.specialty.name}"/></td>
-
+                                                <td>
+                                                    <a href="<c:url value="/doctors/edit/${doctor.id}"/>">
+                                                        <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
+                                                    </a>
+                                                    <a href="<c:url value="/doctors/delete/${doctor.id}"/>">
+                                                        <button typ e="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </c:forEach>
-
                                     </tbody>
                                 </table>
                             </div>
