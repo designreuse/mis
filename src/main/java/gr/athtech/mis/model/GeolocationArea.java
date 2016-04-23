@@ -33,12 +33,16 @@ public class GeolocationArea implements Serializable {
     @OneToMany(mappedBy = "geolocationArea")
     private List<Doctor> doctors;
 
+    @OneToMany(mappedBy = "geolocationArea")
+    private List<City> cities;
+
     public GeolocationArea() {
     }
 
-    public GeolocationArea(int id, String name, List<Doctor> doctors) {
+    public GeolocationArea(int id, String name, List<City> cities, List<Doctor> doctors) {
         this.id = id;
         this.name = name;
+        this.cities = cities;
         this.doctors = doctors;
     }
 
@@ -65,5 +69,15 @@ public class GeolocationArea implements Serializable {
     public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
+    
+    
 
 }
