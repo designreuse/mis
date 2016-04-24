@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,13 +37,13 @@ public class User implements Serializable {
     private String lastName;
 
     //Used in order to create jointed tables for many to many relationships
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private List<Role> roles;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
-    private Set<Group> groups;
+    private List<Group> groups;
 
     //Used in order to create jointed tables for one to many relationships
     @OneToMany(mappedBy = "medicalVisitor")
@@ -51,7 +52,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String username, String password, String firstName, String lastName, Set<Role> roles, Set<Group> groups, List<ScheduledVisit> scheduledVisits) {
+    public User(Long id, String username, String password, String firstName, String lastName, List<Role> roles, List<Group> groups, List<ScheduledVisit> scheduledVisits) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -102,19 +103,19 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public Set<Group> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 

@@ -23,11 +23,22 @@ public class UserService {
         return users;
     }
     
-    /*
-    public User findById() {
+    
+    public User findById(Long id) {
 
-        User user = userRepository.findOne(Long.MIN_VALUE);
+        User user = repo.findOne(id);
 
         return user;
-    }*/
+    }
+    
+    /**
+      * Save a new user instance
+      * 
+      * @param user
+      * @return 
+      */
+     public User save(User user){
+        user = repo.save(user);
+        return user;
+     }
 }

@@ -59,8 +59,8 @@
                                 <span>Medical visitors</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value='/medicalVisitors/'/>"><i class="fa fa-circle-o"></i> View medical visitors</a></li>
-                                <li><a href="<c:url value='/medicalVisitors/create'/>"><i class="fa fa-circle-o"></i> Create medical visitor</a></li>
+                                <li><a href="<c:url value='/users/'/>"><i class="fa fa-circle-o"></i> View medical visitors</a></li>
+                                <li><a href="<c:url value='/users/create'/>"><i class="fa fa-circle-o"></i> Create medical visitor</a></li>
                             </ul>
                         </li>
                         <li>

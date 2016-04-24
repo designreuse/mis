@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.model;
 
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,12 +32,12 @@ public class Role {
     
     //Used in order to create jointed tables for many to many relationships
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private List<User> users;
 
     public Role() {
     }
 
-    public Role(Long id, String name, Set<User> users) {
+    public Role(Long id, String name, List<User> users) {
         this.id = id;
         this.name = name;
         this.users = users;
@@ -58,11 +59,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
