@@ -86,6 +86,7 @@ public class UserController {
             HttpServletResponse response, Model model) {
 
         Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
+        //fixes the save problem, also we remove cascade.ALL from the user model
         List roles = new ArrayList();
         roles.add(role);
         User user = new User();
