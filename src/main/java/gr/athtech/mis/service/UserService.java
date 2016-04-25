@@ -41,4 +41,15 @@ public class UserService {
         user = repo.save(user);
         return user;
      }
+     
+     /**
+      * Update the user instance
+      * 
+      * @param user
+      * @return
+      */
+     public User update(User user){
+         //user = repo.update(user);
+         return user;
+     }
 }
