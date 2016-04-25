@@ -9,6 +9,7 @@ import gr.athtech.mis.model.Role;
 import gr.athtech.mis.model.User;
 import gr.athtech.mis.service.RoleService;
 import gr.athtech.mis.service.UserService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -84,13 +85,15 @@ public class UserController {
     public String store(HttpServletRequest request,
             HttpServletResponse response, Model model) {
 
-        Long role = Long.parseLong(request.getParameter("roleId"));
-       
+        Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
+        List roles = new ArrayList();
+        roles.add(role);
         User user = new User();
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
+        user.setRoles(roles);
         //user.setRoles((List<Role>) roleService.findOne(role));
 
         logger.debug("----- New user: ", user);
