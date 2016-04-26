@@ -19,8 +19,9 @@
                             <h3 class="box-title">Edit user</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
-                            <form role="form" action="<c:url value="/users/store" />" method="PUT">
+                            <form role="form" action="<c:url value="/users/update" />" method="POST">
                                 <div class="row">
+                                    <input type="hidden" name="id" value="${user.id}">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>First Name:</label>
@@ -58,7 +59,7 @@
                                         </div>
                                     </div>
                                  </div>                                
-                                <button type="submit" class="btn btn-default">Save</button>
+                                <button type="submit" class="btn btn-default">Update</button>
                             </form>
                         </div><!-- /.box-body -->
                     </div>

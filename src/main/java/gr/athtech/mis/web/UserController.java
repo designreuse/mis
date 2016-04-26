@@ -19,10 +19,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -82,8 +82,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public String store(HttpServletRequest request,
-            HttpServletResponse response, Model model) {
+    public String store(HttpServletRequest request, HttpServletResponse response, Model model) {
 
         Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
         //fixes the save problem, also we remove cascade.ALL from the user model
@@ -100,7 +99,7 @@ public class UserController {
         logger.debug("----- New user: ", user);
 
         userService.save(user);
-        return "users/view";
+        return "redirect:/users/";
     }
     
     /**
@@ -121,18 +120,37 @@ public class UserController {
         return "users/edit";
     }
     
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public String update(@ModelAttribute("doctor") User user) {
-
+   /**
+     * @param request
+     * @param response
+     * @param model
+     * @return 
+    */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(HttpServletRequest request, HttpServletResponse response, Model model) {
+        
+        Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
+        List roles = new ArrayList();
+        roles.add(role);
+        
+        User user = new User();
+        user.setId(Long.parseLong(request.getParameter("id")));
+        user.setFirstName(request.getParameter("firstName"));
+        user.setLastName(request.getParameter("lastName"));
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setRoles(roles);
+        
         userService.update(user);     
-        return "doctors";
+        return "redirect:/users/";
     }
     
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") int id) {
-
-        //doctorService.delete(id);
-        return "doctors";
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Long id) {
+        userService.delete(id);
+        
+        return "redirect:/users/";
     }
     
 }
