@@ -22,7 +22,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -86,7 +85,7 @@ public class UserController {
 
         Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
         //fixes the save problem, also we remove cascade.ALL from the user model
-        List roles = new ArrayList();
+        List<Role> roles = new ArrayList<>();
         roles.add(role);
         User user = new User();
         user.setFirstName(request.getParameter("firstName"));
@@ -130,7 +129,7 @@ public class UserController {
     public String update(HttpServletRequest request, HttpServletResponse response, Model model) {
         
         Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
-        List roles = new ArrayList();
+        List<Role> roles = new ArrayList<>();
         roles.add(role);
         
         User user = new User();

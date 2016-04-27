@@ -48,25 +48,18 @@ public class UserService {
       * @param user
       * @return
       */
-     public User update(User user){
-         
-        if(findById(user.getId()) == null){
-            System.out.println("This object is not located in the database");
-        }
-        else{
-            user = repo.save(user);
-        }
+     public User update(User user){    
+         user = repo.save(user);         
          return user;
      }
      
      /**
       * Delete a user based on Id
-      * 
-      * 
-      * @param user
+      * @param id
       */
      
      public void delete(Long id){
        repo.delete(id);
       }
+      
 }

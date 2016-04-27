@@ -62,7 +62,17 @@
                                 <li><a href="<c:url value='/users/'/>"><i class="fa fa-circle-o"></i> View medical visitors</a></li>
                                 <li><a href="<c:url value='/users/create'/>"><i class="fa fa-circle-o"></i> Create medical visitor</a></li>
                             </ul>
-                        </li>
+                        </li>                                          
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-clock-o"></i>
+                                <span>Scheduled Visits</span>  <i class="fa fa-angle-right pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value='/ScheduledVisits/'/>"><i class="fa fa-circle-o"></i> View Assigned Visits</a></li>
+                                <li><a href="<c:url value='/ScheduledVisits/create'/>"><i class="fa fa-circle-o"></i> Create New Visit</a></li>
+                            </ul>
+                        </li>                                                                
                         <li>
                             <a href="#">
                                 <i class="fa fa-calendar"></i> <span>Calendar</span>

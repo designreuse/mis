@@ -3,12 +3,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View all users</title>
+        <title>View Scheduled Visits</title>
     </head>
     <body>
         <section class="content-header">
             <h1>
-                View all users
+                View Scheduled Visits
             </h1>
         </section>
         <section class="content">
@@ -17,7 +17,7 @@
                 <div class="col-md-12">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Scheduled Visits List</h3>
+                            <h3 class="box-title">New Visits List</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
@@ -25,27 +25,25 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Medical Visitor</th>
+                                            <th>Visitor/s</th>
                                             <th>Cycle</th>
                                             <th>Doctor</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="user" items="${users}">
+                                        <c:forEach var="visit" items="${newVisits}">
                                             <tr>
-                                                <td><c:out value="${user.id}"/></td>
-                                                <td><c:out value="${user.firstName}"/> <c:out value="${user.lastName}"/></td>
-                                                <td><c:out value="${user.username}"/></td>
-                                                <td><c:out value="${user.password}"/></td>
-                                                <c:forEach var="role" items="${user.roles}">
-                                                     <td><c:out value="${role.name}"/></td>
-                                                </c:forEach>
+                                                <td><c:out value="${visit.id}"/></td>
+                                                <td><c:out value="${visit.medicalVisitor.firstName}"/> <c:out value="${visit.medicalVisitor.lastName}"/></td>
+                                                <td><c:out value="${visit.cycle.startDate}"/> - <c:out value="${visit.cycle.endDate}"/></td>
+                                                <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
+                                                <td><c:out value="${visit.status}"/></td>                                        
                                                 <td>
-                                                    <a href="<c:url value="/users/edit/${user.id}"/>">
+                                                    <a href="<c:url value="/ScheduledVisits/edit/${visit.id}"/>">
                                                         <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
                                                     </a>
-                                                    <a href="<c:url value="/users/delete/${user.id}"/>">
+                                                    <a href="<c:url value="/ScheduledVisits/delete/${visit.id}"/>">
                                                         <button typ e="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                                     </a>
                                                 </td>
