@@ -9,6 +9,7 @@ import javax.servlet.Filter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 public class MyWebInitializer extends
         AbstractAnnotationConfigDispatcherServletInitializer {
@@ -35,6 +36,7 @@ public class MyWebInitializer extends
 
         return new Filter[]{
             characterEncodingFilter,
+            new HiddenHttpMethodFilter(),
             new SitemeshFilter(),
            /* new DelegatingFilterProxy("springSecurityFilterChain"),
             new OpenEntityManagerInViewFilter()*/};

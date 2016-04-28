@@ -22,22 +22,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
  * @author JurgenPC
  */
-@Controller 
+@Controller
 @RequestMapping(value = "/users")
 public class UserController {
-    
+
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
-    
-    @Autowired 
+
+    @Autowired
     private UserService userService;
     @Autowired
     private RoleService roleService;
-    
+
     /**
      * Return the view that will display all the users
      *
@@ -45,16 +46,16 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Map<String, Object> model){
-        
+    public String index(Map<String, Object> model) {
+
         List<User> users = userService.findAll();
-        
+
         logger.debug("------------------USERS");
         model.put("users", users);
-        
+
         return "users/view";
     }
-    
+
     /**
      * Return the view that holds the create new user form
      *
@@ -62,16 +63,16 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String store(Model model){
-        
+    public String create(Model model) {
+
         //fetch all the attributed that wil be prefilled
         List<Role> roles = roleService.findAll();
-        
+
         model.addAttribute("roles", roles);
-        
-        return "users/create";     
+
+        return "users/create";
     }
-    
+
     /**
      * Store a new user
      *
@@ -100,7 +101,7 @@ public class UserController {
         userService.save(user);
         return "redirect:/users/";
     }
-    
+
     /**
      * Return the view that holds the edit user form
      *
@@ -118,20 +119,20 @@ public class UserController {
 
         return "users/edit";
     }
-    
-   /**
+
+    /**
      * @param request
      * @param response
      * @param model
-     * @return 
-    */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+     * @return
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public String update(HttpServletRequest request, HttpServletResponse response, Model model) {
-        
+
         Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
         List<Role> roles = new ArrayList<>();
         roles.add(role);
-        
+
         User user = new User();
         user.setId(Long.parseLong(request.getParameter("id")));
         user.setFirstName(request.getParameter("firstName"));
@@ -139,17 +140,17 @@ public class UserController {
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
         user.setRoles(roles);
-        
-        userService.update(user);     
+
+        userService.update(user);
         return "redirect:/users/";
     }
-    
-    
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
     public String delete(@PathVariable("id") Long id) {
         userService.delete(id);
-        
+
         return "redirect:/users/";
     }
-    
+
 }

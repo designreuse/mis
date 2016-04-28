@@ -68,7 +68,7 @@ public class DoctorController {
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String store(Model model) {
+    public String create(Model model) {
 
         //fetch all the attributed that wil be prefilled
         List<City> cities = cityService.findAll();
@@ -130,6 +130,7 @@ public class DoctorController {
         logger.debug("----- New doctor: ", doctor);
 
         doctorService.save(doctor);
+        
         return "doctors/view";
     }
 

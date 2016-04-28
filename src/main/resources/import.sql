@@ -205,8 +205,15 @@ insert into doctor_specialties (id, name) values(28, "Rheumatologist");
 insert into doctor_specialties (id, name) values(29, "Surgeon");
 insert into doctor_specialties (id, name) values(30, "Urologist");
 
+/* user roles */
+insert into roles (id, name) values (1, "Admin");
+insert into roles (id, name) values (2, "Medical Visitor");
+
 
 /* dummy doctor */
 insert into institutions (id, name) values (1, "IKA");
 
-insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (1, "Test doctor", "Test doctor", "Test address", "210123456789", "test@doctor.gr", "Awesome position", 1, 1, 1, 1);
+insert into doctors (id, first_name, last_name, address, phone, email, 
+position, city_id, geolocation_area_id, institution_id, specialty_id) 
+values (1, "Test doctor", "Test doctor", "Test address", "210123456789", "test@doctor.gr", 
+"Awesome position", 1, 1, 1, 1);

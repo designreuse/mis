@@ -4,7 +4,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title><sitemesh:write property='title'/> | MIS Admin Panel</title>
+        <title><sitemesh:write property='page.title'/> | MIS Admin Panel</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
             <link href="<c:url value='/resources/theme/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@
             <![endif]-->
 
     </head>
-    <body class="sidebar-mini skin-blue">
+    <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
         <div class="wrapper">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar">
@@ -38,7 +38,7 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="header">WELCOME <c:out value="${sessionScope.username}" /> <span class="pull-right">LOGOUT</span></li>
-                        <li class="active treeview">
+                        <li class="treeview">
                             <a href="<c:url value='/'/>">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
                             </a>
@@ -88,7 +88,7 @@
                 <!-- /.sidebar -->
             </aside>
             <div class="content-wrapper">
-                <sitemesh:write property='body'/>
+                <sitemesh:write property='page.content'/>
             </div>
         </div>
 
@@ -103,7 +103,9 @@
         <script src="<c:url value='/resources/theme/plugins/chartjs/Chart.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/theme/plugins/datepicker/bootstrap-datepicker.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/theme/plugins/dropzone/dropzone.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
 
+        <sitemesh:write property='page.footerScripts'/>
 
     </body>
 </html>

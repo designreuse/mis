@@ -26,6 +26,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/decorators/");
         viewResolver.setSuffix(".jsp");
+        viewResolver.setOrder(1);
         return viewResolver;
     }
 
@@ -35,6 +36,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/jsp/");
         viewResolver.setSuffix(".jsp");
+        viewResolver.setOrder(0);
         return viewResolver;
     }
 }

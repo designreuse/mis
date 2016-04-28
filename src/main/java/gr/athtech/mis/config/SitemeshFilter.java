@@ -2,13 +2,15 @@ package gr.athtech.mis.config;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
+import org.sitemesh.content.tagrules.html.Sm2TagRuleBundle;
 
 public class SitemeshFilter extends ConfigurableSiteMeshFilter {
 
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         builder.addDecoratorPath("/*", "/WEB-INF/decorators/default.jsp")
-                .addDecoratorPath("/login", "/WEB-INF/decorators/login.jsp");
+                .addDecoratorPath("/login", "/WEB-INF/decorators/login.jsp")
+                .addTagRuleBundle(new Sm2TagRuleBundle());
 
         /*
         // Map default decorator. This shall be applied to all paths if no other paths match.
