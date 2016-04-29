@@ -71,7 +71,7 @@ public class ScheduledVisitController {
         
         //fetch all the attributes that wil be prefilled
         List<Cycle> cycles = cycleService.findAll();
-        List<User> visitors = userService.findAll();
+        List<User> visitors = userService.getMedicalVisitors();
         List<Doctor> doctors = doctorService.findAll();
         
         model.addAttribute("cycles", cycles);
