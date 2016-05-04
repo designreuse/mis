@@ -26,7 +26,7 @@
             <![endif]-->
 
     </head>
-    <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
+            <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
         <div class="wrapper">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar">
@@ -39,7 +39,7 @@
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="header">WELCOME <span class="pull-right"><a href="<c:url value='/'/>logout">LOGOUT</a></span></li>       
+                        <li class="header">WELCOME <span class="text-uppercase">${sessionScope.user.firstName}</span> <span class="pull-right"><a href="<c:url value='/'/>logout">LOGOUT</a></span></li>       
                         <li class="treeview">
                             <a href="<c:url value='/'/>">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 

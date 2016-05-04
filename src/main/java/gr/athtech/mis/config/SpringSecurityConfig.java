@@ -30,8 +30,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery(getUserQuery())
                 .authoritiesByUsernameQuery(getAuthoritiesQuery())
                 .passwordEncoder(passwordEncoder());
-        /*auth.userDetailsService(authService);*/
-
     }
 
     @Override
