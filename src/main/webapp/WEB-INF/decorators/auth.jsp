@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title> <sitemesh:write property='title'/> | MIS Admin Panel</title>
+        <title> <sitemesh:write property='page.title'/> | MIS Admin Panel</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
             <link href="resources/theme/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@
 
     </head>
     <body class="login-page">
-        <sitemesh:write property='body'/>
+        <sitemesh:write property='page.content'/>
 
 
     </body>

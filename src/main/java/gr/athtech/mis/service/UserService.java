@@ -1,6 +1,7 @@
 package gr.athtech.mis.service;
 
 import gr.athtech.mis.model.Role;
+import gr.athtech.mis.model.SecurityUser;
 import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.RoleRepository;
 import javax.annotation.Resource;
@@ -9,9 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import gr.athtech.mis.repository.UserRepository;
 import java.util.List;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service("userService")
-public class UserService {
+public class UserService implements UserDetailsService{
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -36,26 +40,26 @@ public class UserService {
 
     /**
      * Get users based on a certain role
-     * 
+     *
      * @param role
-     * @return 
+     * @return
      */
     public List<User> findByRole(Role role) {
         List<User> users = repo.findByRoles(role);
 
         return users;
     }
-    
+
     /**
      * Return the users who have "medical visitor" as a role
-     * 
-     * @return 
+     *
+     * @return
      */
-    public List<User> getMedicalVisitors(){
-        
+    public List<User> getMedicalVisitors() {
+
         Role medicalVisitor = roleRepo.findByName("Medical Visitor");
         List<User> medicalVisitors = repo.findByRoles(medicalVisitor);
-        
+
         return medicalVisitors;
     }
 
@@ -88,6 +92,20 @@ public class UserService {
      */
     public void delete(Long id) {
         repo.delete(id);
+    }
+
+    /**
+     * For spring security
+     *
+     * @param username
+     * @return
+     */
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = repo.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("UserName " + username + " not found");
+        }
+        return new SecurityUser(user);
     }
 
 }

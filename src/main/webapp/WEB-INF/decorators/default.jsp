@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -37,7 +39,7 @@
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="header">WELCOME <c:out value="${sessionScope.username}" /> <span class="pull-right">LOGOUT</span></li>
+                        <li class="header">WELCOME <span class="pull-right"><a href="<c:url value='/'/>logout">LOGOUT</a></span></li>       
                         <li class="treeview">
                             <a href="<c:url value='/'/>">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 

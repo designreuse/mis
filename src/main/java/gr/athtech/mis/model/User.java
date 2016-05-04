@@ -2,7 +2,6 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +35,9 @@ public class User implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
+    private String email;
+
     //Used in order to create jointed tables for many to many relationships
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -52,12 +54,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String username, String password, String firstName, String lastName, List<Role> roles, List<Group> groups, List<ScheduledVisit> scheduledVisits) {
+    public User(Long id, String username, String password, String firstName, String lastName, String email, List<Role> roles, List<Group> groups, List<ScheduledVisit> scheduledVisits) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
         this.roles = roles;
         this.groups = groups;
         this.scheduledVisits = scheduledVisits;
@@ -101,6 +104,14 @@ public class User implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Role> getRoles() {

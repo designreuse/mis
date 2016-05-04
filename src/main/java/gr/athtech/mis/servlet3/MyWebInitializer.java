@@ -38,8 +38,8 @@ public class MyWebInitializer extends
             characterEncodingFilter,
             new HiddenHttpMethodFilter(),
             new SitemeshFilter(),
-           /* new DelegatingFilterProxy("springSecurityFilterChain"),
-            new OpenEntityManagerInViewFilter()*/};
+            new DelegatingFilterProxy("springSecurityFilterChain"),
+            new OpenEntityManagerInViewFilter()};
     }
 
 }

@@ -9,7 +9,7 @@ public class SitemeshFilter extends ConfigurableSiteMeshFilter {
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         builder.addDecoratorPath("/*", "/WEB-INF/decorators/default.jsp")
-                .addDecoratorPath("/login", "/WEB-INF/decorators/login.jsp")
+                .addDecoratorPath("/login", "/WEB-INF/decorators/auth.jsp")
                 .addTagRuleBundle(new Sm2TagRuleBundle());
 
         /*

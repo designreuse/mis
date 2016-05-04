@@ -13,6 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import gr.athtech.mis.service.HelloWorldService;
 import gr.athtech.mis.service.UserService;
+import java.security.Principal;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 public class WelcomeController {
@@ -27,17 +31,18 @@ public class WelcomeController {
         this.helloWorldService = helloWorldService;
     }
 
-   
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Map<String, Object> model) {
+    public String index(HttpServletRequest request, Principal principal, Map<String, Object> model) {
 
-        logger.debug("index() is executed!");
+        /*
+        Object principal1 = SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        HttpSession session = request.getSession(true); //create a new session
 
-        model.put("title", helloWorldService.getTitle(""));
-        model.put("msg", helloWorldService.getDesc());
-
-        userService.findAll();
-        
+      
+        logger.debug("========== username: ", principal.getName());
+        session.setAttribute("user", principal.getName());
+         */
         return "index";
     }
 
@@ -55,6 +60,5 @@ public class WelcomeController {
         return model;
 
     }
-    
 
 }
