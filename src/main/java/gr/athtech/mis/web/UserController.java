@@ -65,7 +65,7 @@ public class UserController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
 
-        //fetch all the attributed that wil be prefilled
+        //fetch all the attributes that will be prefilled
         List<Role> roles = roleService.findAll();
 
         model.addAttribute("roles", roles);
@@ -93,8 +93,8 @@ public class UserController {
         user.setLastName(request.getParameter("lastName"));
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
+        user.setEmail(request.getParameter("email"));
         user.setRoles(roles);
-        //user.setRoles((List<Role>) roleService.findOne(role));
 
         logger.debug("----- New user: ", user);
 
@@ -139,6 +139,7 @@ public class UserController {
         user.setLastName(request.getParameter("lastName"));
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
+        user.setEmail(request.getParameter("email"));
         user.setRoles(roles);
 
         userService.update(user);

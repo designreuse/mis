@@ -6,7 +6,6 @@
 package gr.athtech.mis.model;
 
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
@@ -21,15 +21,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(nullable = false)
     private String name;
-    
+
     //Used in order to create jointed tables for many to many relationships
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
@@ -65,6 +65,11 @@ public class Role {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.name;
     }
 
 }

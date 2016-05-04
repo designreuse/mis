@@ -1,14 +1,17 @@
 package gr.athtech.mis.config;
 
-import gr.athtech.mis.service.UserService;
+import gr.athtech.mis.service.AuthService;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -18,17 +21,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     DataSource dataSource;
 
     @Autowired
-    UserService userService;
+    AuthService authService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        /* auth
-                .jdbcAuthentication()
+        auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .withDefaultSchema()
-                .withUser("user").password("password").roles("USER").and()
-                .withUser("admin").password("password").roles("USER", "ADMIN");*/
-        auth.userDetailsService(userService);
+                .usersByUsernameQuery(getUserQuery())
+                .authoritiesByUsernameQuery(getAuthoritiesQuery())
+                .passwordEncoder(passwordEncoder());
+        /*auth.userDetailsService(authService);*/
+
     }
 
     @Override
@@ -42,7 +45,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/logout").permitAll()
+                .antMatchers("/login", "/logout", "/test").permitAll()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -51,15 +54,26 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .failureUrl("/login?error")
                 .permitAll();
-        /* http
-                .authorizeRequests()
-                .antMatchers("/dashboard/**").authenticated()
-                .antMatchers("/dashboard/admin/*").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll();*/
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
+    }
+
+    private String getUserQuery() {
+        return "SELECT username, password, enabled "
+                + "FROM users "
+                + "WHERE username = ?";
+    }
+
+    private String getAuthoritiesQuery() {
+        return "SELECT DISTINCT users.username as username, roles.name as authority "
+                + "FROM users, users_roles, roles "
+                + "WHERE users.id = users_roles.user_id "
+                + "AND roles.id = users_roles.role_id "
+                + "AND users.username = ? ";
     }
 
 }

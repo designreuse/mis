@@ -38,6 +38,9 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false, columnDefinition = "boolean default 1")
+    private boolean enabled;
+
     //Used in order to create jointed tables for many to many relationships
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -112,6 +115,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<Role> getRoles() {

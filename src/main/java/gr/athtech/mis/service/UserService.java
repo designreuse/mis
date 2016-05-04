@@ -1,7 +1,6 @@
 package gr.athtech.mis.service;
 
 import gr.athtech.mis.model.Role;
-import gr.athtech.mis.model.SecurityUser;
 import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.RoleRepository;
 import javax.annotation.Resource;
@@ -10,12 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import gr.athtech.mis.repository.UserRepository;
 import java.util.List;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service("userService")
-public class UserService implements UserDetailsService{
+public class UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -70,6 +67,7 @@ public class UserService implements UserDetailsService{
      * @return
      */
     public User save(User user) {
+        user.setPassword(encodePassword(user.getPassword()));
         user = repo.save(user);
         return user;
     }
@@ -81,6 +79,7 @@ public class UserService implements UserDetailsService{
      * @return
      */
     public User update(User user) {
+        user.setPassword(encodePassword(user.getPassword()));
         user = repo.save(user);
         return user;
     }
@@ -95,17 +94,15 @@ public class UserService implements UserDetailsService{
     }
 
     /**
-     * For spring security
-     *
-     * @param username
-     * @return
+     * Encode the user's password 
+     * 
+     * @param password
+     * @return 
      */
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repo.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("UserName " + username + " not found");
-        }
-        return new SecurityUser(user);
+    private String encodePassword(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        return hashedPassword;
     }
 
 }

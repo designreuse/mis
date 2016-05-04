@@ -35,12 +35,18 @@
                                 </div>                                    
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input name="username" class="form-control">
+                                        <label>Email</label>
+                                        <input name="email" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input name="username" class="form-control">
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Password</label>
