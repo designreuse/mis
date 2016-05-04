@@ -205,6 +205,146 @@ insert into doctor_specialties (id, name) values(28, "Rheumatologist");
 insert into doctor_specialties (id, name) values(29, "Surgeon");
 insert into doctor_specialties (id, name) values(30, "Urologist");
 
+/* institutions */
+insert into institutions (id, name, geolocation_area_id) values (1, "251 Γενικό Νοσοκομείο Αεροπορίας (ΓΝΑ)", 1);
+insert into institutions (id, name, geolocation_area_id) values (2, "2401 Στρατιωτικό Νοσοκομείο", 1);
+insert into institutions (id, name, geolocation_area_id) values (3, "Αγία Όλγα", 1);
+insert into institutions (id, name, geolocation_area_id) values (4, "Άγιοι Ανάργυροι", 1);
+insert into institutions (id, name, geolocation_area_id) values (5, "Άγιος Σάββας", 1);
+insert into institutions (id, name, geolocation_area_id) values (6, "Αιγινήτειο", 1);
+insert into institutions (id, name, geolocation_area_id) values (7, "Αλεξάνδρα", 1);
+insert into institutions (id, name, geolocation_area_id) values (8, "Αμαλία Φλέμινγκ", 1);
+insert into institutions (id, name, geolocation_area_id) values (9, "Αρεταίειο", 1);
+insert into institutions (id, name, geolocation_area_id) values (10, "Ασκληπιείο Βούλας", 1);
+insert into institutions (id, name, geolocation_area_id) values (11, "Αττικό Νοσοκομείο", 1);
+insert into institutions (id, name, geolocation_area_id) values (12, "Γ. Γεννηματάς", 1);
+insert into institutions (id, name, geolocation_area_id) values (13, "Δρομοκαΐτειο", 1);
+insert into institutions (id, name, geolocation_area_id) values (14, "Νοσοκομείο Ελπίς", 1);
+insert into institutions (id, name, geolocation_area_id) values (15, "Ερρίκος Ντυνάν", 1);
+insert into institutions (id, name, geolocation_area_id) values (16, "Ερυθρός Σταυρός", 1);
+insert into institutions (id, name, geolocation_area_id) values (17, "Ευαγγελισμός", 1);
+insert into institutions (id, name, geolocation_area_id) values (18, "Θριάσιο Νοσοκομείο", 1);
+insert into institutions (id, name, geolocation_area_id) values (19, "Ιατρικό Κέντρο", 1);
+insert into institutions (id, name, geolocation_area_id) values (20, "Ιπποκράτειο", 1);
+insert into institutions (id, name, geolocation_area_id) values (21, "ΚΑΤ", 1);
+insert into institutions (id, name, geolocation_area_id) values (22, "Κρατικό Νικαίας - Άγιος Παντελεήμων", 1);
+insert into institutions (id, name, geolocation_area_id) values (23, "Λαϊκό", 1);
+insert into institutions (id, name, geolocation_area_id) values (24, "Μαιευτήριο Έλενα Βενιζέλου", 1);
+insert into institutions (id, name, geolocation_area_id) values (25, "Μαιευτήριο Μητέρα", 1);
+insert into institutions (id, name, geolocation_area_id) values (26, "Μαιευτήριο Λητώ", 1);
+insert into institutions (id, name, geolocation_area_id) values (27, "Μαιευτήριο Ιασώ", 1);
+insert into institutions (id, name, geolocation_area_id) values (28, "Μαιευτήριο Ρέα", 1);
+insert into institutions (id, name, geolocation_area_id) values (29, "Μεταξά", 1);
+insert into institutions (id, name, geolocation_area_id) values (30, "Ναυτικό Νοσοκομείο Αθηνών (ΝΝΑ)", 1);
+insert into institutions (id, name, geolocation_area_id) values (31, "Ναυτικό Νοσοκομείο Πειραιώς (ΝΝΠ)", 1);
+insert into institutions (id, name, geolocation_area_id) values (32, "ΝΙΜΤΣ", 1);
+insert into institutions (id, name, geolocation_area_id) values (33, "Οφθαλμιατρείο", 1);
+insert into institutions (id, name, geolocation_area_id) values (34, "Παίδων Αγία Σοφία", 1);
+insert into institutions (id, name, geolocation_area_id) values (35, "Παίδων Αγλαΐα Κυριακού", 1);
+insert into institutions (id, name, geolocation_area_id) values (36, "Παίδων Πεντέλης", 1);
+insert into institutions (id, name, geolocation_area_id) values (37, "Παμμακάριστος", 1);
+insert into institutions (id, name, geolocation_area_id) values (38, "Σισμανόγλειο", 1);
+insert into institutions (id, name, geolocation_area_id) values (39, "Σπηλιοπούλειο", 1);
+insert into institutions (id, name, geolocation_area_id) values (40, "Συγγρού", 1);
+insert into institutions (id, name, geolocation_area_id) values (41, "Σωτηρία", 1);
+insert into institutions (id, name, geolocation_area_id) values (42, "Τζάνειο", 1);
+insert into institutions (id, name, geolocation_area_id) values (43, "Υγεία", 1);
+insert into institutions (id, name, geolocation_area_id) values (44, "Ψυχιατρικό Νοσοκομείο Αττικής (Δαφνί)", 1);
+insert into institutions (id, name, geolocation_area_id) values (45, "Ωνάσειο", 1);
+
+insert into institutions (id, name, geolocation_area_id) values (46, "Γενικό Νοσοκομείο Άμφισσας", 2);
+insert into institutions (id, name, geolocation_area_id) values (47, "Γενικό Νοσοκομείο Θήβας", 2);
+insert into institutions (id, name, geolocation_area_id) values (48, "Γενικό Νοσοκομείο Καρπενησίου", 2);
+insert into institutions (id, name, geolocation_area_id) values (49, "Γενικό Νοσοκομείο Καρύστου", 2);
+insert into institutions (id, name, geolocation_area_id) values (50, "Γενικό Νοσοκομείο Κύμης", 2);
+insert into institutions (id, name, geolocation_area_id) values (51, "Γενικό Νοσοκομείο Λαμίας", 2);
+insert into institutions (id, name, geolocation_area_id) values (52, "Γενικό Νοσοκομείο Λιβαδειάς", 2);
+insert into institutions (id, name, geolocation_area_id) values (53, "Γενικό Νοσοκομείο Χαλκίδας", 2);
+
+insert into institutions (id, name, geolocation_area_id) values (54, "Γενικό Νοσοκομείο Βόλου", 11);
+insert into institutions (id, name, geolocation_area_id) values (55, "Γενικό Νοσοκομείο Καρδίτσας", 11);
+insert into institutions (id, name, geolocation_area_id) values (56, "Γενικό Νοσοκομείο Λάρισας", 11);
+insert into institutions (id, name, geolocation_area_id) values (57, "Πανεπιστημιακό Νοσοκομείο Λάρισας", 11);
+insert into institutions (id, name, geolocation_area_id) values (58, "Γενικό Νοσοκομείο Τρικάλων", 11);
+
+insert into institutions (id, name, geolocation_area_id) values (59, "Πανεπιστημιακό Νοσοκομείο Ηρακλείου", 4);
+insert into institutions (id, name, geolocation_area_id) values (60, "Βενιζέλειο-Πανάνειο Γενικό Νοσοκομείο Ηρακλείου", 4);
+insert into institutions (id, name, geolocation_area_id) values (61, "Creta Inter Clinic", 4);
+
+insert into institutions (id, name, geolocation_area_id) values (62, "Γενικό Νοσοκομείο Θεσσαλονίκης Γ. Παπανικολάου", 3);
+insert into institutions (id, name, geolocation_area_id) values (63, "Γενικό Νοσοκομείο Θεσσαλονίκης Παπαγεωργίου", 3);
+insert into institutions (id, name, geolocation_area_id) values (64, "Γενικό Νοσοκομείο Θεσσαλονίκης Ιπποκράτειο", 3);
+insert into institutions (id, name, geolocation_area_id) values (65, "Γενικό Νοσοκομείο Θεσσαλονίκης Γ. Γεννηματάς", 3);
+insert into institutions (id, name, geolocation_area_id) values (66, "Γενικό Νοσοκομείο Θεσσαλονίκης Άγιος Παύλος και Παναγία", 3);
+insert into institutions (id, name, geolocation_area_id) values (67, "Γενικό Νοσοκομείο Θεσσαλονίκης Άγιος Δημήτριος", 3);
+insert into institutions (id, name, geolocation_area_id) values (68, "Πανεπιστημιακό Νοσοκομείο ΑΧΕΠΑ", 3);
+insert into institutions (id, name, geolocation_area_id) values (69, "Αντικαρκινικό Νοσοκομείο Θεσσαλονίκης Θεαγένειο", 3);
+insert into institutions (id, name, geolocation_area_id) values (70, "Νοσοκομείο Ειδικών Παθήσεων Θεσσαλονίκης (Λοιμωδών)", 3);
+insert into institutions (id, name, geolocation_area_id) values (71, "Νοσοκομείο Αφροδισίων και Δερματικών Νόσων Θεσσαλονίκης", 3);
+insert into institutions (id, name, geolocation_area_id) values (72, "Ψυχιατρικό Νοσοκομείο Θεσσαλονίκης", 3);
+insert into institutions (id, name, geolocation_area_id) values (73, "424 Στρατιωτικό Νοσοκομείο Εκπαιδεύσεως", 3);
+insert into institutions (id, name, geolocation_area_id) values (74, "Γενικό Νοσοκομείο Κατερίνης", 3);
+insert into institutions (id, name, geolocation_area_id) values (75, "Γενικό Νοσοκομείο Κιλκίς", 3);
+insert into institutions (id, name, geolocation_area_id) values (76, "Γενικό Νοσοκομείο Γουμένισσας", 3);
+insert into institutions (id, name, geolocation_area_id) values (77, "Γενικό Νοσοκομείο Σερρών", 3);
+insert into institutions (id, name, geolocation_area_id) values (78, "Γενικό Νοσοκομείο Βέροιας", 3);
+insert into institutions (id, name, geolocation_area_id) values (79, "Γενικό Νοσοκομείο Νάουσας", 3);
+
+insert into institutions (id, name, geolocation_area_id) values (80, "Γενικό Νοσοκομείο Καβάλας", 5);
+insert into institutions (id, name, geolocation_area_id) values (81, "Γενικό Νοσοκομείο Ξάνθης", 5);
+insert into institutions (id, name, geolocation_area_id) values (82, "Στρατιωτικό Νοσοκομείο Ξάνθης", 5);
+insert into institutions (id, name, geolocation_area_id) values (83, "Γενικό Νοσοκομείο Δράμας", 5);
+insert into institutions (id, name, geolocation_area_id) values (84, "Σισμανόγλειο Νοσοκομείο Κομοτηνής", 5);
+insert into institutions (id, name, geolocation_area_id) values (85, "Πανεπιστημιακό Νοσοκομείο Αλεξανδρούπολης", 5);
+insert into institutions (id, name, geolocation_area_id) values (86, "Στρατιωτικό Νοσοκομείο Αλεξανδρούπολης", 5);
+insert into institutions (id, name, geolocation_area_id) values (87, "Γενικό Νοσοκομείο Διδυμοτείχου", 5);
+
+insert into institutions (id, name, geolocation_area_id) values (88, "Γενικό Νοσοκομείο Φλώρινας", 13);
+insert into institutions (id, name, geolocation_area_id) values (89, "Γενικό Νοσοκομείο Κοζάνης "Μαμάτσειο"", 13);
+insert into institutions (id, name, geolocation_area_id) values (90, "Γενικό Νοσοκομείο Πτολεμαΐδας "Μποδοσάκειο"", 13);
+insert into institutions (id, name, geolocation_area_id) values (91, "Γενικό Νοσοκομείο Καστοριάς", 13);
+insert into institutions (id, name, geolocation_area_id) values (92, "Γενικό Νοσοκομείο Γρεβενών", 13);
+
+insert into institutions (id, name, geolocation_area_id) values (93, "Γενικό Νοσοκομείο Μυτιλήνης "Βοστάνειο"", 10);
+insert into institutions (id, name, geolocation_area_id) values (94, "Γενικό Νοσοκομείο - Κ.Υ. Ικαρίας "Πανικάριον"", 10);
+insert into institutions (id, name, geolocation_area_id) values (95, "Βαρδάκειο και Πρώιο", 10);
+insert into institutions (id, name, geolocation_area_id) values (96, "Γενικό Νοσοκομείο Χίου "Σκυλίτσειο"", 10);
+
+insert into institutions (id, name, geolocation_area_id) values (97, "Γενικό Νοσοκομείο Πατρών "Ο Άγιος Ανδρέας"", 12);
+insert into institutions (id, name, geolocation_area_id) values (98, "Πανεπιστημιακό Γενικό Νοσοκομείο Πατρών (ΠΓΝΠ)", 12);
+insert into institutions (id, name, geolocation_area_id) values (99, "Καραμανδάνειο Νοσοκομείο Παίδων", 12);
+insert into institutions (id, name, geolocation_area_id) values (100, "Νοσοκομείο Νοσημάτων Θώρακος Πατρών", 12);
+insert into institutions (id, name, geolocation_area_id) values (101, "Ολύμπιο Θεραπευτήριο", 12);
+insert into institutions (id, name, geolocation_area_id) values (102, "409 Στρατιωτικό Νοσοκομείο", 12);
+insert into institutions (id, name, geolocation_area_id) values (103, "Γενικό Νοσοκομείο Αγρινίου", 12);
+insert into institutions (id, name, geolocation_area_id) values (104, "Γενικό Νοσοκομείο Μεσολογγίου "Χατζηκώστα"", 12);
+insert into institutions (id, name, geolocation_area_id) values (104, "Γενικό Νοσοκομείο Πύργου "Ανδρέας Παπανδρέου"", 12);
+insert into institutions (id, name, geolocation_area_id) values (104, "Γενικό Νομαρχιακό Νοσοκομείο Αμαλιάδας", 12);
+
+insert into institutions (id, name, geolocation_area_id) values (105, "Γενικό Νοσοκομείο Κορίνθου", 9);
+insert into institutions (id, name, geolocation_area_id) values (106, "Γενικό Νοσοκομείο Σπάρτης", 9);
+insert into institutions (id, name, geolocation_area_id) values (107, "Γενικό Νομαρχιακό Νοσοκομείο Ναυπλίου", 9);
+insert into institutions (id, name, geolocation_area_id) values (108, "Γενικό Νομαρχιακό Νοσοκομείο Άργους", 9);
+insert into institutions (id, name, geolocation_area_id) values (109, "Γενικό Νομαρχιακό Νοσοκομείο Καλαμάτας", 9);
+insert into institutions (id, name, geolocation_area_id) values (110, "Γενικό Νομαρχιακό Νοσοκομείο Τρίπολης", 9);
+
+insert into institutions (id, name, geolocation_area_id) values (111, "Γενικό Νοσοκομείο Κέρκυρας", 7);
+insert into institutions (id, name, geolocation_area_id) values (112, "Γενικό Νοσοκομείο Λευκάδας", 7);
+insert into institutions (id, name, geolocation_area_id) values (113, "Γενικό Νοσοκομείο Αργοστολίου", 7);
+insert into institutions (id, name, geolocation_area_id) values (114, "Γενικό Νοσοκομείο Ληξουρίου", 7);
+insert into institutions (id, name, geolocation_area_id) values (115, "Γενικό Νοσοκομείο Ζακύνθου", 7);
+
+insert into institutions (id, name, geolocation_area_id) values (116, "Γενικό Νοσοκομείο Ρόδου", 8);
+insert into institutions (id, name, geolocation_area_id) values (117, "Γενικό Νοσοκομείο Σύρου Βαρδάκειο & Πρώιο", 8);
+
+insert into institutions (id, name, geolocation_area_id) values (118, "Γενικό Νοσοκομείο Άρτας", 6);
+insert into institutions (id, name, geolocation_area_id) values (119, "Γενικό Νοσοκομείο Ιωαννίνων «Γ. Χατζηκώστα»", 6);
+insert into institutions (id, name, geolocation_area_id) values (120, "Πανεπιστημιακό Γενικό Νοσκομείο Ιωαννίνων", 6);
+insert into institutions (id, name, geolocation_area_id) values (121, "Γενικό Νοσοκομείο Πρέβεζας", 6);
+insert into institutions (id, name, geolocation_area_id) values (122, "Γενικό Νοσοκομείο Φιλιατών", 6);
+insert into institutions (id, name, geolocation_area_id) values (123, "XXXXX", 6);
+
+
 /* user roles */
 insert into roles (id, name) values (1, "ADMIN");
 insert into roles (id, name) values (2, "MEDICAL_VISITOR");
@@ -214,6 +354,4 @@ insert into users (id, first_name, last_name, password, username, email, enabled
 insert into users_roles (user_id, role_id) values (1, 1);
 
 /* dummy doctor */
-insert into institutions (id, name) values (1, "IKA");
-
 insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (1, "Test doctor", "Test doctor", "Test address", "210123456789", "test@doctor.gr", "Awesome position", 1, 1, 1, 1);
