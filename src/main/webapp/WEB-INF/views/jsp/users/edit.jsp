@@ -45,7 +45,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input name="username" class="form-control">
+                                        <input name="username" value="${user.username}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">

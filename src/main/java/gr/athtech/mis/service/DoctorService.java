@@ -2,6 +2,7 @@ package gr.athtech.mis.service;
 
 import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.repository.DoctorRepository;
+import gr.athtech.mis.repository.ScheduledVisitRepository;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,5 +49,10 @@ public class DoctorService {
      public Doctor save(Doctor doctor){
         doctor = repo.save(doctor);
         return doctor;
+     }
+     
+     public List<Doctor> getAvailableDoctorList(){
+         List<Doctor> doctorList = repo.getAvailableDoctors();
+         return doctorList;
      }
 }

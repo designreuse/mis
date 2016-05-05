@@ -37,4 +37,14 @@ public class ScheduledVisitService {
         return schvst;
      }
     
+    
+    /**
+     * Delete a scheduled visit based on Id
+     *
+     * @param id
+     */
+    public void delete(Long id) {
+        repo.delete(id);
+    }
+    
 }

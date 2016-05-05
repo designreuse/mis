@@ -148,5 +148,5 @@ public class User implements Serializable {
     public void setScheduledVisits(List<ScheduledVisit> scheduledVisits) {
         this.scheduledVisits = scheduledVisits;
     }
-
+    
 }

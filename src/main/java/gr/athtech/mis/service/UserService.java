@@ -54,7 +54,7 @@ public class UserService {
      */
     public List<User> getMedicalVisitors() {
 
-        Role medicalVisitor = roleRepo.findByName("Medical Visitor");
+        Role medicalVisitor = roleRepo.findByName("MEDICAL_VISITOR");
         List<User> medicalVisitors = repo.findByRoles(medicalVisitor);
 
         return medicalVisitors;

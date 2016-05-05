@@ -18,14 +18,15 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
+                            <c:if test="${not empty users}">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Medical Visitor</th>
-                                        <th>Cycle</th>
-                                        <th>Doctor</th>
-                                        <th>Status</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>Role</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +49,10 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            </c:if> 
+                            <c:if test="${empty users}">  
+                            <div class="alert alert-warning">The are no available records to view!</div>
+                          </c:if>
                         </div>
                     </div><!-- /.box-body -->
                 </div>

@@ -22,8 +22,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -72,7 +74,7 @@ public class ScheduledVisitController {
         //fetch all the attributes that wil be prefilled
         List<Cycle> cycles = cycleService.findAll();
         List<User> visitors = userService.getMedicalVisitors();
-        List<Doctor> doctors = doctorService.findAll();
+        List<Doctor> doctors = doctorService.getAvailableDoctorList(); //show only doctors that are not included in any scheduled visit
         
         model.addAttribute("cycles", cycles);
         model.addAttribute("visitors", visitors);
@@ -105,6 +107,14 @@ public class ScheduledVisitController {
         logger.debug("----- New user: ", schvst);
 
         scheduledVisitsService.save(schvst);
+        return "redirect:/ScheduledVisits/";
+    }
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String delete(@PathVariable("id") Long id) {
+        scheduledVisitsService.delete(id);
+
         return "redirect:/ScheduledVisits/";
     }
     

@@ -19,6 +19,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
+                            <c:if test="${not empty newVisits}">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -37,23 +38,26 @@
                                             <td><c:out value="${visit.cycle.startDate}"/> - <c:out value="${visit.cycle.endDate}"/></td>
                                             <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
                                             <td><c:out value="${visit.status}"/></td>                                        
-                                            <td>
-                                                <a href="<c:url value="/ScheduledVisits/edit/${visit.id}"/>">
-                                                    <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
-                                                </a>
-                                                <a href="<c:url value="/ScheduledVisits/delete/${visit.id}"/>">
-                                                    <button typ e="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                                </a>
+                                            <td>          
+                                               <button typ e="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>                               
                                             </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
+                             </c:if> 
+                            <c:if test="${empty newVisits}">  
+                            <div class="alert alert-warning">The are no available records to view!</div>
+                          </c:if>
                         </div>
                     </div><!-- /.box-body -->
                 </div>
             </div>
         </div>
     </section>
+</content>
+
+<content tag="footerScripts">
+    <script src="<c:url value='/resources/js/ScheduledVisit.js'/>" type="text/javascript"></script>
 </content>
 
