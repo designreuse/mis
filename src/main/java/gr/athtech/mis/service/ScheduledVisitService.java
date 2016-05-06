@@ -6,7 +6,9 @@
 package gr.athtech.mis.service;
 
 import gr.athtech.mis.model.ScheduledVisit;
+import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
+import gr.athtech.mis.repository.UserRepository;
 import java.util.List;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
@@ -24,6 +26,8 @@ public class ScheduledVisitService {
     
     @Resource
     ScheduledVisitRepository repo;
+    @Resource
+    UserRepository userRepo;
     
     public List<ScheduledVisit> findAll() {
         List<ScheduledVisit> newVisits = repo.findAll();
@@ -37,6 +41,13 @@ public class ScheduledVisitService {
         return schvst;
      }
     
+     public ScheduledVisit findById(Long id) {
+
+        ScheduledVisit schv = repo.findOne(id);
+
+        return schv;
+    }
+    
     
     /**
      * Delete a scheduled visit based on Id
@@ -47,4 +58,11 @@ public class ScheduledVisitService {
         repo.delete(id);
     }
     
+    
+    public List<ScheduledVisit> getAllByVisitorId(Long id){
+        User selectedUser = userRepo.findOne(id);
+        List<ScheduledVisit> allVisits = repo.findByMedicalVisitor(selectedUser);
+        
+        return allVisits;
+    }
 }

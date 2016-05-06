@@ -38,9 +38,12 @@
                                             <td><c:out value="${visit.cycle.startDate}"/> - <c:out value="${visit.cycle.endDate}"/></td>
                                             <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
                                             <td><c:out value="${visit.status}"/></td>                                        
-                                            <td>          
+                                            <td>  
+                                               <a href="<c:url value="/PaidVisits/create/${visit.id}"/>" class="btn btn-info">
+                                                    <i class="fa fa-check-square-o"></i>
+                                               </a>  
                                                <button typ e="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>                               
-                                            </td>
+                                            </td>      
                                         </tr>
                                     </c:forEach>
                                 </tbody>

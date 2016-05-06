@@ -6,6 +6,8 @@
 package gr.athtech.mis.repository;
 
 import gr.athtech.mis.model.PaidVisit;
+import gr.athtech.mis.model.ScheduledVisit;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("paiddVisitRepository")
 public interface PaidVisitRepository extends JpaRepository<PaidVisit, Long>{
+    
+    List<PaidVisit> findByScheduledVisit(List<ScheduledVisit> schVisit);
     
 }

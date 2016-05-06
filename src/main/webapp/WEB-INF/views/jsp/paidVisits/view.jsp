@@ -32,7 +32,6 @@
                                         <th>Hour</th>
                                         <th>Week</th>
                                         <th>Group</th>
-                                        <th>Comment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,8 +45,12 @@
                                             <td><c:out value="${paidVisit.date}"/></td>
                                             <td><c:out value="${paidVisit.hour}"/></td>
                                             <td><c:out value="${paidVisit.week}"/></td>
-                                            <td><c:out value="${paidVisit.isGroup}"/></td> 
-                                            <td><c:out value="${paidVisit.comments}"/></td>                                                                                   
+                                            <td><c:out value="${paidVisit.isGroup}"/></td>  
+                                            <td>
+                                                <a href="<c:url value="/PaidVisits/info/${paidVisit.id}"/>" class="btn btn-info">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
