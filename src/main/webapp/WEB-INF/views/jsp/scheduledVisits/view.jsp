@@ -61,6 +61,6 @@
 </content>
 
 <content tag="footerScripts">
-    <script src="<c:url value='/resources/js/ScheduledVisit.js'/>" type="text/javascript"></script>
+    <script src="<c:url value='/resources/js/scheduledVisit.js'/>" type="text/javascript"></script>
 </content>
 
