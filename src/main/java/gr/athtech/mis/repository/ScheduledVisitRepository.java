@@ -8,16 +8,59 @@ package gr.athtech.mis.repository;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
 import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import javax.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  *
- * @author it-support
+ * @author jmone
  */
-@Repository("scheduledVisitRepository")
-public interface ScheduledVisitRepository extends JpaRepository<ScheduledVisit, Long>{
+@Service("scheduledVisitRepository")
+public class ScheduledVisitRepository {
     
-    List<ScheduledVisit> findByMedicalVisitor(User user);
+    private static final Logger logger = LoggerFactory.getLogger(ScheduledVisit.class);
     
+    @Resource
+    IScheduledVisitRepository repo;
+    @Resource
+    UserRepository userRepo;
+    
+    public List<ScheduledVisit> findAll() {
+        List<ScheduledVisit> newVisits = repo.findAll();
+
+        logger.info("---------New Visits", newVisits);
+        return newVisits;
+    }
+    
+    public ScheduledVisit save(ScheduledVisit schvst){
+        schvst = repo.save(schvst);
+        return schvst;
+     }
+    
+     public ScheduledVisit findById(Long id) {
+
+        ScheduledVisit schv = repo.findOne(id);
+
+        return schv;
+    }
+    
+    
+    /**
+     * Delete a scheduled visit based on Id
+     *
+     * @param id
+     */
+    public void delete(Long id) {
+        repo.delete(id);
+    }
+    
+    
+    public List<ScheduledVisit> getAllByVisitorId(Long id){
+        User selectedUser = userRepo.findOne(id);
+        List<ScheduledVisit> allVisits = repo.findByMedicalVisitor(selectedUser);
+        
+        return allVisits;
+    }
 }

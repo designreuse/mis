@@ -20,6 +20,7 @@ $('#geolocationAreaId').on('change', function () {
 
 });
 
+//fill a select based on an array
 function fillSelect(selectName, array) {
     var options = "";
     //fill the cities options

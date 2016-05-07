@@ -7,8 +7,8 @@ package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.Role;
 import gr.athtech.mis.model.User;
-import gr.athtech.mis.service.RoleService;
-import gr.athtech.mis.service.UserService;
+import gr.athtech.mis.repository.RoleRepository;
+import gr.athtech.mis.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +35,9 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
     @Autowired
-    private RoleService roleService;
+    private RoleRepository roleRepository;
 
     /**
      * Return the view that will display all the users
@@ -48,7 +48,7 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
-        List<User> users = userService.findAll();
+        List<User> users = userRepository.findAll();
 
         logger.debug("------------------USERS");
         model.put("users", users);
@@ -66,7 +66,7 @@ public class UserController {
     public String create(Model model) {
 
         //fetch all the attributes that will be prefilled
-        List<Role> roles = roleService.findAll();
+        List<Role> roles = roleRepository.findAll();
 
         model.addAttribute("roles", roles);
 
@@ -84,7 +84,7 @@ public class UserController {
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-        Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
+        Role role = roleRepository.findOne(Long.parseLong(request.getParameter("roleId")));
         //fixes the save problem, also we remove cascade.ALL from the user model
         List<Role> roles = new ArrayList<>();
         roles.add(role);
@@ -98,7 +98,7 @@ public class UserController {
 
         logger.debug("----- New user: ", user);
 
-        userService.save(user);
+        userRepository.save(user);
         return "redirect:/users/";
     }
 
@@ -112,8 +112,8 @@ public class UserController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
 
-        List<Role> roles = roleService.findAll();
-        User user = userService.findById(id);
+        List<Role> roles = roleRepository.findAll();
+        User user = userRepository.findOne(id);
         model.addAttribute("user", user);
         model.addAttribute("roles", roles);
 
@@ -129,7 +129,7 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public String update(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-        Role role = roleService.findOne(Long.parseLong(request.getParameter("roleId")));
+        Role role = roleRepository.findOne(Long.parseLong(request.getParameter("roleId")));
         List<Role> roles = new ArrayList<>();
         roles.add(role);
 
@@ -142,14 +142,14 @@ public class UserController {
         user.setEmail(request.getParameter("email"));
         user.setRoles(roles);
 
-        userService.update(user);
+        userRepository.update(user);
         return "redirect:/users/";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {
-        userService.delete(id);
+        userRepository.delete(id);
 
         return "redirect:/users/";
     }

@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import gr.athtech.mis.repository.UserRepository;
+import gr.athtech.mis.repository.IUserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -16,7 +16,7 @@ public class AuthService implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     @Resource
-    UserRepository repo;
+    IUserRepository repo;
 
     /**
      * For spring security

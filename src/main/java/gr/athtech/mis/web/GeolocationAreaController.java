@@ -6,7 +6,7 @@
 package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.GeolocationArea;
-import gr.athtech.mis.service.GeolocationAreaService;
+import gr.athtech.mis.repository.GeolocationAreaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,13 @@ public class GeolocationAreaController {
     private final Logger logger = LoggerFactory.getLogger(GeolocationAreaController.class);
 
     @Autowired
-    private GeolocationAreaService geolocationAreaService;
+    private GeolocationAreaRepository repo;
 
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public GeolocationArea show(@PathVariable("id") Long id) {
-        GeolocationArea geolocationArea  =geolocationAreaService.findOneWithCitiesWithInstitutions(id);
+        GeolocationArea geolocationArea  =repo.findOneWithCitiesWithInstitutions(id);
 
         return geolocationArea;
     }

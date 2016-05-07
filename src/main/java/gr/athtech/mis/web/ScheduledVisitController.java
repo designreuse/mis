@@ -9,10 +9,10 @@ import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
-import gr.athtech.mis.service.CycleService;
-import gr.athtech.mis.service.DoctorService;
-import gr.athtech.mis.service.ScheduledVisitService;
-import gr.athtech.mis.service.UserService;
+import gr.athtech.mis.repository.CycleRepository;
+import gr.athtech.mis.repository.DoctorRepository;
+import gr.athtech.mis.repository.ScheduledVisitRepository;
+import gr.athtech.mis.repository.UserRepository;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -34,55 +34,55 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/scheduledVisits")
 public class ScheduledVisitController {
-    
+
     private final Logger logger = LoggerFactory.getLogger(ScheduledVisitController.class);
-    
+
     @Autowired
-    private ScheduledVisitService scheduledVisitsService;
+    private ScheduledVisitRepository scheduledVisitRepository;
     @Autowired
-    private CycleService cycleService;
+    private CycleRepository cycleRepository;
     @Autowired
-    private DoctorService doctorService;
+    private DoctorRepository doctorRepository;
     @Autowired
-    private UserService userService;
-    
+    private UserRepository userRepository;
+
     /**
      * Return the view that will display all the scheduled visits
      *
      * @param model
      * @return
      */
-     @RequestMapping(value = "/", method = RequestMethod.GET)
-     public String index(Map<String, Object> model){
-         
-         List<ScheduledVisit> newVisits = scheduledVisitsService.findAll();
-         logger.debug("------------------NEW VISITS");
-         model.put("newVisits", newVisits);
-         return "scheduledVisits/view";
-         
-     }
-     
-     /**
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Map<String, Object> model) {
+
+        List<ScheduledVisit> newVisits = scheduledVisitRepository.findAll();
+        logger.debug("------------------NEW VISITS");
+        model.put("newVisits", newVisits);
+        return "scheduledVisits/view";
+
+    }
+
+    /**
      * Return the view that holds the create a new scheduled visit form
      *
      * @param model
      * @return
      */
-     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String store(Model model){
-        
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String store(Model model) {
+
         //fetch all the attributes that wil be prefilled
-        List<Cycle> cycles = cycleService.findAll();
-        List<User> visitors = userService.getMedicalVisitors();
-        List<Doctor> doctors = doctorService.getAvailableDoctorList(); //show only doctors that are not included in any scheduled visit
-        
+        List<Cycle> cycles = cycleRepository.findAll();
+        List<User> visitors = userRepository.getMedicalVisitors();
+        List<Doctor> doctors = doctorRepository.getAvailableDoctorList(); //show only doctors that are not included in any scheduled visit
+
         model.addAttribute("cycles", cycles);
         model.addAttribute("visitors", visitors);
         model.addAttribute("doctors", doctors);
-        
-        return "scheduledVisits/create";     
+
+        return "scheduledVisits/create";
     }
-    
+
     /**
      * Store a new scheduled visit
      *
@@ -94,9 +94,9 @@ public class ScheduledVisitController {
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-        Cycle cycle = cycleService.findOne(Long.parseLong(request.getParameter("cycleId")));
-        User visitor = userService.findById(Long.parseLong(request.getParameter("medicalVisitorId")));
-        Doctor doctor = doctorService.findOne(Long.parseLong(request.getParameter("doctorId")));
+        Cycle cycle = cycleRepository.findOne(Long.parseLong(request.getParameter("cycleId")));
+        User visitor = userRepository.findOne(Long.parseLong(request.getParameter("medicalVisitorId")));
+        Doctor doctor = doctorRepository.findOne(Long.parseLong(request.getParameter("doctorId")));
 
         ScheduledVisit schvst = new ScheduledVisit();
         schvst.setCycle(cycle);
@@ -106,32 +106,33 @@ public class ScheduledVisitController {
 
         logger.debug("----- New user: ", schvst);
 
-        scheduledVisitsService.save(schvst);
-        return "redirect:/ScheduledVisits/";
+        scheduledVisitRepository.save(schvst);
+        return "redirect:/scheduledVisits/";
     }
-    
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {
-        scheduledVisitsService.delete(id);
+        scheduledVisitRepository.delete(id);
 
-        return "redirect:/ScheduledVisits/";
+        return "redirect:/scheduledVisits/";
     }
-    
+
     /**
-     * Return the view that will display all the scheduled visits for the logged in user
+     * Return the view that will display all the scheduled visits for the logged
+     * in user
      *
      * @param model
      * @return
      */
-     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-     public String displayByUser(@PathVariable("id") Long id, Map<String, Object> model){
-         
-         List<ScheduledVisit> newVisits = scheduledVisitsService.getAllByVisitorId(id);
-         logger.debug("------------------NEW VISITS");
-         model.put("newVisits", newVisits);
-         return "scheduledVisits/view";
-         
-     }
-      
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String displayByUser(@PathVariable("id") Long id, Map<String, Object> model) {
+
+        List<ScheduledVisit> newVisits = scheduledVisitRepository.getAllByVisitorId(id);
+        logger.debug("------------------NEW VISITS");
+        model.put("newVisits", newVisits);
+        return "scheduledVisits/view";
+
+    }
+
 }

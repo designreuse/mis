@@ -5,11 +5,12 @@ import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.model.DoctorSpecialty;
 import gr.athtech.mis.model.GeolocationArea;
 import gr.athtech.mis.model.Institution;
-import gr.athtech.mis.service.CityService;
+import gr.athtech.mis.repository.CityRepository;
+import gr.athtech.mis.repository.DoctorRepository;
+import gr.athtech.mis.repository.DoctorSpecialtyRepository;
+import gr.athtech.mis.repository.GeolocationAreaRepository;
+import gr.athtech.mis.repository.InstitutionRepository;
 import gr.athtech.mis.service.DoctorService;
-import gr.athtech.mis.service.DoctorSpecialtyService;
-import gr.athtech.mis.service.GeolocationAreaService;
-import gr.athtech.mis.service.InstitutionService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,13 +37,15 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
     @Autowired
-    private CityService cityService;
+    private DoctorRepository repo;
     @Autowired
-    private GeolocationAreaService geolocationAreaService;
+    private CityRepository cityRepository;
     @Autowired
-    private InstitutionService institutionService;
+    private GeolocationAreaRepository geolocationAreaRepository;
     @Autowired
-    private DoctorSpecialtyService doctorSpecialtyService;
+    private InstitutionRepository institutionRepository;
+    @Autowired
+    private DoctorSpecialtyRepository doctorSpecialtyRepository;
 
     /**
      * Return the view that will display all the doctors
@@ -53,9 +56,8 @@ public class DoctorController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
-        List<Doctor> doctors = doctorService.findAll();
+        List<Doctor> doctors = repo.findAll();
 
-        logger.debug("------------------DOCTORS");
         model.put("doctors", doctors);
 
         return "doctors/view";
@@ -70,11 +72,11 @@ public class DoctorController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
 
-        //fetch all the attributed that wil be prefilled
-        List<City> cities = cityService.findAll();
-        List<GeolocationArea> geolocationAreas = geolocationAreaService.findAll();
-        List<Institution> institutions = institutionService.findAll();
-        List<DoctorSpecialty> doctorSpecialties = doctorSpecialtyService.findAll();
+        //fetch all the attributes that will be prefilled
+        List<City> cities = cityRepository.findAll();
+        List<GeolocationArea> geolocationAreas = geolocationAreaRepository.findAll();
+        List<Institution> institutions = institutionRepository.findAll();
+        List<DoctorSpecialty> doctorSpecialties = doctorSpecialtyRepository.findAll();
 
         model.addAttribute("cities", cities);
         model.addAttribute("geolocationAreas", geolocationAreas);
@@ -94,7 +96,18 @@ public class DoctorController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
 
-        Doctor doctor = doctorService.findOne(id);
+        //fetch all the attributes that will be prefilled
+        List<City> cities = cityRepository.findAll();
+        List<GeolocationArea> geolocationAreas = geolocationAreaRepository.findAll();
+        List<Institution> institutions = institutionRepository.findAll();
+        List<DoctorSpecialty> doctorSpecialties = doctorSpecialtyRepository.findAll();
+
+        Doctor doctor = repo.findOne(id);
+
+        model.addAttribute("cities", cities);
+        model.addAttribute("geolocationAreas", geolocationAreas);
+        model.addAttribute("institutions", institutions);
+        model.addAttribute("doctorSpecialties", doctorSpecialties);
         model.addAttribute("doctor", doctor);
 
         return "doctors/edit";
@@ -103,35 +116,20 @@ public class DoctorController {
     /**
      * Store a new doctor
      *
-     * @param doctor
+     * @param request
+     * @param response
+     * @param model
      * @return
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request,
             HttpServletResponse response, Model model) {
 
-        City city = cityService.findOne(Long.parseLong(request.getParameter("cityId")));
-        GeolocationArea geolocationArea = geolocationAreaService.findOne(Long.parseLong(request.getParameter("geolocationAreaId")));        
-        Institution institution = institutionService.findOne(Long.parseLong(request.getParameter("institutionId")));    
-        DoctorSpecialty doctorSpecialty = doctorSpecialtyService.findOne(Long.parseLong("1"));    
-       
-        Doctor doctor = new Doctor();
-        doctor.setFirstName(request.getParameter("firstName"));
-        doctor.setLastName(request.getParameter("lastName"));
-        doctor.setAddress(request.getParameter("address"));
-        doctor.setEmail(request.getParameter("email"));
-        doctor.setPhone(request.getParameter("phone"));
-        doctor.setPosition(request.getParameter("position"));
-        doctor.setCity(city);
-        doctor.setGeolocationArea(geolocationArea);
-        doctor.setInstitution(institution);
-        doctor.setSpecialty(doctorSpecialty);
+        Doctor doctor = doctorService.getDataFromRequest(request);
 
-        logger.debug("----- New doctor: ", doctor);
+        repo.save(doctor);
 
-        doctorService.save(doctor);
-        
-        return "doctors/view";
+        return "redirect:/doctors/";
     }
 
     /**
@@ -163,7 +161,7 @@ public class DoctorController {
     @RequestMapping(value = "/json", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
     public List<Doctor> index() {
 
-        List<Doctor> doctors = doctorService.findAll();
+        List<Doctor> doctors = repo.findAll();
 
         return doctors;
     }

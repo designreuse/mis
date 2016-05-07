@@ -18,7 +18,7 @@
                         <h3 class="box-title">Create New Visit</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/ScheduledVisits/store"/>" method="POST">
+                        <form role="form" action="<c:url value="/scheduledVisits/store"/>" method="POST">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
