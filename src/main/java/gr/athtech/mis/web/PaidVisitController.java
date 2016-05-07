@@ -7,8 +7,8 @@ package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.ScheduledVisit;
-import gr.athtech.mis.service.PaidVisitService;
-import gr.athtech.mis.service.ScheduledVisitService;
+import gr.athtech.mis.repository.PaidVisitRepository;
+import gr.athtech.mis.repository.ScheduledVisitRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,15 +29,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author JurgenPC
  */
 @Controller
-@RequestMapping(value = "/PaidVisits")
+@RequestMapping(value = "/paidVisits")
 public class PaidVisitController {
     
     private final Logger logger = LoggerFactory.getLogger(PaidVisitController.class);
     
     @Autowired
-    private PaidVisitService paidVisitService;
+    private PaidVisitRepository paidVisitRepository;
     @Autowired 
-    private ScheduledVisitService scheduledVisitService;
+    private ScheduledVisitRepository scheduledVisitRepository;
     
     /**
      * Return the view that will display all the paid visits
@@ -48,7 +48,7 @@ public class PaidVisitController {
      @RequestMapping(value = "/", method = RequestMethod.GET)
      public String index(Map<String, Object> model){
          
-         List<PaidVisit> paidVisits = paidVisitService.findAll();
+         List<PaidVisit> paidVisits = paidVisitRepository.findAll();
          logger.debug("------------------NEW VISITS");
          model.put("paidVisits", paidVisits);
          return "paidVisits/view";    
@@ -64,8 +64,8 @@ public class PaidVisitController {
      @RequestMapping(value = "/{id}", method = RequestMethod.GET)
      public String indexSingle(@PathVariable("id") Long id, Map<String, Object> model){
          
-         List<ScheduledVisit> userVisits = scheduledVisitService.getAllByVisitorId(id);
-         List<PaidVisit> paidVisits = paidVisitService.getAllPaidVisits(userVisits);
+         List<ScheduledVisit> userVisits = scheduledVisitRepository.getAllByVisitorId(id);
+         List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisits(userVisits);
          logger.debug("------------------NEW VISITS");
          model.put("paidVisits", paidVisits);
          return "paidVisits/view";    
@@ -81,7 +81,7 @@ public class PaidVisitController {
     @RequestMapping(value = "/create/{id}", method = RequestMethod.GET)
     public String create(@PathVariable("id") Long id, Model model) {
 
-        ScheduledVisit schv = scheduledVisitService.findById(id);
+        ScheduledVisit schv = scheduledVisitRepository.findById(id);
         model.addAttribute("schv", schv);
         return "paidVisits/create";
     }
@@ -89,7 +89,7 @@ public class PaidVisitController {
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
 
-        ScheduledVisit selectedSchv = scheduledVisitService.findById(Long.parseLong(request.getParameter("id")));
+        ScheduledVisit selectedSchv = scheduledVisitRepository.findById(Long.parseLong(request.getParameter("id")));
         selectedSchv.setStatus("Paid");
         //Convert date parammeter to SQL date
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -107,14 +107,14 @@ public class PaidVisitController {
         
         logger.debug("----- New user: ", pdvst);
 
-        paidVisitService.save(pdvst);
+        paidVisitRepository.save(pdvst);
         return "redirect:/PaidVisits/";
     }
     
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
     public String info(@PathVariable("id") Long id, Model model) {
 
-        PaidVisit paidVisit = paidVisitService.findById(id);
+        PaidVisit paidVisit = paidVisitRepository.findById(id);
         model.addAttribute("paidVisit", paidVisit);
         return "paidVisits/info";
     }
