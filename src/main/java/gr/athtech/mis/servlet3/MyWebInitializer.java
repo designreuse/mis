@@ -37,8 +37,8 @@ public class MyWebInitializer extends
         return new Filter[]{
             characterEncodingFilter,
             new HiddenHttpMethodFilter(),
-            new SitemeshFilter(),
             new DelegatingFilterProxy("springSecurityFilterChain"),
+            new SitemeshFilter(),
             new OpenEntityManagerInViewFilter()};
     }
 

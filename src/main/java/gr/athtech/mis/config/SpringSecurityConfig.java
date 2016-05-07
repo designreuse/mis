@@ -25,11 +25,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
+        auth.userDetailsService(authService).passwordEncoder(passwordEncoder());
+
+       /* auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery(getUserQuery())
                 .authoritiesByUsernameQuery(getAuthoritiesQuery())
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());*/
+      //  auth.userDetailsService(authService);
     }
 
     @Override
@@ -45,6 +48,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login", "/logout", "/test").permitAll()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
+                .antMatchers("/doctors/delete/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -67,10 +71,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private String getAuthoritiesQuery() {
-        return "SELECT DISTINCT users.username as username, roles.name as authority "
-                + "FROM users, users_roles, roles "
+        return "SELECT DISTINCT users.username as username, authorities.name as authority "
+                + "FROM users, users_roles, authorities "
                 + "WHERE users.id = users_roles.user_id "
-                + "AND roles.id = users_roles.role_id "
+                + "AND authorities.id = users_roles.role_id "
                 + "AND users.username = ? ";
     }
 

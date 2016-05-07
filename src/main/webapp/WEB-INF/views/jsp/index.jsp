@@ -1,9 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <content tag="title">Dashboard</content>
 
 <content tag="content">
+ 
     <section class="content-header">
         <h1>
             Dashboard

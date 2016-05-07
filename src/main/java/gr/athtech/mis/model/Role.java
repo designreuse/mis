@@ -20,7 +20,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @author it-support
  */
 @Entity
-@Table(name = "roles")
+@Table(name = "authorities")
 public class Role implements GrantedAuthority {
 
     @Id

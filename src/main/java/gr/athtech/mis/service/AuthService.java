@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import gr.athtech.mis.repository.IUserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -24,7 +25,7 @@ public class AuthService implements UserDetailsService {
      * @param username
      * @return
      */
-    public SecurityUser loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repo.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("UserName " + username + " not found");

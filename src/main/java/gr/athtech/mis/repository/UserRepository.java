@@ -52,7 +52,7 @@ public class UserRepository {
      */
     public List<User> getMedicalVisitors() {
 
-        Role medicalVisitor = roleRepo.findByName("MEDICAL_VISITOR");
+        Role medicalVisitor = roleRepo.findByName("ROLE_MEDICAL_VISITOR");
         List<User> medicalVisitors = repo.findByRoles(medicalVisitor);
 
         return medicalVisitors;

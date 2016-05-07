@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <content tag="title">View all doctors</content>
 
@@ -15,7 +16,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">View all doctors</h3>
+                        <h3 class="box-title">View all doctors</h3>                       
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
@@ -47,7 +48,9 @@
                                                 <a href="<c:url value="/doctors/edit/${doctor.id}"/>">
                                                     <button type="button" class="btn btn-sm btn-success btn-30"><i class="fa fa-edit"></i></button>
                                                 </a>
-                                                 <button type="button" class="btn btn-sm btn-danger btn-30 deleteDoctor" data-id="${doctor.id}"><i class="fa fa-trash"></i></button>
+                                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                                    <button type="button" class="btn btn-sm btn-danger btn-30 deleteDoctor" data-id="${doctor.id}"><i class="fa fa-trash"></i></button>
+                                                    </sec:authorize>
                                             </td>
                                         </tr>
                                     </c:forEach>

@@ -23,9 +23,6 @@ public class WelcomeController {
 
         HttpSession session = request.getSession(true); //create a new session
 
-        SecurityUser userDetails = authService.loadUserByUsername(principal.getName());
-
-        session.setAttribute("user", userDetails);
         return "index";
     }
 

@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="user" property="principal" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -39,7 +40,7 @@
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="header">WELCOME <span class="text-uppercase">${sessionScope.user.firstName}</span> <span class="pull-right"><a href="<c:url value='/'/>logout">LOGOUT</a></span></li>       
+                        <li class="header">WELCOME <span class="text-uppercase">${user.username}</span> <span class="pull-right"><a href="<c:url value='/'/>logout">LOGOUT</a></span></li>       
                         <li class="treeview">
                             <a href="<c:url value='/'/>">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
@@ -82,8 +83,9 @@
                                 <span>My Scheduled Visits</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value='/scheduledVisits/${sessionScope.user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
-                                <li><a href="<c:url value='/paidVisits/${sessionScope.user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
+                                <sec:authentication property="principal.firstName"/> 
+                                <li><a href="<c:url value='/scheduledVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
+                                <li><a href="<c:url value='/paidVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
                             </ul>
                         </li>
                         <li>
@@ -101,7 +103,7 @@
                 <!-- /.sidebar -->
             </aside>
             <div class="content-wrapper">
-                <sitemesh:write property='page.content'/>
+                <sitemesh:write property='page.content'/>                
             </div>
         </div>
 

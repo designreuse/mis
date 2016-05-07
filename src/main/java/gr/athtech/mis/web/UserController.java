@@ -94,6 +94,7 @@ public class UserController {
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
         user.setEmail(request.getParameter("email"));
+        user.setEnabled(true);
         user.setRoles(roles);
 
         logger.debug("----- New user: ", user);

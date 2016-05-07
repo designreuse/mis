@@ -345,8 +345,8 @@ insert into institutions (id, name, geolocation_area_id) values (124, "Γενι�
 
 
 /* user roles */
-insert into roles (id, name) values (1, "ADMIN");
-insert into roles (id, name) values (2, "MEDICAL_VISITOR");
+insert into authorities (id, name) values (1, "ROLE_ADMIN");
+insert into authorities (id, name) values (2, "ROLE_MEDICAL_VISITOR");
 
 /* users */
 insert into users (id, first_name, last_name, password, username, email, enabled) values (1, "Admin", "Admin", "$2a$10$bMaNOYGEwfNl2z6hg9lmRuc3s7uAgWxhRVzll2YguII6sBvVSX2qi", "admin", "admin@mis.gr", 1);
