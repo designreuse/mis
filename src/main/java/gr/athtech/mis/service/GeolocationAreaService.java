@@ -28,4 +28,22 @@ public class GeolocationAreaService {
 
         return geolocationArea;
     }
+
+    /**
+     * Fetch a geolocationArea by its id, and also load its cities and
+     * institutions
+     *
+     * @param id
+     * @return
+     */
+    public GeolocationArea findOneWithCitiesWithInstitutions(Long id) {
+        GeolocationArea geolocationArea = repo.findOne(id);
+
+        if (geolocationArea != null) {
+            geolocationArea.getCities();
+            geolocationArea.getInstitutions();
+        }
+        
+        return geolocationArea;
+    }
 }

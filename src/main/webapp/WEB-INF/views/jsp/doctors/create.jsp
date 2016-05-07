@@ -49,7 +49,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Geographical Area:</label>
-                                        <select name="geolocationAreaId" class="form-control">
+                                        <select name="geolocationAreaId" id="geolocationAreaId" class="form-control">
+                                            <option value="0">[-- select --]</option>
                                             <c:forEach var="area" items="${geolocationAreas}">
                                                 <option value="${area.id}">${area.name}</option>
                                             </c:forEach>
@@ -59,10 +60,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>City</label>
-                                        <select name="cityId" class="form-control">
-                                            <c:forEach var="city" items="${cities}">
-                                                <option value="${city.id}">${city.name}</option>
-                                            </c:forEach>
+                                        <select name="cityId" id="cityId" class="form-control" disabled>
                                         </select>     
                                     </div>
                                 </div>
@@ -85,10 +83,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Institution</label>
-                                        <select name="institutionId" class="form-control">
-                                            <c:forEach var="institution" items="${institutions}">
-                                                <option value="${institution.id}">${institution.name}</option>
-                                            </c:forEach>
+                                        <select name="institutionId" id="institutionId" class="form-control" disabled>
                                         </select>     
                                     </div>
                                 </div>
@@ -101,4 +96,8 @@
             </div>
         </div>
     </section>
+</content>
+
+<content tag="footerScripts">
+    <script src="<c:url value='/resources/js/doctors.js'/>" type="text/javascript"></script>
 </content>

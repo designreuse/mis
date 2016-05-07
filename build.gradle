@@ -68,13 +68,14 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.38'
     compile 'jstl:jstl:1.2'
     compile 'org.apache.commons:commons-dbcp2:2.0'
-    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
-
-	
+    compile 'com.fasterxml.jackson.core:jackson-core:2.3.0'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.3.0'
+   
     //include in compile only, exclude in the war
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
     providedCompile 'javax.servlet:jsp-api:2.0'
     providedCompile 'org.sitemesh:sitemesh:3.0.1'
+    providedCompile 'com.fasterxml.jackson.core:jackson-annotations:2.3.0'
 	
    // runtime 'org.sitemesh:sitemesh:3.0.1'
 }

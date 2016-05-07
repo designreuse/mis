@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,11 +31,14 @@ public class GeolocationArea implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "geolocationArea")
+    @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
     private List<Doctor> doctors;
 
-    @OneToMany(mappedBy = "geolocationArea")
+    @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
     private List<City> cities;
+
+    @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
+    private List<Institution> institutions;
 
     public GeolocationArea() {
     }
@@ -77,7 +81,13 @@ public class GeolocationArea implements Serializable {
     public void setCities(List<City> cities) {
         this.cities = cities;
     }
-    
-    
+
+    public List<Institution> getInstitutions() {
+        return institutions;
+    }
+
+    public void setInstitutions(List<Institution> institutions) {
+        this.institutions = institutions;
+    }
 
 }

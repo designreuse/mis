@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -35,6 +36,7 @@ public class Institution implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "geolocation_area_id")
+    @JsonIgnore
     private GeolocationArea geolocationArea;
 
     @OneToMany(mappedBy = "institution")
