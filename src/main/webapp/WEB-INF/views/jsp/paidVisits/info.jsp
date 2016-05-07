@@ -20,19 +20,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Medical Visitor Name:</label><br/>
-                                        <label>${paidVisit.scheduledVisit.medicalVisitor.firstName} ${paidVisit.scheduledVisit.medicalVisitor.lastName}</label>
+                                        <p>${paidVisit.scheduledVisit.medicalVisitor.firstName} ${paidVisit.scheduledVisit.medicalVisitor.lastName}</p>
                                     </div>
                                 </div>                            
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Doctor Name:</label><br/>
-                                        <label>${paidVisit.scheduledVisit.doctor.firstName} ${paidVisit.scheduledVisit.doctor.lastName}</label>
+                                        <p>${paidVisit.scheduledVisit.doctor.firstName} ${paidVisit.scheduledVisit.doctor.lastName}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Cycle:</label><br/>
-                                        <label>${paidVisit.scheduledVisit.cycle.startDate} - ${paidVisit.scheduledVisit.cycle.endDate}</label>
+                                        <p>${paidVisit.scheduledVisit.cycle.startDate} - ${paidVisit.scheduledVisit.cycle.endDate}</p>
                                     </div>
                                 </div>                                 
                             </div> 
@@ -40,25 +40,25 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Status: </label><br/>
-                                        <label>${paidVisit.date}</label>
+                                        <p>${paidVisit.date}</p>
                                     </div>
                                 </div> 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Status: </label><br/>
-                                        <label>${paidVisit.hour}</label>
+                                        <p>${paidVisit.hour}</p>
                                     </div>
                                 </div> 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Status: </label><br/>
-                                        <label>${paidVisit.week}</label>
+                                        <p>${paidVisit.week}</p>
                                     </div>
                                 </div> 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Status: </label><br/>
-                                        <label>${paidVisit.isGroup}</label>
+                                        <p>${paidVisit.isGroup}</p>
                                     </div>
                                 </div>       
                             </div>  
@@ -78,4 +78,3 @@
         </div>
     </section>
 </content>
-
