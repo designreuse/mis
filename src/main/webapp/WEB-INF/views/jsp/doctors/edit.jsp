@@ -20,7 +20,7 @@
                     <div class="box-body">
                         <form role="form" action="<c:url value="/doctors/update"/>" method="POST">
                             <input type="hidden" name="_method" value="put" />
-                            <input type="hidden" name="id" value="${user.id}">
+                            <input type="hidden" name="id" value="${doctor.id}">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">

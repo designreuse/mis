@@ -40,10 +40,13 @@
                                                 <td><c:out value="${role.name}"/></td>
                                             </c:forEach>
                                             <td>
-                                                <a href="<c:url value="/users/edit/${user.id}"/>" class="btn btn-info">
+                                                <a href="<c:url value="/users/one/${user.id}"/>" class="btn btn-info btn-sm btn-30">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="<c:url value="/users/edit/${user.id}"/>" class="btn btn-success btn-sm btn-30">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <button typ e="button" class="btn btn-danger deleteUser" data-id="${user.id}"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-danger btn-sm btn-30 deleteUser" data-id="${user.id}"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </c:forEach>

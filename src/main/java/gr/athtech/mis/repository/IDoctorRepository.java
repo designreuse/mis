@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository("iDoctorRepository")
 public interface IDoctorRepository extends JpaRepository<Doctor, Long>{
-    
+        
     @Query("SELECT d FROM Doctor d "
             + "WHERE NOT EXISTS "
             + "(SELECT s FROM ScheduledVisit s WHERE d = s)")

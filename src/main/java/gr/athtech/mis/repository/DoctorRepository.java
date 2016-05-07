@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("doctorRepository")
+@Transactional
 public class DoctorRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(DoctorRepository.class);
@@ -34,7 +36,15 @@ public class DoctorRepository {
      */
     public Doctor findOne(Long id) {
         Doctor doctor = repo.findOne(id);
-
+        
+        /*if(doctor!=null){
+            doctor.getGeolocationArea();
+            doctor.getCity();
+            doctor.getInstitution();
+            doctor.getSpecialty();
+            doctor.getScheduledVisits();
+        }
+*/
         return doctor;
     }
 
@@ -48,6 +58,15 @@ public class DoctorRepository {
         doctor = repo.save(doctor);
         return doctor;
     }
+    
+     public Doctor update(Doctor doctor) {
+        doctor = repo.save(doctor);
+        return doctor;
+    }
+     
+     public void delete(Long id){
+         repo.delete(id);
+     }
 
     public List<Doctor> getAvailableDoctorList() {
         List<Doctor> doctorList = repo.getAvailableDoctors();

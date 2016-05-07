@@ -5,10 +5,12 @@
  */
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,16 +32,12 @@ public class DoctorSpecialty implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "specialty")
-    private List<Doctor> doctors;
-
     public DoctorSpecialty() {
     }
 
-    public DoctorSpecialty(Long id, String name, List<Doctor> doctors) {
+    public DoctorSpecialty(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.doctors = doctors;
     }
 
     public Long getId() {
@@ -56,14 +54,6 @@ public class DoctorSpecialty implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
     }
 
 }

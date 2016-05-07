@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -61,6 +59,23 @@ public class DoctorController {
         model.put("doctors", doctors);
 
         return "doctors/view";
+    }
+    
+    /**
+     * Show one doctor
+     * 
+     * @param id
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
+    public String one(@PathVariable("id") Long id, Model model) {
+
+        Doctor doctor = repo.findOne(id);
+
+        model.addAttribute("doctor", doctor);
+
+        return "doctors/one";
     }
 
     /**
@@ -118,14 +133,13 @@ public class DoctorController {
      *
      * @param request
      * @param response
-     * @param model
      * @return
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public String store(HttpServletRequest request,
-            HttpServletResponse response, Model model) {
+    public String store(HttpServletRequest request) {
 
-        Doctor doctor = doctorService.getDataFromRequest(request);
+        Doctor doctor = new Doctor();
+        doctor = doctorService.getDataFromRequest(request, doctor);
 
         repo.save(doctor);
 
@@ -135,34 +149,26 @@ public class DoctorController {
     /**
      * Update an existing doctor
      *
-     * @param doctor
+     * @param request
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public String update(@ModelAttribute("doctor") Doctor doctor) {
+    public String update(HttpServletRequest request) {
 
-        //doctorService.update(doctor);     
-        return "doctors";
+        Doctor doctor = repo.findOne(Long.parseLong(request.getParameter("id")));
+        doctor = doctorService.getDataFromRequest(request, doctor);
+
+        repo.update(doctor);
+
+        return "redirect:/doctors/";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") int id) {
-
-        //doctorService.delete(id);
-        return "doctors";
-    }
-
-    /**
-     * Get all the doctors and return them in json format
-     *
-     * @return
-     */
     @ResponseBody
-    @RequestMapping(value = "/json", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
-    public List<Doctor> index() {
+    public String delete(@PathVariable("id") Long id) {
 
-        List<Doctor> doctors = repo.findAll();
-
-        return doctors;
+        repo.delete(id);
+        return "redirect:/doctors/";
     }
+
 }

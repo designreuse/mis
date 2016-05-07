@@ -13,3 +13,12 @@
 .login-page{background-color:#222d32;}
 #errorMsg{color:#a92222};
 .login-logo h2{color:#fff;}
+
+
+.btn-40{
+    width:40px;
+}
+.btn-30{
+    width:30px;
+    margin-bottom: 2px;
+}

@@ -1,3 +1,17 @@
+//confirm before deleting a dotor
+$(".deleteDoctor").click(function (e) {
+    console.log($("body").attr('data-url') + 'doctors/delete/' + $(this).attr('data-id'))
+    if (confirm('Are you sure you want to delete the doctor?')) {
+
+        $.ajax({
+            url: $("body").attr('data-url') + 'doctors/delete/' + $(this).attr('data-id'),
+            type: 'DELETE'
+        }).done(function (data) {
+            window.location.href = $("body").attr('data-url') + "doctors/";
+        });
+    }
+});
+
 //when a geographical area is selected, fetch its cities and institutions
 $('#geolocationAreaId').on('change', function () {
 

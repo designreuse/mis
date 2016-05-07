@@ -24,8 +24,6 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
                                         <th>Email</th>
                                         <th>Position</th>
                                         <th>Institution</th>
@@ -38,21 +36,18 @@
                                         <tr>
                                             <td><c:out value="${doctor.id}"/></td>
                                             <td><c:out value="${doctor.firstName}"/> <c:out value="${doctor.lastName}"/></td>
-                                            <td><c:out value="${doctor.address}"/>, 
-                                                <c:out value="${doctor.city.name}"/>, 
-                                                <c:out value="${doctor.geolocationArea.name}"/></td>
-                                            <td><c:out value="${doctor.phone}"/></td>
                                             <td><c:out value="${doctor.email}"/></td>
                                             <td><c:out value="${doctor.position}"/></td>
                                             <td><c:out value="${doctor.institution.name}"/></td>
                                             <td><c:out value="${doctor.specialty.name}"/></td>
                                             <td>
+                                                <a href="<c:url value="/doctors/one/${doctor.id}"/>" class="btn btn-info btn-sm btn-30">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
                                                 <a href="<c:url value="/doctors/edit/${doctor.id}"/>">
-                                                    <button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-success btn-30"><i class="fa fa-edit"></i></button>
                                                 </a>
-                                                <a href="<c:url value="/doctors/delete/${doctor.id}"/>">
-                                                    <button typ e="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                                </a>
+                                                 <button type="button" class="btn btn-sm btn-danger btn-30 deleteDoctor" data-id="${doctor.id}"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -64,4 +59,8 @@
             </div>
         </div>
     </section>
+</content>
+
+<content tag="footerScripts">
+    <script src="<c:url value='/resources/js/doctors.js'/>" type="text/javascript"></script>
 </content>

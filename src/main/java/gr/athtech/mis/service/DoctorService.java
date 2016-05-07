@@ -35,13 +35,12 @@ public class DoctorService {
      * @param request
      * @return 
      */
-    public Doctor getDataFromRequest(HttpServletRequest request) {
+    public Doctor getDataFromRequest(HttpServletRequest request, Doctor doctor) {
         City city = cityRepository.findOne(Long.parseLong(request.getParameter("cityId")));
         GeolocationArea geolocationArea = geolocationAreaRepository.findOne(Long.parseLong(request.getParameter("geolocationAreaId")));
         Institution institution = institutionRepository.findOne(Long.parseLong(request.getParameter("institutionId")));
         DoctorSpecialty doctorSpecialty = doctorSpecialtyRepository.findOne(Long.parseLong(request.getParameter("specialtyId")));
 
-        Doctor doctor = new Doctor();
         doctor.setFirstName(request.getParameter("firstName"));
         doctor.setLastName(request.getParameter("lastName"));
         doctor.setAddress(request.getParameter("address"));

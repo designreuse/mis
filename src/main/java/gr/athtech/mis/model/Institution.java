@@ -6,6 +6,7 @@
 package gr.athtech.mis.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -39,17 +40,13 @@ public class Institution implements Serializable {
     @JsonIgnore
     private GeolocationArea geolocationArea;
 
-    @OneToMany(mappedBy = "institution")
-    private List<Doctor> doctors;
-
     public Institution() {
     }
 
-    public Institution(Long id, String name, GeolocationArea geolocationArea, List<Doctor> doctors) {
+    public Institution(Long id, String name, GeolocationArea geolocationArea) {
         this.id = id;
         this.name = name;
         this.geolocationArea = geolocationArea;
-        this.doctors = doctors;
     }
 
     public Long getId() {
@@ -74,14 +71,6 @@ public class Institution implements Serializable {
 
     public void setGeolocationArea(GeolocationArea geolocationArea) {
         this.geolocationArea = geolocationArea;
-    }
-
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
     }
 
 }

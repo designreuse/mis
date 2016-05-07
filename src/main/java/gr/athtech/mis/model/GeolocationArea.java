@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -32,9 +33,6 @@ public class GeolocationArea implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
-    private List<Doctor> doctors;
-
-    @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
     private List<City> cities;
 
     @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
@@ -43,11 +41,9 @@ public class GeolocationArea implements Serializable {
     public GeolocationArea() {
     }
 
-    public GeolocationArea(Long id, String name, List<City> cities, List<Doctor> doctors) {
+    public GeolocationArea(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.cities = cities;
-        this.doctors = doctors;
     }
 
     public Long getId() {
@@ -64,14 +60,6 @@ public class GeolocationArea implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
     }
 
     public List<City> getCities() {
