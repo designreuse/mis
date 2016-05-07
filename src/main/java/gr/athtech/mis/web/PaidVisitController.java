@@ -90,7 +90,7 @@ public class PaidVisitController {
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
 
         ScheduledVisit selectedSchv = scheduledVisitService.findById(Long.parseLong(request.getParameter("id")));
-        
+        selectedSchv.setStatus("Paid");
         //Convert date parammeter to SQL date
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         java.util.Date date = format.parse(request.getParameter("date"));

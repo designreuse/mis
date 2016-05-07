@@ -87,7 +87,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Date</label>
-                                         <input name="date" class="form-control">                                  
+                                         <input name="date" type="text" class="form-control">                                           
                                     </div>
                                 </div>
                             </div>
@@ -99,3 +99,11 @@
         </div>
     </section>
 </content>
+
+<content tag="footerScripts">
+    <script type="text/javascript">
+            $('.form-group input').datepicker({
+        format: "dd-mm-yyyy"
+    });
+    </script>
+</content>                                   
