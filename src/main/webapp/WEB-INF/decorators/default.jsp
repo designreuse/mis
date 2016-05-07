@@ -71,9 +71,9 @@
                                 <span>Visits Management</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value='/ScheduledVisits/'/>"><i class="fa fa-circle-o"></i> View Assigned Visits</a></li>
-                                <li><a href="<c:url value='/ScheduledVisits/create'/>"><i class="fa fa-circle-o"></i> Create New Visit</a></li>
-                                <li><a href="<c:url value='/PaidVisits/'/>"><i class="fa fa-circle-o"></i> View Paid Visits</a></li>
+                                <li><a href="<c:url value='/scheduledVisits/'/>"><i class="fa fa-circle-o"></i> View Assigned Visits</a></li>
+                                <li><a href="<c:url value='/scheduledVisits/create'/>"><i class="fa fa-circle-o"></i> Create New Visit</a></li>
+                                <li><a href="<c:url value='/paidVisits/'/>"><i class="fa fa-circle-o"></i> View Paid Visits</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -82,8 +82,8 @@
                                 <span>My Scheduled Visits</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value='/ScheduledVisits/${sessionScope.user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
-                                <li><a href="<c:url value='/PaidVisits/${sessionScope.user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
+                                <li><a href="<c:url value='/scheduledVisits/${sessionScope.user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
+                                <li><a href="<c:url value='/paidVisits/${sessionScope.user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
                             </ul>
                         </li>
                         <li>

@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author JurgenPC
  */
 @Controller
-@RequestMapping(value = "/PaidVisits")
+@RequestMapping(value = "/paidVisits")
 public class PaidVisitController {
     
     private final Logger logger = LoggerFactory.getLogger(PaidVisitController.class);

@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author jmone
  */
 @Controller
-@RequestMapping(value = "/ScheduledVisits")
+@RequestMapping(value = "/scheduledVisits")
 public class ScheduledVisitController {
     
     private final Logger logger = LoggerFactory.getLogger(ScheduledVisitController.class);
