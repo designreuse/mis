@@ -12,5 +12,3 @@ $(".deleteVisit").click(function (e) {
         });
     }
 });
-
-
