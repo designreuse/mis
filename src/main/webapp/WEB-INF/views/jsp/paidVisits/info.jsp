@@ -15,7 +15,7 @@
                         <h3 class="box-title">Visit Details: For ${paidVisit.scheduledVisit.medicalVisitor.firstName} ${paidVisit.scheduledVisit.medicalVisitor.lastName} </h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/PaidVisits/${paidVisit.scheduledVisit.medicalVisitor.id}" />" method="GET">
+                        <form role="form" action="<c:url value="/paidVisits/${paidVisit.scheduledVisit.medicalVisitor.id}" />" method="GET">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">

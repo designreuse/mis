@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author JurgenPC
  */
 @Controller
-@RequestMapping(value = "/PaidVisits")
+@RequestMapping(value = "/paidVisits")
 public class PaidVisitController {
     
     private final Logger logger = LoggerFactory.getLogger(PaidVisitController.class);
@@ -109,7 +109,7 @@ public class PaidVisitController {
         logger.debug("----- New user: ", pdvst);
 
         paidVisitRepository.save(pdvst);
-        return "redirect:/PaidVisits/";
+        return "redirect:/paidVisits/";
     }
     
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
