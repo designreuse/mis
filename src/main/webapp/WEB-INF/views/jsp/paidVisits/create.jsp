@@ -18,7 +18,7 @@
                         <h3 class="box-title">Pay Visit</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/PaidVisits/store" />" method="POST">
+                        <form role="form" action="<c:url value="/paidVisits/store" />" method="POST">
                             <div class="row">
                                 <input type="hidden" name="id" value="${schv.id}">
                                 <div class="col-md-4">

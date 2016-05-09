@@ -5,9 +5,13 @@
  */
 package gr.athtech.mis.web;
 
+import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.Role;
+import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
+import gr.athtech.mis.repository.PaidVisitRepository;
 import gr.athtech.mis.repository.RoleRepository;
+import gr.athtech.mis.repository.ScheduledVisitRepository;
 import gr.athtech.mis.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,10 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private PaidVisitRepository paidVisitRepository;
+    @Autowired 
+    private ScheduledVisitRepository scheduledVisitRepository;
 
     /**
      * Return the view that will display all the users
@@ -153,6 +161,28 @@ public class UserController {
         userRepository.delete(id);
 
         return "redirect:/users/";
+    }
+    
+    /**
+     * Show one user
+     * 
+     * @param id
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
+    public String one(@PathVariable("id") Long id, Model model) {
+
+        User user = userRepository.findOne(id);
+        List<ScheduledVisit> userVisits = scheduledVisitRepository.getAllByVisitorId(id);
+        List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisits(userVisits);
+
+        model.addAttribute("user", user);
+        model.addAttribute("userVisits", userVisits);
+        model.addAttribute("paidVisits", paidVisits);
+        
+
+        return "users/one";
     }
 
 }
