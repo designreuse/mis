@@ -12,7 +12,7 @@ public interface IDoctorRepository extends JpaRepository<Doctor, Long>{
         
     @Query("SELECT d FROM Doctor d "
             + "WHERE NOT EXISTS "
-            + "(SELECT s FROM ScheduledVisit s WHERE d = s)")
+            + "(SELECT s FROM d.scheduledVisits s)")
     public List<Doctor> getAvailableDoctors();
     
 }
