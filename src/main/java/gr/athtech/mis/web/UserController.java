@@ -174,7 +174,7 @@ public class UserController {
     public String one(@PathVariable("id") Long id, Model model) {
 
         User user = userRepository.findOne(id);
-        List<ScheduledVisit> userVisits = scheduledVisitRepository.getAllByVisitorId(id);
+        List<ScheduledVisit> userVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
         
 

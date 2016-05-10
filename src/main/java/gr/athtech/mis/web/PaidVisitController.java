@@ -93,7 +93,7 @@ public class PaidVisitController {
         selectedSchv.setStatus("Paid");
         
         //Convert date parammeter to SQL date
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = format.parse(request.getParameter("date"));
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         

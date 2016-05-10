@@ -57,7 +57,7 @@
             <div class="col-md-8">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Visits</h3>
+                        <h3 class="box-title">Visits - Current Active Cycle</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                     <ul class="nav nav-pills">  
@@ -83,7 +83,7 @@
                             <tr>
                             <td><c:out value="${schvisits.doctor.firstName}"/> <c:out value="${schvisits.doctor.lastName}"/></td>
                             <td><c:out value="${schvisits.cycle.startDate}"/> - <c:out value="${schvisits.cycle.endDate}"/></td>
-                            <td><c:out value="${schvisits.status}"/></td>
+                            <td><c:out value="${schvisits.status}"/> (<c:out value="${schvisits.paidVisits.size()}"/>)</td>
                             </tr>
                         </c:forEach>
                        </tbody>

@@ -103,7 +103,9 @@
 <content tag="footerScripts">
     <script type="text/javascript">
             $('.form-group input').datepicker({
-        format: "dd-mm-yyyy"
+        format: "yyyy-mm-dd",
+        startDate: "${schv.cycle.startDate}",
+        endDate: "${schv.cycle.endDate}"
     });
     </script>
 </content>                                   

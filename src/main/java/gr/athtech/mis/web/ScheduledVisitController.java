@@ -55,6 +55,23 @@ public class ScheduledVisitController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
 
+        //Show the scheduled visits of the current cycle based on the current date
+        List<ScheduledVisit> newVisits = scheduledVisitRepository.showByCurrentCycle();
+        logger.debug("------------------NEW VISITS");
+        model.put("newVisits", newVisits);
+        return "scheduledVisits/view";
+
+    }
+    
+    /**
+     * Return the view that will display all the scheduled visits
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public String indexAll(Map<String, Object> model) {
+
         List<ScheduledVisit> newVisits = scheduledVisitRepository.findAll();
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
@@ -122,13 +139,14 @@ public class ScheduledVisitController {
      * Return the view that will display all the scheduled visits for the logged
      * in user
      *
+     * @param id
      * @param model
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String displayByUser(@PathVariable("id") Long id, Map<String, Object> model) {
 
-        List<ScheduledVisit> newVisits = scheduledVisitRepository.getAllByVisitorId(id);
+        List<ScheduledVisit> newVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
         return "scheduledVisits/view";

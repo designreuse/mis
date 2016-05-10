@@ -63,4 +63,14 @@ public class ScheduledVisitRepository {
         
         return allVisits;
     }
+    
+    public List<ScheduledVisit> getUsersFromCurrentCycle(Long id){
+        List<ScheduledVisit> activeVisits = repo.findByMedicalVisitorId(id);
+        return activeVisits;
+    }
+    
+    public List<ScheduledVisit> showByCurrentCycle(){
+        List<ScheduledVisit> allCurrentVisits = repo.findByCurrentCycle();
+        return allCurrentVisits;
+    }
 }
