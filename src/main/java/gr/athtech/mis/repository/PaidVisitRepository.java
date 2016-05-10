@@ -32,10 +32,17 @@ public class PaidVisitRepository {
         return pdvst;
      }
     
-    public List<PaidVisit> getAllPaidVisits(List<ScheduledVisit> vst){
-        List<PaidVisit> allPaidVisits = repo.findByScheduledVisit(vst);
+    //public List<PaidVisit> getAllPaidVisits(List<ScheduledVisit> vst){
+        //List<PaidVisit> allPaidVisits = repo.findByScheduledVisit(vst);
         
-        return allPaidVisits;
+        //return allPaidVisits;
+    //}
+    
+    public List<PaidVisit> getAllUserVisits(Long id)
+    {
+        List<PaidVisit> allUsersVisits = repo.findByScheduledVisitMedicalVisitorId(id);
+        
+        return allUsersVisits;
     }
     
     public PaidVisit findById(Long id) {

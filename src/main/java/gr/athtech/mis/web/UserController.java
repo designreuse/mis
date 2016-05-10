@@ -175,7 +175,8 @@ public class UserController {
 
         User user = userRepository.findOne(id);
         List<ScheduledVisit> userVisits = scheduledVisitRepository.getAllByVisitorId(id);
-        List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisits(userVisits);
+        List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
+        
 
         model.addAttribute("user", user);
         model.addAttribute("userVisits", userVisits);

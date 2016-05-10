@@ -65,7 +65,7 @@ public class PaidVisitController {
      public String indexSingle(@PathVariable("id") Long id, Map<String, Object> model){
          
          List<ScheduledVisit> userVisits = scheduledVisitRepository.getAllByVisitorId(id);
-         List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisits(userVisits);
+         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
          logger.debug("------------------NEW VISITS");
          model.put("paidVisits", paidVisits);
          return "paidVisits/view";    
