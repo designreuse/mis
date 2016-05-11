@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -129,9 +130,19 @@ public class ScheduledVisitController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") Long id) {
-        scheduledVisitRepository.delete(id);
-
+    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        
+        ScheduledVisit checkedVisit = scheduledVisitRepository.findById(id);
+        String currentStatus = checkedVisit.getStatus();
+        
+        if(currentStatus.equals("Paid")){
+            
+            redirectAttributes.addFlashAttribute("warning", true);
+        }
+        else{
+            scheduledVisitRepository.delete(id);
+        }
+       
         return "redirect:/scheduledVisits/";
     }
 

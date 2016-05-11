@@ -16,10 +16,17 @@
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">New Visits List</h3>
+                        <c:if test="${warning eq true}">
+                                <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                You cannot delete the scheduled visit. Please delete the appropriate paid visits first.
+                                <a href="#" class="alert-link">Alert Link</a>.
+                                </div>
+                         </c:if>  
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <c:if test="${not empty newVisits}">
+                            <c:if test="${not empty newVisits}">                                                       
                             <table class="table">
                                 <thead>
                                     <tr>
