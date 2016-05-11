@@ -1,7 +1,6 @@
 package gr.athtech.mis.repository;
 
 import gr.athtech.mis.model.PaidVisit;
-import gr.athtech.mis.model.ScheduledVisit;
 import java.util.List;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
@@ -50,6 +49,15 @@ public class PaidVisitRepository {
         PaidVisit paidVisit = repo.findOne(id);
 
         return paidVisit;
+    }
+    
+     /**
+     * Delete a paid visit based on Id
+     *
+     * @param id
+     */
+    public void delete(Long id) {
+        repo.delete(id);
     }
     
 }

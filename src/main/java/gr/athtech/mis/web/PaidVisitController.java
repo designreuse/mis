@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -118,6 +119,15 @@ public class PaidVisitController {
         PaidVisit paidVisit = paidVisitRepository.findById(id);
         model.addAttribute("paidVisit", paidVisit);
         return "paidVisits/info";
+    }
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String delete(@PathVariable("id") Long id) {
+        paidVisitRepository.delete(id);
+        logger.debug("------------------PAID VISIT DELETED");
+
+        return "redirect:/paidVisits/";
     }
     
     

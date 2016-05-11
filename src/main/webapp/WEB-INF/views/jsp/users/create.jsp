@@ -75,7 +75,7 @@
 <content tag="footerScripts">
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#signInForm').formValidation();
+          $('#createUserForm').formValidation();
        });
     </script>
 </content>

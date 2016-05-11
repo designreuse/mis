@@ -50,6 +50,7 @@
                                                 <a href="<c:url value="/paidVisits/info/${paidVisit.id}"/>" class="btn btn-info">
                                                     <i class="fa fa-info"></i>
                                                 </a>
+                                                <button typ e="button" class="btn btn-danger deletePaidVisit" data-id="${paidVisit.id}"><i class="fa fa-trash"></i></button>    
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -66,5 +67,7 @@
         </div>
     </section>
 </content>
-
+<content tag="footerScripts">
+    <script src="<c:url value='/resources/js/paidVisit.js'/>" type="text/javascript"></script>
+</content>
 
