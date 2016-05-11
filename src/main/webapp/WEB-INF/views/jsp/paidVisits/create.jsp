@@ -87,7 +87,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Date</label>
-                                         <input name="date" type="text" class="form-control">                                           
+                                         <input name="date" type="text" class="form-control date">                                           
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
 
 <content tag="footerScripts">
     <script type="text/javascript">
-            $('.form-group input').datepicker({
+            $('.date').datepicker({
         format: "yyyy-mm-dd",
         startDate: "${schv.cycle.startDate}",
         endDate: "${schv.cycle.endDate}"

@@ -34,5 +34,10 @@ public class CycleRepository {
         Cycle cycle = repo.findOne(id);
         return cycle;
     }
+    public Cycle save(Cycle cycle){
+        cycle = repo.save(cycle);
+        return cycle;
+        
+    }
     
 }

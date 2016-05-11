@@ -27,7 +27,7 @@
             <![endif]-->
 
     </head>
-            <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
+    <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
         <div class="wrapper">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar">
@@ -89,10 +89,16 @@
                                 <li><a href="<c:url value='/paidVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-calendar"></i> <span>Calendar</span>
+                                <i class="fa fa-calendar"></i>
+                                <span>Cycles</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value='/cycles/'/>"><i class="fa fa-circle-o"></i> View All Cycles</a></li>
+                                <li><a href="<c:url value='/cycles/create'/>"><i class="fa fa-circle-o"></i> Create New Cycle</a></li>
+
+                            </ul>
                         </li>
                         <li>
                             <a href="#">
