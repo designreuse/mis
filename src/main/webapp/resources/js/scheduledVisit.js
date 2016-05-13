@@ -1,4 +1,4 @@
-//confirm before deleting a user
+//confirm before deleting a visit
 $(".deleteVisit").click(function (e) {
     console.log($("body").attr('data-url') + 'scheduledVisits/delete/' + $(this).attr('data-id'))
 
