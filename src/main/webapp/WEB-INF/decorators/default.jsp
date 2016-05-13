@@ -72,8 +72,8 @@
                                 <span>Visits Management</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value='/scheduledVisits/'/>"><i class="fa fa-circle-o"></i> View Active Assigned Visits</a></li>
-                                <li><a href="<c:url value='/scheduledVisits/all'/>"><i class="fa fa-circle-o"></i> View All Assigned Visits</a></li>
+                                <li><a href="<c:url value='/scheduledVisits/'/>"><i class="fa fa-circle-o"></i> View Assigned Visits</a></li>
+                                <li><a href="<c:url value='/scheduledVisits/one'/>"><i class="fa fa-circle-o"></i> View Assigned Visits By Cycle</a></li>
                                 <li><a href="<c:url value='/scheduledVisits/create'/>"><i class="fa fa-circle-o"></i> Create New Visit</a></li>
                                 <li><a href="<c:url value='/paidVisits/'/>"><i class="fa fa-circle-o"></i> View Paid Visits</a></li>
                             </ul>

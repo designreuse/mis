@@ -13,4 +13,16 @@ $(".deleteVisit").click(function (e) {
     }
 });
 
+//Show visits by cycle
+$('#selectedCycle').on('change', function () {
+
+        $.ajax({
+            type: 'GET',
+            url: $("body").attr('data-url') + 'scheduledVisits/one/' + $(this).val(),
+            success: function (data){
+                (".show").html(data);
+            }
+        });
+   
+});
 
