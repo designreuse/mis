@@ -49,7 +49,8 @@ public class ScheduledVisit implements Serializable {
     @JoinColumn(name = "cycle_id", nullable = false)
     private Cycle cycle;
 
-    @OneToMany(mappedBy = "scheduledVisit")
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scheduledVisit")
     private List<PaidVisit> paidVisits;
 
     @ManyToMany(cascade = CascadeType.ALL)

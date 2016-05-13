@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 /**
  *
@@ -47,6 +47,7 @@ public class ScheduledVisitController {
     @Autowired
     private UserRepository userRepository;
 
+
     /**
      * Return the view that will display all the scheduled visits
      *
@@ -58,8 +59,12 @@ public class ScheduledVisitController {
 
         //Show the scheduled visits of the current cycle based on the current date
         List<ScheduledVisit> newVisits = scheduledVisitRepository.showByCurrentCycle();
+        //show all
+        List<ScheduledVisit> newAllVisits = scheduledVisitRepository.findAll();
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
+        model.put("newAllVisits", newAllVisits);
+       
         return "scheduledVisits/view";
 
     }
@@ -70,13 +75,15 @@ public class ScheduledVisitController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/one", method = RequestMethod.GET)
     public String indexAll(Map<String, Object> model) {
 
         List<ScheduledVisit> newVisits = scheduledVisitRepository.findAll();
+        List<Cycle> allCycles = cycleRepository.findAll();
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
-        return "scheduledVisits/view";
+        model.put("allCycles", allCycles);
+        return "scheduledVisits/one";
 
     }
 
@@ -130,19 +137,9 @@ public class ScheduledVisitController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        
-        ScheduledVisit checkedVisit = scheduledVisitRepository.findById(id);
-        String currentStatus = checkedVisit.getStatus();
-        
-        if(currentStatus.equals("Paid")){
-            
-            redirectAttributes.addFlashAttribute("warning", true);
-        }
-        else{
-            scheduledVisitRepository.delete(id);
-        }
-       
+    public String delete(@PathVariable("id") Long id) {
+           
+            scheduledVisitRepository.delete(id);   
         return "redirect:/scheduledVisits/";
     }
 
