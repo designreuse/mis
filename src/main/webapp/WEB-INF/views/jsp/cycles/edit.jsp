@@ -18,7 +18,7 @@
                         <h3 class="box-title">Edit user</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/cycle/update" />" method="POST">
+                        <form role="form" action="<c:url value="/cycles/update" />" method="POST">
                             <input type="hidden" name="_method" value="put" />
                             <div class="row">
                                 <input type="hidden" name="id" value="${cycle.id}">

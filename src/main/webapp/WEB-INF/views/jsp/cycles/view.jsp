@@ -34,7 +34,7 @@
                                                 <td><c:out value="${cycle.id}"/></td>                                             
                                                 <td><c:out value="${cycle.startDate}"/> - <c:out value="${cycle.endDate}"/></td>
                                                 <td>
-                                                    <a href="<c:url value="/cycles/edit/${cycle.id}"/>" class="btn btn-edit">
+                                                    <a href="<c:url value="/cycles/edit/${cycle.id}"/>" class="btn btn-success btn-sm btn-30">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <button typ e="button" class="btn btn-danger deleteCycle" data-id="${cycle.id}"><i class="fa fa-trash"></i></button>    
