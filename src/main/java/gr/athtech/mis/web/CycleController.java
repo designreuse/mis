@@ -6,8 +6,6 @@
 package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.Cycle;
-import gr.athtech.mis.model.PaidVisit;
-import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.repository.CycleRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,8 +18,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -80,6 +80,14 @@ public class CycleController {
         cycle.setEndDate(sqltoDate);
 
         cycleRepository.save(cycle);
+
+        return "redirect:/cycles/";
+    }
+     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String delete(@PathVariable("id") Long id) {
+        cycleRepository.delete(id);
+        logger.debug("------------------CYCLE DELETED");
 
         return "redirect:/cycles/";
     }
