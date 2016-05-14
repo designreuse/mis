@@ -7,8 +7,7 @@
 
     <div class="login-box">
         <div class="login-logo">
-            <%-- <img src="<c:url value='/resources/theme/dist/img/logo.png' />" /> --%>
-            <h2>MIS Admin Panel</h2>
+            <img src="<c:url value='/resources/img/logo.png' />" /> 
         </div><!-- /.login-logo -->
         <form action="<c:url value='/'/>login" modelattribute="user" method="post">                
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

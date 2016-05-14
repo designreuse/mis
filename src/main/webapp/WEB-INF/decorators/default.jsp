@@ -7,7 +7,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title><sitemesh:write property='page.title'/> | MIS Admin Panel</title>
+        <title><sitemesh:write property='page.title'/> | Mediculus Admin Panel</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
             <link href="<c:url value='/resources/theme/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
@@ -36,8 +36,7 @@
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-                        <!-- <img src="resources/theme/dist/img/logo.png' />" /> -->
-                        <h4>MIS Admin Panel</h4>
+                        <img src="<c:url value='/resources/img/logo.png' />" style="width:50%;"/>
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
