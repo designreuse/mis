@@ -17,14 +17,14 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">New Visits List</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <form role="form" action="<c:url value="/scheduledVisits/byCycle"/>" method="POST">
+                    <div class="box-body">   
+                        <form role="form" action="<c:url value="/scheduledVisits/byCycle"/>" method="POST">                          
                         <select name="cycleId" id="cycleId" class="form-control">
                             <option value="0">[-- select --]</option>
                             <c:forEach var="cycle" items="${cyclesList}">
                                 <option value="${cycle.id}">${cycle.startDate} - ${cycle.endDate}</option>
                             </c:forEach>
-                        </select> 
+                        </select>                         
                         <button type="submit" class="btn btn-default">Select</button>
                         </form>
                         <div class="tab-content">

@@ -77,8 +77,10 @@ public class ScheduledVisitController {
     @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
     public String showCycles(Map<String, Object> model) {
 
+        List<ScheduledVisit> newVisits = scheduledVisitRepository.showByCurrentCycle();
         List<Cycle> cyclesList = cycleRepository.findAll();
         logger.debug("------------------NEW VISITS");
+        model.put("newVisits", newVisits);
         model.put("cyclesList", cyclesList); 
         return "scheduledVisits/byCycle";
 

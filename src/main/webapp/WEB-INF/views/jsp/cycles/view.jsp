@@ -24,7 +24,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Cycle</th>
+                                            <th>Starting Date</th>
+                                            <th>Ending Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -32,11 +33,9 @@
                                         <c:forEach var="cycle" items="${cycles}">
                                             <tr>
                                                 <td><c:out value="${cycle.id}"/></td>                                             
-                                                <td><c:out value="${cycle.startDate}"/> - <c:out value="${cycle.endDate}"/></td>
-                                                <td>
-                                                    <a href="<c:url value="/cycles/edit/${cycle.id}"/>" class="btn btn-success btn-sm btn-30">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
+                                                <td><c:out value="${cycle.startDate}"/></td>
+                                                <td><c:out value="${cycle.endDate}"/></td>
+                                                <td>                                                  
                                                     <button typ e="button" class="btn btn-danger deleteCycle" data-id="${cycle.id}"><i class="fa fa-trash"></i></button>    
                                                 </td>
                                             </tr>
