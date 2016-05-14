@@ -32,21 +32,19 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Doctors</label>
-                                        <select name="doctorId" class="form-control">
-                                            <c:forEach var="doc" items="${doctors}">
-                                                <option value="${doc.id}">${doc.firstName} ${doc.lastName}</option>
+                                        <label>Cycle</label>
+                                        <select name="cycleId" id="cycleId" class="form-control">
+                                            <option value="0">[-- select --]</option>
+                                            <c:forEach var="cycle" items="${cycles}">
+                                                <option value="${cycle.id}">${cycle.startDate} - ${cycle.endDate}</option>
                                             </c:forEach>
                                         </select>     
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Cycle</label>
-                                        <select name="cycleId" class="form-control">
-                                            <c:forEach var="cycle" items="${cycles}">
-                                                <option value="${cycle.id}">${cycle.startDate} - ${cycle.endDate}</option>
-                                            </c:forEach>
+                                        <label>Doctors</label>
+                                        <select name="doctorId" id="doctorId" class="form-control" disabled>                                      
                                         </select>     
                                     </div>
                                 </div>
@@ -58,4 +56,8 @@
             </div>
         </div>
     </section>
+</content>
+                            
+<content tag="footerScripts">
+    <script src="<c:url value='/resources/js/doctors.js'/>" type="text/javascript"></script>
 </content>

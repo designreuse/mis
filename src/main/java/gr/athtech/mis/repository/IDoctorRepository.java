@@ -15,4 +15,9 @@ public interface IDoctorRepository extends JpaRepository<Doctor, Long>{
             + "(SELECT s FROM d.scheduledVisits s)")
     public List<Doctor> getAvailableDoctors();
     
+    @Query("SELECT id, firstName, lastName FROM Doctor d "
+            + "WHERE NOT EXISTS "
+            + "(SELECT s FROM d.scheduledVisits s WHERE s.cycle.id = ?1)")
+    public List<Doctor> getAvailableDoctorsList(Long id);
+    
 }

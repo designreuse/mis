@@ -72,4 +72,10 @@ public class DoctorRepository {
         List<Doctor> doctorList = repo.getAvailableDoctors();
         return doctorList;
     }
+    
+    public List<Doctor> findDoctorByCycleId(Long id){
+        List<Doctor> doctorList = repo.getAvailableDoctorsList(id);
+        
+        return doctorList;
+    }
 }

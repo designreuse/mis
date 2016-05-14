@@ -1,4 +1,4 @@
-//confirm before deleting a dotor
+//confirm before deleting a doctor
 $(".deleteDoctor").click(function (e) {
     console.log($("body").attr('data-url') + 'doctors/delete/' + $(this).attr('data-id'))
     if (confirm('Are you sure you want to delete the doctor?')) {
@@ -44,3 +44,23 @@ function fillSelect(selectName, array) {
     $('select[name="' + selectName + '"]').html(options);
     $('select[name="' + selectName + '"]').prop('disabled', false);
 }
+
+//when a cycle is selected, fetch the available doctors of this period
+$('#cycleId').on('change', function () {
+
+        $.ajax({
+            url: $("body").attr('data-url') + 'doctors/' + $(this).val(),
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                var options = "";
+                for(var i = 0; i < data.length; i++){
+                   options += "<option value='" + data[i].id + "'>" + data[i].firstName+" "+data[i].lastName + "</option>";
+                   
+                }
+                $('select[name="doctorId"]').html(options);
+                $('select[name="doctorId"]').prop('disabled', false);
+            }
+        });
+});
+

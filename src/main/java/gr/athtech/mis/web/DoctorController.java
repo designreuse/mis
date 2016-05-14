@@ -170,5 +170,14 @@ public class DoctorController {
         repo.delete(id);
         return "redirect:/doctors/";
     }
+       
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Doctor> show(@PathVariable("id") Long id) {
+        
+        List<Doctor> doctorList =repo.findDoctorByCycleId(id);
+     
+        return doctorList;
+    }
 
 }
