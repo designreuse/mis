@@ -69,24 +69,27 @@ public class ScheduledVisitController {
 
     }
     
-    /**
-     * Return the view that will display all the scheduled visits
-     *
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/one", method = RequestMethod.GET)
-    public String indexAll(Map<String, Object> model) {
+    @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
+    public String showCycles(Map<String, Object> model) {
 
-        List<ScheduledVisit> newVisits = scheduledVisitRepository.findAll();
-        List<Cycle> allCycles = cycleRepository.findAll();
+        List<Cycle> cyclesList = cycleRepository.findAll();
         logger.debug("------------------NEW VISITS");
-        model.put("newVisits", newVisits);
-        model.put("allCycles", allCycles);
-        return "scheduledVisits/one";
+        model.put("cyclesList", cyclesList); 
+        return "scheduledVisits/byCycle";
 
     }
-
+    
+    @RequestMapping(value = "/byCycle", method = RequestMethod.POST)
+    public String showSelectedVisits(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+        
+        Long id = Long.parseLong(request.getParameter("cycleId"));
+        List<Cycle> cyclesList = cycleRepository.findAll();
+        List<ScheduledVisit> newVisits = scheduledVisitRepository.showVisitsByCycleId(id);
+        model.put("cyclesList", cyclesList);
+        model.put("newVisits", newVisits);
+        return "scheduledVisits/byCycle";
+    }
+    
     /**
      * Return the view that holds the create a new scheduled visit form
      *

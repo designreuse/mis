@@ -75,7 +75,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value='/scheduledVisits/'/>"><i class="fa fa-circle-o"></i> View Assigned Visits</a></li>
-                                <li><a href="<c:url value='/scheduledVisits/one'/>"><i class="fa fa-circle-o"></i> View Assigned Visits By Cycle</a></li>
+                                <li><a href="<c:url value='/scheduledVisits/allCycles'/>"><i class="fa fa-circle-o"></i> View Assigned Visits By Cycle</a></li>
                                 <li><a href="<c:url value='/scheduledVisits/create'/>"><i class="fa fa-circle-o"></i> Create New Visit</a></li>
                                 <li><a href="<c:url value='/paidVisits/'/>"><i class="fa fa-circle-o"></i> View Paid Visits</a></li>
                             </ul>

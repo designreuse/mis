@@ -54,7 +54,7 @@
                                                     <a href="<c:url value="/paidVisits/create/${visit.id}"/>" class="btn btn-info">
                                                         <i class="fa fa-check-square-o"></i>
                                                     </a>  
-                                                    <button typ e="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>                               
+                                                    <button type="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>                               
                                                 </td>      
                                             </tr>
                                         </c:forEach>

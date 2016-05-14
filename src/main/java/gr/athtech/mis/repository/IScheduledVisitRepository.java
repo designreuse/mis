@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.repository;
 
+import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
 import java.util.List;
@@ -30,5 +31,7 @@ public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit,
             + "WHERE s.cycle.startDate <= CURRENT_DATE "
             + "AND s.cycle.endDate >= CURRENT_DATE")
     public List<ScheduledVisit> findByCurrentCycle();
+    
+    public List<ScheduledVisit> findScheduledVisitByCycle(Cycle cycle);
     
 }

@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.repository;
 
+import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
 import java.util.List;
@@ -26,6 +27,8 @@ public class ScheduledVisitRepository {
     IScheduledVisitRepository repo;
     @Resource
     UserRepository userRepo;
+    @Resource
+    ICycleRepository cycleRepo;
     
     public List<ScheduledVisit> findAll() {
         List<ScheduledVisit> newVisits = repo.findAll();
@@ -72,5 +75,13 @@ public class ScheduledVisitRepository {
     public List<ScheduledVisit> showByCurrentCycle(){
         List<ScheduledVisit> allCurrentVisits = repo.findByCurrentCycle();
         return allCurrentVisits;
+    }
+    
+
+    public List<ScheduledVisit> showVisitsByCycleId(Long id){
+        Cycle cycle = cycleRepo.findOne(id);
+        List<ScheduledVisit> selectedList = repo.findScheduledVisitByCycle(cycle);
+        
+        return selectedList;
     }
 }
