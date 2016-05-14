@@ -54,7 +54,7 @@ console.log($(this).val())
             success: function (data) {
                 var options = "";
                 for(var i = 0; i < data.length; i++){
-                   options += "<option value='" + data[i][0] + "'>" + data[i][1]+" "+data[i][2] + "</option>";
+                   options += "<option value='" + data[i].id + "'>" + data[i].firstName+" "+data[i].lastName + "</option>";
                    
                 }
                 $('select[name="doctorId"]').html(options);
