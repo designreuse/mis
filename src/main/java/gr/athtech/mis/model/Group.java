@@ -6,13 +6,16 @@
 package gr.athtech.mis.model;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,11 +35,13 @@ public class Group implements Serializable {
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<User> users;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private List<User> members;
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<ScheduledVisit> scheduledVisits;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "groups_visits", joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "visit_id", referencedColumnName = "id"))
+    private List<ScheduledVisit> scheduledVisits;
 
     @OneToOne
     @JoinColumn(name = "leader_id", nullable = false)
@@ -45,10 +50,10 @@ public class Group implements Serializable {
     public Group() {
     }
 
-    public Group(Long id, String name, Set<User> users, Set<ScheduledVisit> scheduledVisits, User leader) {
+    public Group(Long id, String name, List<User> members, List<ScheduledVisit> scheduledVisits, User leader) {
         this.id = id;
         this.name = name;
-        this.users = users;
+        this.members = members;
         this.scheduledVisits = scheduledVisits;
         this.leader = leader;
     }
@@ -69,12 +74,12 @@ public class Group implements Serializable {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public List<User> getMembers() {
+        return members;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setMembers(List<User> members) {
+        this.members = members;
     }
 
     public User getLeader() {
@@ -85,11 +90,11 @@ public class Group implements Serializable {
         this.leader = leader;
     }
 
-    public Set<ScheduledVisit> getScheduledVisits() {
+    public List<ScheduledVisit> getScheduledVisits() {
         return scheduledVisits;
     }
 
-    public void setScheduledVisits(Set<ScheduledVisit> scheduledVisits) {
+    public void setScheduledVisits(List<ScheduledVisit> scheduledVisits) {
         this.scheduledVisits = scheduledVisits;
     }
 

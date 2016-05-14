@@ -31,7 +31,6 @@ public class RoleRepository {
      */
     public List<Role> findAll() {
         List<Role> roles = repo.findAll();
-
         return roles;
     }
 
@@ -49,9 +48,9 @@ public class RoleRepository {
 
     /**
      * Return a role based on a given name
-     * 
+     *
      * @param name
-     * @return 
+     * @return
      */
     public Role findByName(String name) {
         Role role = repo.findByName(name);

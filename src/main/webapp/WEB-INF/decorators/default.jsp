@@ -17,6 +17,7 @@
             <link href="<c:url value='/resources/theme/dist/css/skins/_all-skins.min.css'/>" rel="stylesheet" type="text/css" />
             <link href="<c:url value='/resources/theme/plugins/datepicker/datepicker3.css'/>" rel="stylesheet" type="text/css" />
             <link href="<c:url value='/resources/theme/plugins/dropzone/dropzone.css'/>" rel="stylesheet" type="text/css" />
+            <link href="<c:url value='/resources/theme/plugins/select2/select2.min.css'/>" rel="stylesheet" type="text/css" />
             <link href="<c:url value='/resources/css/custom.css'/>" rel="stylesheet" type="text/css" />
 
             <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -64,6 +65,8 @@
                             <ul class="treeview-menu">
                                 <li><a href="<c:url value='/users/'/>"><i class="fa fa-circle-o"></i> View medical visitors</a></li>
                                 <li><a href="<c:url value='/users/create'/>"><i class="fa fa-circle-o"></i> Create medical visitor</a></li>
+                                <li><a href="<c:url value='/groups/'/>"><i class="fa fa-circle-o"></i> View medical groups</a></li>
+                                <li><a href="<c:url value='/groups/create'/>"><i class="fa fa-circle-o"></i> Create medical group</a></li>
                             </ul>
                         </li>                                          
                         <li class="treeview">
@@ -125,6 +128,7 @@
         <script src="<c:url value='/resources/theme/plugins/chartjs/Chart.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/theme/plugins/datepicker/bootstrap-datepicker.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/theme/plugins/dropzone/dropzone.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/theme/plugins/select2/select2.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
 
         <sitemesh:write property='page.footerScripts'/>
