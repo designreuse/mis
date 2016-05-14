@@ -45,21 +45,26 @@ public class Doctor implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
+    @JsonIgnore
     private City city;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "specialty_id")
+    @JsonIgnore
     private DoctorSpecialty specialty;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "geolocation_area_id")
+    @JsonIgnore
     private GeolocationArea geolocationArea;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "institution_id")
+    @JsonIgnore
     private Institution institution;
 
     @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
     private List<ScheduledVisit> scheduledVisits;
 
     public Doctor() {

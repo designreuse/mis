@@ -51,7 +51,6 @@ console.log($(this).val())
         $.ajax({
             url: $("body").attr('data-url') + 'doctors/byCycle/' + $(this).val(),
             type: 'GET',
-            dataType: "json",
             success: function (data) {
                 var options = "";
                 for(var i = 0; i < data.length; i++){

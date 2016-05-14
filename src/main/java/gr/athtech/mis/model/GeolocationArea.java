@@ -5,7 +5,7 @@
  */
 package gr.athtech.mis.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
