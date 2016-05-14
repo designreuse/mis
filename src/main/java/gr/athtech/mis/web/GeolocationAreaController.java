@@ -29,11 +29,10 @@ public class GeolocationAreaController {
     @Autowired
     private GeolocationAreaRepository repo;
 
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public GeolocationArea show(@PathVariable("id") Long id) {
-        GeolocationArea geolocationArea  =repo.findOneWithCitiesWithInstitutions(id);
+        GeolocationArea geolocationArea = repo.findOneWithCitiesWithInstitutions(id);
 
         return geolocationArea;
     }

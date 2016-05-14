@@ -171,7 +171,7 @@ public class DoctorController {
         return "redirect:/doctors/";
     }
        
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/byCycle/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Doctor> show(@PathVariable("id") Long id) {
         

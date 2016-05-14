@@ -83,7 +83,8 @@ public class CycleController {
 
         return "redirect:/cycles/";
     }
-     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {
         cycleRepository.delete(id);

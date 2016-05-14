@@ -47,15 +47,15 @@ function fillSelect(selectName, array) {
 
 //when a cycle is selected, fetch the available doctors of this period
 $('#cycleId').on('change', function () {
-
+console.log($(this).val())
         $.ajax({
-            url: $("body").attr('data-url') + 'doctors/' + $(this).val(),
+            url: $("body").attr('data-url') + 'doctors/byCycle/' + $(this).val(),
             type: 'GET',
             dataType: "json",
             success: function (data) {
                 var options = "";
                 for(var i = 0; i < data.length; i++){
-                   options += "<option value='" + data[i].id + "'>" + data[i].firstName+" "+data[i].lastName + "</option>";
+                   options += "<option value='" + data[i][0] + "'>" + data[i][1]+" "+data[i][2] + "</option>";
                    
                 }
                 $('select[name="doctorId"]').html(options);
