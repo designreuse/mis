@@ -68,6 +68,11 @@ public class ScheduledVisitController {
         return "scheduledVisits/view";
 
     }
+    /**
+     * Display only the cycles drop down 
+     * @param model
+     * @return 
+     */
     
     @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
     public String showCycles(Map<String, Object> model) {
@@ -79,6 +84,13 @@ public class ScheduledVisitController {
 
     }
     
+    /**
+     * Display the scheduled visits of the selected cycle
+     * @param request
+     * @param response
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = "/byCycle", method = RequestMethod.POST)
     public String showSelectedVisits(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
         
