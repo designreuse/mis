@@ -59,7 +59,13 @@
                                         <label>Role</label>
                                         <select name="roleId" class="form-control">
                                             <c:forEach var="role" items="${roles}">
-                                                <option value="${role.id}">${role.name}</option>
+                                                <c:set var="found" scope="page" value="false"/>
+                                                <c:forEach var="userRole" items="${user.roles}">
+                                                    <c:if test="${role.id==userRole.id}">
+                                                        <c:set var="found" scope="page" value="true"/>
+                                                    </c:if>                                                    
+                                                </c:forEach>
+                                                <option value="${role.id}" ${found==true ? 'selected="selected"' : ''}>${role.publicName}</option>
                                             </c:forEach>
                                         </select>                                        
                                     </div>

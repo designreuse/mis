@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
@@ -33,6 +34,9 @@ public class Role implements GrantedAuthority {
     //Used in order to create jointed tables for many to many relationships
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
+
+    @Transient
+    private String publicName;
 
     public Role() {
     }
@@ -70,6 +74,20 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return this.name;
+    }
+
+    public String getPublicName() {
+        String publicName = "";
+        if ("ROLE_ADMIN".equals(this.name)) {
+            publicName = "Admin";
+        } else if ("ROLE_MEDICAL_VISITOR".equals(this.name)) {
+            publicName = "Medical Visitor";
+        }
+        return publicName;
+    }
+
+    public void setPublicName(String publicName) {
+        this.publicName = publicName;
     }
 
 }

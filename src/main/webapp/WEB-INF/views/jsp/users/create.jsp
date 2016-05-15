@@ -58,7 +58,7 @@
                                         <label>Role</label>
                                         <select name="roleId" class="form-control">
                                             <c:forEach var="role" items="${roles}">
-                                                <option value="${role.id}">${role.name}</option>
+                                                <option value="${role.id}">${role.publicName}</option>
                                             </c:forEach>
                                         </select>                                       
                                     </div>

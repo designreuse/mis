@@ -18,19 +18,19 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="fa fa-plane"></i></span>
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Total Flights</span>
-                        <span class="info-box-number">1890</span>
+                        <span class="info-box-text">Medical Visitors</span>
+                        <span class="info-box-number">${medicalVisitors}</span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-red"><i class="fa fa-ship"></i></span>
+                    <span class="info-box-icon bg-red"><i class="fa fa-user-md"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Cruises</span>
-                        <span class="info-box-number">1500</span>
+                        <span class="info-box-text">Doctors</span>
+                        <span class="info-box-number">${doctors}</span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -40,19 +40,19 @@
 
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-green"><i class="fa fa-bus"></i></span>
+                    <span class="info-box-icon bg-green"><i class="fa fa-clock-o"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Bus Tours</span>
-                        <span class="info-box-number">760</span>
+                        <span class="info-box-text">Scheduled Visits</span>
+                        <span class="info-box-number">${scheduledVisits}</span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-yellow"><i class="fa fa-rocket"></i></span>
+                    <span class="info-box-icon bg-yellow"><i class="fa fa-clock-o"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Space Rocket Tours</span>
-                        <span class="info-box-number">2,000</span>
+                        <span class="info-box-text">Paid Visits</span>
+                        <span class="info-box-number">${paidVisits}</span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
             </div><!-- /.col -->

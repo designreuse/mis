@@ -37,7 +37,7 @@
                                             <td><c:out value="${user.username}"/></td>
                                             <td><c:out value="${user.password}"/></td>
                                             <c:forEach var="role" items="${user.roles}">
-                                                <td><c:out value="${role.name}"/></td>
+                                                <td><c:out value="${role.publicName}"/></td>
                                             </c:forEach>
                                             <td>
                                                 <a href="<c:url value="/users/one/${user.id}"/>" class="btn btn-info btn-sm btn-30">
