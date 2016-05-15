@@ -5,10 +5,12 @@
  */
 package gr.athtech.mis.web;
 
+import gr.athtech.mis.model.Group;
 import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.Role;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
+import gr.athtech.mis.repository.GroupRepository;
 import gr.athtech.mis.repository.PaidVisitRepository;
 import gr.athtech.mis.repository.RoleRepository;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
@@ -46,6 +48,8 @@ public class UserController {
     private PaidVisitRepository paidVisitRepository;
     @Autowired 
     private ScheduledVisitRepository scheduledVisitRepository;
+    @Autowired 
+    private GroupRepository groupRepository;
 
     /**
      * Return the view that will display all the users
@@ -176,11 +180,13 @@ public class UserController {
         User user = userRepository.findOne(id);
         List<ScheduledVisit> userVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
+        List<Group> userGroups = groupRepository.findByUserId(id);
         
 
         model.addAttribute("user", user);
         model.addAttribute("userVisits", userVisits);
         model.addAttribute("paidVisits", paidVisits);
+        model.addAttribute("userGroups", userGroups);
         
 
         return "users/one";

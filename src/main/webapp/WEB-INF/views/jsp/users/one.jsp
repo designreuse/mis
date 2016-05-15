@@ -37,18 +37,61 @@
                         </div>
                     </div><!-- /.box-body -->
                 </div>
-            </div>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Group Membership</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <c:if test="${not empty userGroups}">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Group name</th>
+                                            <th>Leader</th>
+                                            <th>Members</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="group" items="${userGroups}">
+                                            <tr>
+                                                <td><c:out value="${group.name}"/></td>
+                                                <td><c:out value="${group.leader.firstName}"/> <c:out value="${group.leader.lastName}"/> </td>
+                                                <td>
+                                                    <c:forEach var="user" items="${group.members}" varStatus="loop">
+                                                        <c:choose>
+                                                            <c:when test="${loop.index==0}">
+                                                                <c:out value="${user.firstName}"/> <c:out value="${user.lastName}"/>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                , <c:out value="${user.firstName}"/> <c:out value="${user.lastName}"/>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:forEach>
+                                                </td>                                               
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:if> 
+                            <c:if test="${empty userGroups}">  
+                                ...
+                            </c:if>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div> 
+            </div> 
             <div class="col-md-8">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Group etc</h3>
+                        <h3 class="box-title">Group Visits - Current Active Cycle</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         ...
 
                     </div><!-- /.box-body -->
                 </div>
-            </div>            
+            </div>                     
             <div class="col-md-8">
                 <div class="box box-info">
                     <div class="box-header with-border">
@@ -113,7 +156,7 @@
                         </div>   
                     </div><!-- /.box-body -->
                 </div>
-            </div>
+            </div>         
         </div>
     </section>
 </content>

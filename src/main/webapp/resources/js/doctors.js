@@ -63,3 +63,23 @@ console.log($(this).val())
         });
 });
 
+//when a cycle is selected, fetch the available doctors of this period
+$('#cycleIdGroup').on('change', function () {
+console.log($(this).val())
+        $.ajax({
+            url: $("body").attr('data-url') + 'doctors/byCycle/' + $(this).val(),
+            type: 'GET',
+            success: function (data) {
+                var options = "";
+                for(var i = 0; i < data.length; i++){
+                   options += "<option value='" + data[i].id + "'>" + data[i].firstName+" "+data[i].lastName + "</option>";
+                   
+                }
+                $('select[name="doctorIdGroup"]').html(options);
+                $('select[name="doctorIdGroup"]').prop('disabled', false);
+            }
+        });
+});
+
+
+

@@ -39,7 +39,9 @@
                                         <tr>
                                             <td><c:out value="${paidVisit.id}"/></td>
                                             <td><c:out value="${paidVisit.scheduledVisit.id}"/></td>
-                                            <td><c:out value="${paidVisit.scheduledVisit.medicalVisitor.firstName}"/> <c:out value="${paidVisit.scheduledVisit.medicalVisitor.lastName}"/></td>
+                                            <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">
+                                                 <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
+                                            </c:forEach>
                                             <td><c:out value="${paidVisit.scheduledVisit.doctor.firstName}"/> <c:out value="${paidVisit.scheduledVisit.doctor.lastName}"/></td>
                                             <td><c:out value="${paidVisit.scheduledVisit.cycle.startDate}"/> - <c:out value="${paidVisit.scheduledVisit.cycle.endDate}"/></td>
                                             <td><c:out value="${paidVisit.date}"/></td>

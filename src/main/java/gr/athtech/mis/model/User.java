@@ -50,8 +50,7 @@ public class User implements Serializable {
     @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
     private List<Group> groups;
 
-    //Used in order to create jointed tables for one to many relationships
-    @OneToMany(mappedBy = "medicalVisitor")
+    @ManyToMany(mappedBy = "medicalVisitors")
     private List<ScheduledVisit> scheduledVisits;
 
     public User() {

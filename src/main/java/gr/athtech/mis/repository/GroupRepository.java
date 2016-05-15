@@ -1,6 +1,7 @@
 package gr.athtech.mis.repository;
 
 import gr.athtech.mis.model.Group;
+import gr.athtech.mis.model.User;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,18 @@ public class GroupRepository {
         }
         
         return group;
+    }
+    
+    public List<Group> findByLeader(User leader){
+        List<Group> userGroups = repo.findByLeader(leader);
+        
+        return userGroups;
+    }
+    
+    public List<Group> findByUserId(Long id){
+        List<Group> userGroups = repo.findByLeaderOrMember(id);
+        
+        return userGroups;
     }
     
     public Group save(Group group){

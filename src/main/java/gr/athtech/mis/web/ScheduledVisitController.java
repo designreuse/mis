@@ -7,12 +7,15 @@ package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.Doctor;
+import gr.athtech.mis.model.Group;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.CycleRepository;
 import gr.athtech.mis.repository.DoctorRepository;
+import gr.athtech.mis.repository.GroupRepository;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
 import gr.athtech.mis.repository.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +49,8 @@ public class ScheduledVisitController {
     private DoctorRepository doctorRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired 
+    private GroupRepository groupRepository;
 
 
     /**
@@ -114,10 +119,12 @@ public class ScheduledVisitController {
     public String store(Model model) {
 
         //fetch all the attributes that wil be prefilled
+        List<Group> groups = groupRepository.findAll();
         List<Cycle> cycles = cycleRepository.findAll();
         List<User> visitors = userRepository.getMedicalVisitors();
         List<Doctor> doctors = doctorRepository.getAvailableDoctorList(); //show only doctors that are not included in any scheduled visit
 
+        model.addAttribute("groups", groups);
         model.addAttribute("cycles", cycles);
         model.addAttribute("visitors", visitors);
         model.addAttribute("doctors", doctors);
@@ -139,10 +146,13 @@ public class ScheduledVisitController {
         Cycle cycle = cycleRepository.findOne(Long.parseLong(request.getParameter("cycleId")));
         User visitor = userRepository.findOne(Long.parseLong(request.getParameter("medicalVisitorId")));
         Doctor doctor = doctorRepository.findOne(Long.parseLong(request.getParameter("doctorId")));
+        
+        List<User> users = new ArrayList<>();
+        users.add(visitor);
 
         ScheduledVisit schvst = new ScheduledVisit();
         schvst.setCycle(cycle);
-        schvst.setMedicalVisitor(visitor);
+        schvst.setMedicalVisitors(users);
         schvst.setDoctor(doctor);
         schvst.setStatus("Pending");
 
@@ -151,7 +161,38 @@ public class ScheduledVisitController {
         scheduledVisitRepository.save(schvst);
         return "redirect:/scheduledVisits/";
     }
+    
+    /**
+     * Store a new scheduled visit
+     *
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/storeGroup", method = RequestMethod.POST)
+    public String storeGroup(HttpServletRequest request, HttpServletResponse response, Model model) {
 
+        Cycle cycle = cycleRepository.findOne(Long.parseLong(request.getParameter("cycleIdGroup")));
+        Group group = groupRepository.findOne(Long.parseLong(request.getParameter("groupVisitorId")));
+        Doctor doctor = doctorRepository.findOne(Long.parseLong(request.getParameter("doctorIdGroup")));
+        
+        List<Group> groups = new ArrayList<>();
+        groups.add(group);
+        
+        ScheduledVisit schvst = new ScheduledVisit();
+        
+        schvst.setCycle(cycle);
+        schvst.setDoctor(doctor);
+        schvst.setStatus("Pending");
+        schvst.setGroups(groups);
+
+        logger.debug("----- New user: ", schvst);
+
+        scheduledVisitRepository.save(schvst);
+        return "redirect:/scheduledVisits/";
+    }
+    
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {

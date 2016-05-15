@@ -20,11 +20,12 @@ import org.springframework.stereotype.Repository;
 @Repository("iScheduledVisitRepository")
 public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit, Long>{
     
-    List<ScheduledVisit> findByMedicalVisitor(User user);
+    //List<ScheduledVisit> findByMedicalVisitor(User user);
     
     @Query("SELECT s FROM ScheduledVisit as s "
+            + "JOIN s.medicalVisitors md "
             + "WHERE s.cycle.startDate <= CURRENT_DATE "
-            + "AND s.cycle.endDate >= CURRENT_DATE AND s.medicalVisitor.id = ?1")
+            + "AND s.cycle.endDate >= CURRENT_DATE AND md.id = ?1")
     List<ScheduledVisit> findByMedicalVisitorId(Long id);
     
     @Query("SELECT s FROM ScheduledVisit as s "

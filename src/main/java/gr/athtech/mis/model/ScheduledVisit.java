@@ -37,9 +37,9 @@ public class ScheduledVisit implements Serializable {
     @Column(nullable = false)
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "visitor_id", nullable = false)
-    private User medicalVisitor;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "individual_visits", joinColumns = @JoinColumn(name = "scheduled_visit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "medicalVisitor_id", referencedColumnName = "id"))
+    private List<User> medicalVisitors;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id", nullable = false)
@@ -54,16 +54,16 @@ public class ScheduledVisit implements Serializable {
     private List<PaidVisit> paidVisits;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "groups_visits", joinColumns = @JoinColumn(name = "scheduled_visit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_visit_id", referencedColumnName = "id"))
-    private Set<Group> groups;
+    @JoinTable(name = "groups_visits", joinColumns = @JoinColumn(name = "visit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+    private List<Group> groups;
 
     public ScheduledVisit() {
     }
 
-    public ScheduledVisit(Long id, String status, User medicalVisitor, Doctor doctor, Cycle cycle, List<PaidVisit> paidVisits, Set<Group> groups) {
+    public ScheduledVisit(Long id, String status, List<User> medicalVisitors, Doctor doctor, Cycle cycle, List<PaidVisit> paidVisits, List<Group> groups) {
         this.id = id;
         this.status = status;
-        this.medicalVisitor = medicalVisitor;
+        this.medicalVisitors = medicalVisitors;
         this.doctor = doctor;
         this.cycle = cycle;
         this.paidVisits = paidVisits;
@@ -86,12 +86,12 @@ public class ScheduledVisit implements Serializable {
         this.status = status;
     }
 
-    public User getMedicalVisitor() {
-        return medicalVisitor;
+    public List<User> getMedicalVisitors() {
+        return medicalVisitors;
     }
 
-    public void setMedicalVisitor(User medicalVisitor) {
-        this.medicalVisitor = medicalVisitor;
+    public void setMedicalVisitors(List<User> medicalVisitor) {
+        this.medicalVisitors = medicalVisitors;
     }
 
     public Doctor getDoctor() {
@@ -118,11 +118,11 @@ public class ScheduledVisit implements Serializable {
         this.paidVisits = paidVisits;
     }
 
-    public Set<Group> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 

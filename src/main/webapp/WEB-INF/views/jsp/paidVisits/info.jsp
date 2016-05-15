@@ -22,7 +22,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Medical Visitor Name:</label><br/>
-                                        <p>${paidVisit.scheduledVisit.medicalVisitor.firstName} ${paidVisit.scheduledVisit.medicalVisitor.lastName}</p>
+                                        <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">
+                                            <p><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></p>
+                                        </c:forEach>
                                     </div>
                                 </div>                            
                                 <div class="col-md-4">
@@ -41,25 +43,25 @@
                              <div class="row">      
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Status: </label><br/>
+                                        <label>Actual Date: </label><br/>
                                         <p>${paidVisit.date}</p>
                                     </div>
                                 </div> 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Status: </label><br/>
+                                        <label>Hour: </label><br/>
                                         <p>${paidVisit.hour}</p>
                                     </div>
                                 </div> 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Status: </label><br/>
+                                        <label>Week: </label><br/>
                                         <p>${paidVisit.week}</p>
                                     </div>
                                 </div> 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Status: </label><br/>
+                                        <label>Group: </label><br/>
                                         <p>${paidVisit.isGroup}</p>
                                     </div>
                                 </div>       

@@ -44,6 +44,14 @@ public class PaidVisitRepository {
         return allUsersVisits;
     }
     
+    public List<PaidVisit> getAllUserVisitsByCurrentCycle(Long id)
+    {
+        List<PaidVisit> allUsersVisits = repo.findByScheduledVisitMedicalVisitorIdAndCurrentCycle(id);
+        
+        return allUsersVisits;
+    }
+    
+    
     public PaidVisit findById(Long id) {
 
         PaidVisit paidVisit = repo.findOne(id);
@@ -58,6 +66,18 @@ public class PaidVisitRepository {
      */
     public void delete(Long id) {
         repo.delete(id);
+    }
+    
+    public List<PaidVisit> getAllPaidVisitsByCycle(Long id){
+        List<PaidVisit> allPaidVisits = repo.findByScheduledVisitCycleId(id);
+        
+        return allPaidVisits;
+    }
+    
+    public List<PaidVisit> getAllPaidVisitsByCurrentCycle(){
+        List<PaidVisit> allPaidVisits = repo.findByScheduledVisitCurrentCycle();
+        
+        return allPaidVisits;
     }
     
 }

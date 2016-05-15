@@ -46,7 +46,9 @@
                                         <c:forEach var="visit" items="${newVisits}">
                                             <tr>
                                                 <td><c:out value="${visit.id}"/></td>
-                                                <td><c:out value="${visit.medicalVisitor.firstName}"/> <c:out value="${visit.medicalVisitor.lastName}"/></td>
+                                                <c:forEach var="visitor" items="${visit.medicalVisitors}">
+                                                   <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
+                                                </c:forEach>
                                                 <td><c:out value="${visit.cycle.startDate}"/> - <c:out value="${visit.cycle.endDate}"/></td>
                                                 <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
                                                 <td><c:out value="${visit.status}"/></td>                                        
@@ -83,7 +85,9 @@
                                         <c:forEach var="visit" items="${newAllVisits}">
                                             <tr>
                                                 <td><c:out value="${visit.id}"/></td>
-                                                <td><c:out value="${visit.medicalVisitor.firstName}"/> <c:out value="${visit.medicalVisitor.lastName}"/></td>
+                                                <c:forEach var="visitor" items="${visit.medicalVisitors}">
+                                                   <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
+                                                </c:forEach>
                                                 <td><c:out value="${visit.cycle.startDate}"/> - <c:out value="${visit.cycle.endDate}"/></td>
                                                 <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
                                                 <td><c:out value="${visit.status}"/></td>                                        

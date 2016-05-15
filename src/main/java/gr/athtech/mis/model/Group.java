@@ -39,8 +39,7 @@ public class Group implements Serializable {
     @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<User> members;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "groups_visits", joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "visit_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "groups")
     private List<ScheduledVisit> scheduledVisits;
 
     @OneToOne

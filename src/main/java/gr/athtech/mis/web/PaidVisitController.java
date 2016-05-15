@@ -5,8 +5,10 @@
  */
 package gr.athtech.mis.web;
 
+import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.ScheduledVisit;
+import gr.athtech.mis.repository.CycleRepository;
 import gr.athtech.mis.repository.PaidVisitRepository;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
 import java.text.ParseException;
@@ -39,6 +41,8 @@ public class PaidVisitController {
     private PaidVisitRepository paidVisitRepository;
     @Autowired 
     private ScheduledVisitRepository scheduledVisitRepository;
+    @Autowired
+    private CycleRepository cycleRepository;
     
     /**
      * Return the view that will display all the paid visits
@@ -55,6 +59,43 @@ public class PaidVisitController {
          return "paidVisits/view";    
      }
      
+     
+     /**
+     * Display only the cycles drop down 
+     * @param model
+     * @return 
+     */
+    
+    @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
+    public String showCycles(Map<String, Object> model) {
+
+        List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisitsByCurrentCycle();
+        List<Cycle> cyclesList = cycleRepository.findAll();
+        logger.debug("------------------NEW VISITS");
+        model.put("paidVisits", paidVisits);
+        model.put("cyclesList", cyclesList); 
+        return "paidVisits/byCycle";
+
+    }
+     
+     /**
+     * Display the paid visits of the selected cycle
+     * @param request
+     * @param response
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value = "/byCycle", method = RequestMethod.POST)
+    public String showSelectedVisits(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+        
+        Long id = Long.parseLong(request.getParameter("cycleId"));
+        List<Cycle> cyclesList = cycleRepository.findAll();
+        List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisitsByCycle(id);
+        model.put("cyclesList", cyclesList);
+        model.put("paidVisits", paidVisits);
+        return "paidVisits/byCycle";
+    }
+     
      /**
      * Return the view that will display all the paid visits of the logged in user
      *
@@ -65,8 +106,7 @@ public class PaidVisitController {
      @RequestMapping(value = "/{id}", method = RequestMethod.GET)
      public String indexSingle(@PathVariable("id") Long id, Map<String, Object> model){
          
-         List<ScheduledVisit> userVisits = scheduledVisitRepository.getAllByVisitorId(id);
-         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
+         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisitsByCurrentCycle(id);
          logger.debug("------------------NEW VISITS");
          model.put("paidVisits", paidVisits);
          return "paidVisits/view";    

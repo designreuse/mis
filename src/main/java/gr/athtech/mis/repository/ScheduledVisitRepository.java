@@ -59,13 +59,14 @@ public class ScheduledVisitRepository {
         repo.delete(id);
     }
     
-    
+    /**
     public List<ScheduledVisit> getAllByVisitorId(Long id){
         User selectedUser = userRepo.findOne(id);
         List<ScheduledVisit> allVisits = repo.findByMedicalVisitor(selectedUser);
         
         return allVisits;
     }
+    */
     
     public List<ScheduledVisit> getUsersFromCurrentCycle(Long id){
         List<ScheduledVisit> activeVisits = repo.findByMedicalVisitorId(id);

@@ -24,7 +24,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Medical Visitor Name:</label><br/>
-                                        <label>${schv.medicalVisitor.firstName} ${schv.medicalVisitor.lastName}</label>
+                                        <c:forEach var="visitor" items="${schv.medicalVisitors}">
+                                           <label>${visitor.firstName} ${visitor.lastName}</label> 
+                                        </c:forEach>                      
                                     </div>
                                 </div>                            
                                 <div class="col-md-4">
