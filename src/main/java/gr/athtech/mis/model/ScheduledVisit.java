@@ -90,7 +90,7 @@ public class ScheduledVisit implements Serializable {
         return medicalVisitors;
     }
 
-    public void setMedicalVisitors(List<User> medicalVisitor) {
+    public void setMedicalVisitors(List<User> medicalVisitors) {
         this.medicalVisitors = medicalVisitors;
     }
 
