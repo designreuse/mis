@@ -117,6 +117,10 @@ public class GroupController {
     public String edit(@PathVariable("id") Long id, Model model) {
 
         Group group = repo.findOne(id);
+        
+        List<User> medicalVisitors = userRepository.getMedicalVisitors();
+        
+        model.addAttribute("medicalVisitors", medicalVisitors);
         model.addAttribute("group", group);
 
         return "groups/edit";
@@ -167,7 +171,7 @@ public class GroupController {
     @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
     public String one(@PathVariable("id") Long id, Model model) {
 
-        return "groups  /one";
+        return "groups/one";
     }
 
 }

@@ -18,7 +18,7 @@
                         <h3 class="box-title">Edit Group</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/groups/update"/>" method="PUT">
+                        <form role="form" action="<c:url value="/groups/update"/>" method="POST">
                             <input type="hidden" name="_method" value="put" />
                             <input type="hidden" name="id" value="${group.id}">
                             <div class="row">
@@ -46,7 +46,13 @@
                                         <label>Members</label>
                                         <select name="members[]" id="groupMembers" class="form-control" multiple="multiple">
                                             <c:forEach var="medVisitor" items="${medicalVisitors}">
-                                                <option value="${medVisitor.id}">${medVisitor.firstName} ${medVisitor.lastName}</option>
+                                                <c:set var="found" scope="page" value="false"/>
+                                                <c:forEach var="groupMember" items="${group.members}">
+                                                    <c:if test="${groupMember.id==medVisitor.id}">
+                                                        <c:set var="found" scope="page" value="true"/>
+                                                    </c:if>                                                    
+                                                </c:forEach>
+                                                <option value="${medVisitor.id}" ${found==true ? 'selected="selected"' : ''}>${medVisitor.firstName} ${medVisitor.lastName}</option>
                                             </c:forEach>
                                         </select>     
                                     </div>
