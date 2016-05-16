@@ -83,16 +83,6 @@
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-clock-o"></i>
-                                <span>My Scheduled Visits</span>  <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<c:url value='/scheduledVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
-                                <li><a href="<c:url value='/paidVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
                                 <i class="fa fa-calendar"></i>
                                 <span>Cycles</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
@@ -108,7 +98,6 @@
                                 <span>My Scheduled Visits</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <sec:authentication property="principal.firstName"/> 
                                 <li><a href="<c:url value='/scheduledVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
                                 <li><a href="<c:url value='/scheduledVisits/group/${user.id}'/>"><i class="fa fa-circle-o"></i>View Grouped Assigned Visits</a></li>
                                 <li><a href="<c:url value='/paidVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
