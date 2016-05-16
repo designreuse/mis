@@ -216,5 +216,22 @@ public class ScheduledVisitController {
         return "scheduledVisits/view";
 
     }
+    /**
+     * Return the view that will display all the scheduled visits for the logged
+     * in user
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/group/{id}", method = RequestMethod.GET)
+    public String displayByGroup(@PathVariable("id") Long id, Map<String, Object> model) {
+
+        List<ScheduledVisit> newVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
+        logger.debug("------------------NEW VISITS");
+        model.put("newVisits", newVisits);
+        return "scheduledVisits/view";
+
+    }
 
 }
