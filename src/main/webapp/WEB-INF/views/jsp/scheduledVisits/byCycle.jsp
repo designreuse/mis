@@ -47,6 +47,9 @@
                                                     <c:forEach var="visitor" items="${visit.medicalVisitors}">
                                                         <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
                                                     </c:forEach>
+                                                    <c:forEach var="group" items="${visit.groups}">
+                                                       <td><c:out value="${group.name}"/></td>
+                                                    </c:forEach>    
                                                     <td><c:out value="${visit.cycle.startDate}"/> - <c:out value="${visit.cycle.endDate}"/></td>
                                                     <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
                                                     <td><c:out value="${visit.status}"/></td>                                        

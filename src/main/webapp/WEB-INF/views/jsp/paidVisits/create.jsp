@@ -25,8 +25,11 @@
                                     <div class="form-group">
                                         <label>Medical Visitor Name:</label><br/>
                                         <c:forEach var="visitor" items="${schv.medicalVisitors}">
-                                           <label>${visitor.firstName} ${visitor.lastName}</label> 
-                                        </c:forEach>                      
+                                            <label>${visitor.firstName} ${visitor.lastName}</label> 
+                                        </c:forEach>
+                                        <c:forEach var="group" items="${schv.groups}">
+                                            <label><c:out value="${group.name}"/></label>
+                                        </c:forEach>      
                                     </div>
                                 </div>                            
                                 <div class="col-md-4">
@@ -52,20 +55,20 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Week</label>                                        
-                                         <select name="week" class="form-control">                                         
-                                                <option value="1">Week 1</option>
-                                                <option value="2">Week 2</option>
-                                                <option value="3">Week 3</option>
-                                                <option value="4">Week 4</option>
+                                        <select name="week" class="form-control">                                         
+                                            <option value="1">Week 1</option>
+                                            <option value="2">Week 2</option>
+                                            <option value="3">Week 3</option>
+                                            <option value="4">Week 4</option>
                                         </select>  
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Hour</label>                                          
-                                         <select name="hour" class="form-control">                                         
-                                                <option value="AM">AM</option>
-                                                <option value="PM">PM</option>                                            
+                                        <select name="hour" class="form-control">                                         
+                                            <option value="AM">AM</option>
+                                            <option value="PM">PM</option>                                            
                                         </select>  
                                     </div>
                                 </div>
@@ -73,14 +76,14 @@
                                     <div class="form-group">
                                         <label>Group</label>                                       
                                         <select name="group" class="form-control">                                         
-                                                <option value="NO">NO</option>
-                                                <option value="YES">YES</option>                                            
+                                            <option value="NO">NO</option>
+                                            <option value="YES">YES</option>                                            
                                         </select>  
                                     </div>          
                                 </div>
                             </div>
                             <div class="row">
-                               <div class="col-md-8">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Comment</label>
                                         <textarea name="comment" class="form-control"></textarea>                                 
@@ -89,7 +92,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Date</label>
-                                         <input name="date" type="text" class="form-control date">                                           
+                                        <input name="date" type="text" class="form-control date">                                           
                                     </div>
                                 </div>
                             </div>
@@ -104,10 +107,10 @@
 
 <content tag="footerScripts">
     <script type="text/javascript">
-            $('.date').datepicker({
-        format: "yyyy-mm-dd",
-        startDate: "${schv.cycle.startDate}",
-        endDate: "${schv.cycle.endDate}"
-    });
+        $('.date').datepicker({
+            format: "yyyy-mm-dd",
+            startDate: "${schv.cycle.startDate}",
+            endDate: "${schv.cycle.endDate}"
+        });
     </script>
 </content>                                   

@@ -14,7 +14,12 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Visit Details: For ${paidVisit.scheduledVisit.medicalVisitor.firstName} ${paidVisit.scheduledVisit.medicalVisitor.lastName} </h3>
+                        <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">  
+                            <h3 class="box-title">Visit Details: For <c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/> </h3>
+                        </c:forEach> 
+                        <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">  
+                            <h3 class="box-title">Visit Details: For <c:out value="${group.name}"/> </h3>
+                        </c:forEach>     
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <form role="form" action="<c:url value="/paidVisits/${user.id}" />" method="GET">
@@ -25,6 +30,9 @@
                                         <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">
                                             <p><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></p>
                                         </c:forEach>
+                                        <c:forEach var="group" items="${paidVisit.scheduledVisit.groups}">
+                                            <p><c:out value="${group.name}"/></p>
+                                        </c:forEach>       
                                     </div>
                                 </div>                            
                                 <div class="col-md-4">
@@ -40,7 +48,7 @@
                                     </div>
                                 </div>                                 
                             </div> 
-                             <div class="row">      
+                            <div class="row">      
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Actual Date: </label><br/>
@@ -72,9 +80,9 @@
                                         <label>Comment: </label><br/>
                                         <p>${paidVisit.comments}</p>
                                     </div>
-                               </div> 
+                                </div> 
                             </div>  
-                           <button type="submit" class="btn btn-default">Back</button>         
+                            <button type="submit" class="btn btn-default">Back</button>         
                         </form>           
                     </div><!-- /.box-body -->
                 </div>

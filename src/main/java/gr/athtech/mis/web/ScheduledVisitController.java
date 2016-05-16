@@ -64,11 +64,9 @@ public class ScheduledVisitController {
 
         //Show the scheduled visits of the current cycle based on the current date
         List<ScheduledVisit> newVisits = scheduledVisitRepository.showByCurrentCycle();
-        //show all
-        List<ScheduledVisit> newAllVisits = scheduledVisitRepository.findAll();
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
-        model.put("newAllVisits", newAllVisits);
+
        
         return "scheduledVisits/view";
 

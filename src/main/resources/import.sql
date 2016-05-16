@@ -343,7 +343,6 @@ insert into institutions (id, name, geolocation_area_id) values (122, "Πανε�
 insert into institutions (id, name, geolocation_area_id) values (123, "Γενικό Νοσοκομείο Πρέβεζας", 6);
 insert into institutions (id, name, geolocation_area_id) values (124, "Γενικό Νοσοκομείο Φιλιατών", 6);
 
-
 /* user roles */
 insert into authorities (id, name) values (1, "ROLE_ADMIN");
 insert into authorities (id, name) values (2, "ROLE_MEDICAL_VISITOR");
