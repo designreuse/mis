@@ -56,7 +56,15 @@ public class DoctorController {
     public String index(Map<String, Object> model) {
 
         List<Doctor> doctors = repo.findAll();
+        List<City> cities = cityRepository.findAll();
+        List<GeolocationArea> geolocationAreas = geolocationAreaRepository.findAll();
+        List<Institution> institutions = institutionRepository.findAll();
+        List<DoctorSpecialty> doctorSpecialties = doctorSpecialtyRepository.findAll();
 
+        model.put("cities", cities);
+        model.put("geolocationAreas", geolocationAreas);
+        model.put("institutions", institutions);
+        model.put("doctorSpecialties", doctorSpecialties);
         model.put("doctors", doctors);
 
         return "doctors/view";
@@ -186,7 +194,7 @@ public class DoctorController {
     public List<Doctor> checkUnique(HttpServletRequest request) {
 
         List<Doctor> doctors = repo.findByNameOrAddress(request.getParameter("firstName"), request.getParameter("lastName"), request.getParameter("address"));
-                
+
         if (request.getParameter("id") != null) {
             for (Doctor doctor : doctors) {
                 if (doctor.getId() == Long.parseLong(request.getParameter("id")) && doctors.size() == 1) {
@@ -195,7 +203,41 @@ public class DoctorController {
                 }
             }
         }
-        
+
+        return doctors;
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Doctor> search(HttpServletRequest request) {
+
+        City city = null;
+        GeolocationArea geolocationArea = null;
+        Institution institution = null;
+        DoctorSpecialty doctorSpecialty = null;
+
+        if (!request.getParameter("cityId").isEmpty()) {
+            city = cityRepository.findOne(Long.parseLong(request.getParameter("cityId")));
+        }
+        if (!request.getParameter("geolocationAreaId").isEmpty()) {
+            geolocationArea = geolocationAreaRepository.findOne(Long.parseLong(request.getParameter("geolocationAreaId")));
+        }
+        if (!request.getParameter("institutionId").isEmpty()) {
+            institution = institutionRepository.findOne(Long.parseLong(request.getParameter("institutionId")));
+        }
+        if (!request.getParameter("specialtyId").isEmpty()) {
+            doctorSpecialty = doctorSpecialtyRepository.findOne(Long.parseLong(request.getParameter("specialtyId")));
+        }
+
+        List<Doctor> doctors = repo.search(
+                request.getParameter("firstName"),
+                request.getParameter("lastName"),
+                request.getParameter("address"),
+                request.getParameter("phone"),
+                request.getParameter("position"),
+                request.getParameter("email"),
+                city, geolocationArea, institution, doctorSpecialty);
+
         return doctors;
     }
 }

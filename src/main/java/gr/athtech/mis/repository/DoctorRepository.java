@@ -1,6 +1,10 @@
 package gr.athtech.mis.repository;
 
+import gr.athtech.mis.model.City;
 import gr.athtech.mis.model.Doctor;
+import gr.athtech.mis.model.DoctorSpecialty;
+import gr.athtech.mis.model.GeolocationArea;
+import gr.athtech.mis.model.Institution;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +19,7 @@ public class DoctorRepository {
     private static final Logger logger = LoggerFactory.getLogger(DoctorRepository.class);
 
     @Resource
-    IDoctorRepository repo;    
+    IDoctorRepository repo;
 
     /**
      * Return a list of all the doctors
@@ -36,7 +40,7 @@ public class DoctorRepository {
      */
     public Doctor findOne(Long id) {
         Doctor doctor = repo.findOne(id);
-        
+
         /*if(doctor!=null){
             doctor.getGeolocationArea();
             doctor.getCity();
@@ -44,7 +48,7 @@ public class DoctorRepository {
             doctor.getSpecialty();
             doctor.getScheduledVisits();
         }
-*/
+         */
         return doctor;
     }
 
@@ -58,28 +62,33 @@ public class DoctorRepository {
         doctor = repo.save(doctor);
         return doctor;
     }
-    
-     public Doctor update(Doctor doctor) {
+
+    public Doctor update(Doctor doctor) {
         doctor = repo.save(doctor);
         return doctor;
     }
-     
-     public void delete(Long id){
-         repo.delete(id);
-     }
+
+    public void delete(Long id) {
+        repo.delete(id);
+    }
 
     public List<Doctor> getAvailableDoctorList() {
         List<Doctor> doctorList = repo.getAvailableDoctors();
         return doctorList;
     }
-    
-    public List<Doctor> findDoctorByCycleId(Long id){
+
+    public List<Doctor> findDoctorByCycleId(Long id) {
         List<Doctor> doctorList = repo.getAvailableDoctorsList(id);
-        
+
         return doctorList;
     }
-    
-    public List<Doctor> findByNameOrAddress(String firstName, String lastName, String address){
+
+    public List<Doctor> findByNameOrAddress(String firstName, String lastName, String address) {
         return repo.findByFirstNameLikeAndLastNameLikeOrAddressLike(firstName, lastName, address);
+    }
+
+    public List<Doctor> search(String firstName, String lastName, String address, String phone, String position, String email, City city, GeolocationArea geolocationArea, Institution institution, DoctorSpecialty specialty) {
+        List<Doctor> doctors = repo.findByFirstNameLikeOrLastNameLikeOrAddressLikeOrPhoneLikeOrPositionLikeOrEmailLikeOrCityOrGeolocationAreaOrInstitutionOrSpecialty(firstName, lastName, address, phone, position, email, city, geolocationArea, institution, specialty);
+        return doctors;
     }
 }

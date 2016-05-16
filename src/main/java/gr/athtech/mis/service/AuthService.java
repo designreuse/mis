@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import gr.athtech.mis.repository.IUserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,8 +32,22 @@ public class AuthService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("UserName " + username + " not found");
         }
-        
+
         return new SecurityUser(user);
     }
 
+    /**
+     * Check if the logged in user may edit a given doctor
+     *
+     * @param id
+     * @return
+     */
+    /*  public boolean canEditDoctor(Long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.
+        User user = repo.findByUsername(username);
+        
+
+    }
+     */
 }

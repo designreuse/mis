@@ -81,12 +81,47 @@ $('#cycleIdGroup').on('change', function () {
     });
 });
 
+//search for doctors
+$("#search").click(function (e) {
+
+console.log($("#geolocationAreaId option:selected").val())
+    var firstName = $("#firstName").val();
+    var lastName = $("#lastName").val();
+    var address = $("#address").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+    var position = $("#position").val();
+    var geolocationAreaId = ($("#geolocationAreaId option:selected").val() == 0 ? null : $("#geolocationAreaId option:selected").val());
+    var cityId = ($("#cityId option:selected").val() == 0 ? null : $("#cityId option:selected").val());
+    var institutionId = ($("#institutionId option:selected").val() == 0 ? null : $("#institutionId option:selected").val());
+    var specialtyId = ($("#specialtyId option:selected").val() == 0 ? null : $("#specialtyId option:selected").val());
+
+    $.ajax({
+        url: $("body").attr('data-url') + 'doctors/search/',
+        type: 'GET',
+        data: {
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            email: email,
+            phone: phone,
+            position: position,
+            geolocationAreaId: geolocationAreaId,
+            cityId: cityId,
+            institutionId: institutionId,
+            specialtyId: specialtyId
+        },
+        success: function(data){
+            console.log(data)
+        }
+    });
+});
 
 //before saving a doctor, check that the first name, last name and address are unique
 $("#saveDoctor").submit(function (e) {
     e.preventDefault();
-    
-    var id = $(this).attr('data-id');  
+
+    var id = $(this).attr('data-id');
 
     $.when(checkUnique(id)).then(function (data, textStatus, jqXHR) {
 
