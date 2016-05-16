@@ -11,6 +11,7 @@ import gr.athtech.mis.repository.DoctorSpecialtyRepository;
 import gr.athtech.mis.repository.GeolocationAreaRepository;
 import gr.athtech.mis.repository.InstitutionRepository;
 import gr.athtech.mis.service.DoctorService;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,13 +61,13 @@ public class DoctorController {
 
         return "doctors/view";
     }
-    
+
     /**
      * Show one doctor
-     * 
+     *
      * @param id
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
     public String one(@PathVariable("id") Long id, Model model) {
@@ -170,14 +171,31 @@ public class DoctorController {
         repo.delete(id);
         return "redirect:/doctors/";
     }
-       
+
     @RequestMapping(value = "/byCycle/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Doctor> show(@PathVariable("id") Long id) {
-        
-        List<Doctor> doctorList =repo.findDoctorByCycleId(id);
-     
+
+        List<Doctor> doctorList = repo.findDoctorByCycleId(id);
+
         return doctorList;
     }
 
+    @RequestMapping(value = "/checkUnique", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Doctor> checkUnique(HttpServletRequest request) {
+
+        List<Doctor> doctors = repo.findByNameOrAddress(request.getParameter("firstName"), request.getParameter("lastName"), request.getParameter("address"));
+                
+        if (request.getParameter("id") != null) {
+            for (Doctor doctor : doctors) {
+                if (doctor.getId() == Long.parseLong(request.getParameter("id")) && doctors.size() == 1) {
+                    doctors = new ArrayList<>();
+                    break;
+                }
+            }
+        }
+        
+        return doctors;
+    }
 }

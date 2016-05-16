@@ -22,3 +22,7 @@
     width:30px;
     margin-bottom: 2px;
 }
+
+.error{
+    display:none;
+}

@@ -18,18 +18,18 @@
                         <h3 class="box-title">Create doctor</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/doctors/store"/>" method="POST">
+                        <form role="form" id="saveDoctor" action="<c:url value="/doctors/store"/>" method="POST" data-mode="store">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>First Name:</label>
-                                        <input name="firstName" class="form-control">
+                                        <input name="firstName" id="firstName" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Last Name:</label>
-                                        <input name="lastName" class="form-control">
+                                        <input name="lastName" id="lastName" class="form-control" required>
                                     </div>
                                 </div>                                    
                                 <div class="col-md-3">
@@ -49,7 +49,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Address:</label>
-                                        <input name="address" class="form-control">
+                                        <input name="address" id="address" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -97,7 +97,8 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <p class="isUnique error text-danger">Please provide a unique name and address</p>
+                            <p class="fillFields error text-danger">Please fill in all fields</p>
                             <button type="submit" class="btn btn-default">Save</button>
                         </form>
                     </div><!-- /.box-body -->

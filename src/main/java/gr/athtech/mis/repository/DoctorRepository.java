@@ -78,4 +78,8 @@ public class DoctorRepository {
         
         return doctorList;
     }
+    
+    public List<Doctor> findByNameOrAddress(String firstName, String lastName, String address){
+        return repo.findByFirstNameLikeAndLastNameLikeOrAddressLike(firstName, lastName, address);
+    }
 }

@@ -18,20 +18,20 @@
                         <h3 class="box-title">Edit doctor</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/doctors/update"/>" method="POST">
+                        <form role="form" action="<c:url value="/doctors/update"/>" method="POST" id="saveDoctor" data-mode="update" data-id="${doctor.id}">
                             <input type="hidden" name="_method" value="put" />
                             <input type="hidden" name="id" value="${doctor.id}">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>First Name:</label>
-                                        <input name="firstName" class="form-control" value="${doctor.firstName}">
+                                        <input name="firstName" id="firstName" class="form-control" value="${doctor.firstName}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Last Name:</label>
-                                        <input name="lastName" class="form-control" value="${doctor.lastName}">
+                                        <input name="lastName" id="lastName" class="form-control" value="${doctor.lastName}" required>
                                     </div>
                                 </div>                                    
                                 <div class="col-md-3">
@@ -40,7 +40,7 @@
                                         <input name="email" class="form-control" value="${doctor.email}">
                                     </div>
                                 </div>
-                                    
+
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Phone:</label>
@@ -52,7 +52,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Address:</label>
-                                        <input name="address" class="form-control" value="${doctor.address}">
+                                        <input name="address" id="address" class="form-control" value="${doctor.address}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -106,7 +106,8 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <p class="isUnique error text-danger">Please provide a unique name and address</p>
+                            <p class="fillFields error text-danger">Please fill in all fields</p>
                             <button type="submit" class="btn btn-default">Save</button>
                         </form>
                     </div><!-- /.box-body -->

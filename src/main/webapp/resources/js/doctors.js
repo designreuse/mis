@@ -47,39 +47,83 @@ function fillSelect(selectName, array) {
 
 //when a cycle is selected, fetch the available doctors of this period
 $('#cycleId').on('change', function () {
-console.log($(this).val())
-        $.ajax({
-            url: $("body").attr('data-url') + 'doctors/byCycle/' + $(this).val(),
-            type: 'GET',
-            success: function (data) {
-                var options = "";
-                for(var i = 0; i < data.length; i++){
-                   options += "<option value='" + data[i].id + "'>" + data[i].firstName+" "+data[i].lastName + "</option>";
-                   
-                }
-                $('select[name="doctorId"]').html(options);
-                $('select[name="doctorId"]').prop('disabled', false);
+
+    $.ajax({
+        url: $("body").attr('data-url') + 'doctors/byCycle/' + $(this).val(),
+        type: 'GET',
+        success: function (data) {
+            var options = "";
+            for (var i = 0; i < data.length; i++) {
+                options += "<option value='" + data[i].id + "'>" + data[i].firstName + " " + data[i].lastName + "</option>";
+
             }
-        });
+            $('select[name="doctorId"]').html(options);
+            $('select[name="doctorId"]').prop('disabled', false);
+        }
+    });
 });
 
 //when a cycle is selected, fetch the available doctors of this period
 $('#cycleIdGroup').on('change', function () {
-console.log($(this).val())
-        $.ajax({
-            url: $("body").attr('data-url') + 'doctors/byCycle/' + $(this).val(),
-            type: 'GET',
-            success: function (data) {
-                var options = "";
-                for(var i = 0; i < data.length; i++){
-                   options += "<option value='" + data[i].id + "'>" + data[i].firstName+" "+data[i].lastName + "</option>";
-                   
-                }
-                $('select[name="doctorIdGroup"]').html(options);
-                $('select[name="doctorIdGroup"]').prop('disabled', false);
+    console.log($(this).val())
+    $.ajax({
+        url: $("body").attr('data-url') + 'doctors/byCycle/' + $(this).val(),
+        type: 'GET',
+        success: function (data) {
+            var options = "";
+            for (var i = 0; i < data.length; i++) {
+                options += "<option value='" + data[i].id + "'>" + data[i].firstName + " " + data[i].lastName + "</option>";
+
             }
-        });
+            $('select[name="doctorIdGroup"]').html(options);
+            $('select[name="doctorIdGroup"]').prop('disabled', false);
+        }
+    });
 });
 
 
+//before saving a doctor, check that the first name, last name and address are unique
+$("#saveDoctor").submit(function (e) {
+    e.preventDefault();
+    
+    var id = $(this).attr('data-id');  
 
+    $.when(checkUnique(id)).then(function (data, textStatus, jqXHR) {
+
+        if (data.length > 0) {
+            $(".error.isUnique").show();
+        } else {
+            $(".error.isUnique").hide();
+            $.ajax({
+                type: "POST",
+                url: $("body").attr("data-url") + 'doctors/' + $("#saveDoctor").attr('data-mode'),
+                data: $('#saveDoctor').serialize(),
+                success: function (response) {
+                    window.location.href = $("body").attr('data-url') + "doctors/";
+                },
+                error: function (response) {
+                    $(".error.fillFields").show();
+                }
+            });
+        }
+    });
+});
+
+//check that fields are unique
+function checkUnique(id) {
+
+    var firstName = $("#firstName").val();
+    var lastName = $("#lastName").val();
+    var address = $("#address").val();
+
+    return $.ajax({
+        url: $("body").attr('data-url') + 'doctors/checkUnique/',
+        type: 'GET',
+        data: {
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            id: id
+        }
+    });
+}

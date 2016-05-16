@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository("iDoctorRepository")
 public interface IDoctorRepository extends JpaRepository<Doctor, Long>{
         
+    public List<Doctor> findByFirstNameLikeAndLastNameLikeOrAddressLike(String firstName, String lastName, String address);
+    
     @Query("SELECT d FROM Doctor d "
             + "WHERE NOT EXISTS "
             + "(SELECT s FROM d.scheduledVisits s)")

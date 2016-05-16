@@ -78,6 +78,17 @@
                                 <li><a href="<c:url value='/scheduledVisits/allCycles'/>"><i class="fa fa-circle-o"></i> View Assigned Visits By Cycle</a></li>
                                 <li><a href="<c:url value='/scheduledVisits/create'/>"><i class="fa fa-circle-o"></i> Create New Visit</a></li>
                                 <li><a href="<c:url value='/paidVisits/allCycles'/>"><i class="fa fa-circle-o"></i> View Paid Visits By Cycle</a></li>
+                                <li><a href="<c:url value='/paidVisits/'/>"><i class="fa fa-circle-o"></i> View Paid Visits</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-clock-o"></i>
+                                <span>My Scheduled Visits</span>  <i class="fa fa-angle-right pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<c:url value='/scheduledVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
+                                <li><a href="<c:url value='/paidVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
