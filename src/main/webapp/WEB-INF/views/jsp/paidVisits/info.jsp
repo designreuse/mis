@@ -14,12 +14,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">  
-                            <h3 class="box-title">Visit Details: For <c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/> </h3>
-                        </c:forEach> 
-                        <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">  
-                            <h3 class="box-title">Visit Details: For <c:out value="${group.name}"/> </h3>
-                        </c:forEach>     
+                        <h3>Paid Visit Details</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <form role="form" action="<c:url value="/paidVisits/${user.id}" />" method="GET">
@@ -69,10 +64,21 @@
                                 </div> 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Group: </label><br/>
+                                        <label>Group: </label><br/> 
                                         <p>${paidVisit.isGroup}</p>
                                     </div>
-                                </div>       
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Members(If applies): </label><br/>
+                                        <c:forEach var="group" items="${paidVisit.scheduledVisit.groups}">
+                                            <p><c:out value="${group.leader.firstName}"/> <c:out value="${group.leader.lastName}"/></p>
+                                            <c:forEach var="user" items="${group.members}">
+                                                <p><c:out value="${user.firstName}"/> <c:out value="${user.lastName}"/></p>
+                                            </c:forEach>    
+                                        </c:forEach>       
+                                    </div>
+                                </div>      
                             </div>  
                             <div class="row">
                                 <div class="col-md-12">

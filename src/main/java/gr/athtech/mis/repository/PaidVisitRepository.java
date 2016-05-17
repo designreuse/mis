@@ -51,6 +51,13 @@ public class PaidVisitRepository {
         return allUsersVisits;
     }
     
+     public List<PaidVisit> getAllGroupVisitsByCurrentCycle(Long id)
+    {
+        List<PaidVisit> allUsersVisits = repo.findByScheduledGroupIdAndCurrentCycle(id);
+        
+        return allUsersVisits;
+    }
+    
     
     public PaidVisit findById(Long id) {
 

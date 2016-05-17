@@ -49,14 +49,14 @@
                                         <label>Status: </label><br/>
                                         <label>${schv.status}</label>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Group</label><br />      
-                                        <input type="hidden" name="group" value="NO">
-                                        <label>NO</label> 
-                                    </div>
-                                </div>                              
+                                        <label>Group</label><br />  
+                                        <input type="hidden" name="group" value="YES">
+                                        <label>YES</label> 
+                                    </div>          
+                                </div>
                             </div>                          
                             <div class="row">
                                 <div class="col-md-4">
@@ -78,7 +78,7 @@
                                             <option value="PM">PM</option>                                            
                                         </select>  
                                     </div>
-                                </div> 
+                                </div>                             
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Date</label>
@@ -92,7 +92,7 @@
                                         <label>Comment</label>
                                         <textarea name="comment" class="form-control"></textarea>                                 
                                     </div>
-                                </div> 
+                                </div>                              
                             </div>
                             <button type="submit" class="btn btn-default">Save</button>
                         </form>

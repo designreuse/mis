@@ -87,8 +87,64 @@
                         <h3 class="box-title">Group Visits - Current Active Cycle</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        ...
-
+                        <ul class="nav nav-pills">  
+                            <li class="active">
+                                <a href="#scheduledGroup-pills" data-toggle="tab" aria-expanded="true">Scheduled Visits (${newGroupVisits.size()})</a>
+                            </li>
+                            <li class>
+                                <a href="#paidGroup-pills" data-toggle="tab" aria-expanded="false">Paid Visits (${groupVisits.size()})</a>
+                            </li>
+                        </ul>
+                           <div class="tab-content"> 
+                            <div class="tab-pane fade active in" id="scheduledGroup-pills">    
+                                <table class="table">    
+                                    <thead>
+                                        <tr>
+                                            <th>Group</th>
+                                            <th>Doctor</th>
+                                            <th>Cycle</th>                            
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="schvisits" items="${newGroupVisits}">
+                                            <tr>                                          
+                                                <c:forEach var="gname" items="${schvisits.groups}">
+                                                    <td><c:out value="${gname.name}"/></td>
+                                                </c:forEach>
+                                                <td><c:out value="${schvisits.doctor.firstName}"/> <c:out value="${schvisits.doctor.lastName}"/></td>
+                                                <td><c:out value="${schvisits.cycle.startDate}"/> - <c:out value="${schvisits.cycle.endDate}"/></td>
+                                                <td><c:out value="${schvisits.status}"/> (<c:out value="${schvisits.paidVisits.size()}"/>)</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div> 
+                            <div class="tab-pane fade" id="paidGroup-pills"> 
+                                <table class="table">    
+                                    <thead>
+                                        <tr>
+                                            <th>Doctor</th>
+                                            <th>Cycle</th>                            
+                                            <th>Date</th>
+                                            <th>Hour</th>
+                                            <th>Week</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <c:forEach var="pvisits" items="${groupVisits}">
+                                            <tr>
+                                                <td><c:out value="${pvisits.scheduledVisit.doctor.firstName}"/> <c:out value="${pvisits.scheduledVisit.doctor.lastName}"/></td>
+                                                <td><c:out value="${pvisits.scheduledVisit.cycle.startDate}"/> - <c:out value="${pvisits.scheduledVisit.cycle.endDate}"/></td> 
+                                                <td><c:out value="${pvisits.date}"/></td>
+                                                <td><c:out value="${pvisits.hour}"/></td>
+                                                <td><c:out value="${pvisits.week}"/></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>                       
+                        </div>   
                     </div><!-- /.box-body -->
                 </div>
             </div>                     
@@ -136,7 +192,6 @@
                                             <th>Date</th>
                                             <th>Hour</th>
                                             <th>Week</th>
-                                            <th>Group</th>
                                         </tr>
                                     </thead>
                                     <tbody> 
@@ -147,7 +202,6 @@
                                                 <td><c:out value="${pvisits.date}"/></td>
                                                 <td><c:out value="${pvisits.hour}"/></td>
                                                 <td><c:out value="${pvisits.week}"/></td>
-                                                <td><c:out value="${pvisits.isGroup}"/></td>  
                                             </tr>
                                         </c:forEach>
                                     </tbody>

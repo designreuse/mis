@@ -107,8 +107,10 @@ public class PaidVisitController {
      public String indexSingle(@PathVariable("id") Long id, Map<String, Object> model){
          
          List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisitsByCurrentCycle(id);
+         List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
          logger.debug("------------------NEW VISITS");
          model.put("paidVisits", paidVisits);
+         model.put("groupVisits", groupVisits);
          return "paidVisits/view";    
      }
      
@@ -126,6 +128,22 @@ public class PaidVisitController {
         model.addAttribute("schv", schv);
         return "paidVisits/create";
     }
+    
+    /**
+     * Return the view that holds the edit scheduled group visit form
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/createGroup/{id}", method = RequestMethod.GET)
+    public String createGroup(@PathVariable("id") Long id, Model model) {
+
+        ScheduledVisit schv = scheduledVisitRepository.findById(id);
+        model.addAttribute("schv", schv);
+        return "paidVisits/createGroup";
+    }
+    
     
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
@@ -150,7 +168,7 @@ public class PaidVisitController {
         logger.debug("----- New user: ", pdvst);
 
         paidVisitRepository.save(pdvst);
-        return "redirect:/paidVisits/";
+        return "redirect:/scheduledVisits/";
     }
     
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)

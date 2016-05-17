@@ -39,7 +39,7 @@
                         <img src="<c:url value='/resources/img/logo.png' />" style="width:50%;"/>
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu">
+                    <ul class="sidebar-menu">                      
                         <li class="header">WELCOME <span class="text-uppercase">${user.username}</span> <span class="pull-right"><a href="<c:url value='/'/>logout">LOGOUT</a></span></li>       
                         <li class="treeview">
                             <a href="<c:url value='/'/>">
@@ -56,6 +56,7 @@
                                 <li><a href="<c:url value='/doctors/create'/>"><i class="fa fa-circle-o"></i> Create doctor</a></li>
                             </ul>
                         </li>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-users"></i>
@@ -73,14 +74,12 @@
                                 <i class="fa fa-clock-o"></i>
                                 <span>Visits Management</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<c:url value='/scheduledVisits/'/>"><i class="fa fa-circle-o"></i> View Assigned Visits</a></li>
-                                <li><a href="<c:url value='/scheduledVisits/allCycles'/>"><i class="fa fa-circle-o"></i> View Assigned Visits By Cycle</a></li>
-                                <li><a href="<c:url value='/scheduledVisits/create'/>"><i class="fa fa-circle-o"></i> Create New Visit</a></li>
-                                <li><a href="<c:url value='/paidVisits/allCycles'/>"><i class="fa fa-circle-o"></i> View Paid Visits By Cycle</a></li>
-                                <li><a href="<c:url value='/paidVisits/'/>"><i class="fa fa-circle-o"></i> View Paid Visits</a></li>
+                            <ul class="treeview-menu">                             
+                                <li><a href="<c:url value='/scheduledVisits/allCycles'/>"><i class="fa fa-circle-o"></i> Assigned Visits</a></li>                               
+                                <li><a href="<c:url value='/paidVisits/allCycles'/>"><i class="fa fa-circle-o"></i> Paid Visits</a></li>  
+                                <li><a href="<c:url value='/scheduledVisits/create'/>"><i class="fa fa-circle-o"></i> New Visit</a></li>
                             </ul>
-                        </li>
+                        </li>                    
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-calendar"></i>
@@ -92,17 +91,19 @@
 
                             </ul>
                         </li>
+                        </sec:authorize>  
+                        <sec:authorize access="hasRole('ROLE_MEDICAL_VISITOR')">
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-clock-o"></i>
                                 <span>My Scheduled Visits</span>  <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<c:url value='/scheduledVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>
-                                <li><a href="<c:url value='/scheduledVisits/group/${user.id}'/>"><i class="fa fa-circle-o"></i>View Grouped Assigned Visits</a></li>
+                                <li><a href="<c:url value='/scheduledVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Assigned Visits</a></li>     
                                 <li><a href="<c:url value='/paidVisits/${user.id}'/>"><i class="fa fa-circle-o"></i>View Paid Visits</a></li>
                             </ul>
-                        </li>                      
+                        </li>
+                        </sec:authorize>
                         <li>
                             <a href="#">
                                 <i class="fa fa-folder"></i> <span>Other stuff</span>

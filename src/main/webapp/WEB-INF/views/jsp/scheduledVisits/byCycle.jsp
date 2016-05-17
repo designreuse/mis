@@ -20,7 +20,7 @@
                     <div class="box-body">   
                         <form role="form" action="<c:url value="/scheduledVisits/byCycle"/>" method="POST">                          
                         <select name="cycleId" id="cycleId" class="form-control">
-                            <option value="0">[-- select --]</option>
+                            <option value="0">[-- Cycle --]</option>
                             <c:forEach var="cycle" items="${cyclesList}">
                                 <option value="${cycle.id}">${cycle.startDate} - ${cycle.endDate}</option>
                             </c:forEach>

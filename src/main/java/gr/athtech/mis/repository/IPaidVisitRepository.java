@@ -49,6 +49,17 @@ public interface IPaidVisitRepository extends JpaRepository<PaidVisit, Long>{
             + "AND s.cycle.endDate >= CURRENT_DATE AND md.id = ?1")
     public List<PaidVisit> findByScheduledVisitMedicalVisitorIdAndCurrentCycle(Long id);
     
+     /**
+     * @param id
+     * @return 
+     */
+    @Query("SELECT v FROM PaidVisit as v "
+            + "JOIN v.scheduledVisit as s "
+            + "JOIN s.groups as g "
+            + "WHERE s.cycle.startDate <= CURRENT_DATE "
+            + "AND s.cycle.endDate >= CURRENT_DATE AND g.leader.id = ?1")
+    public List<PaidVisit> findByScheduledGroupIdAndCurrentCycle(Long id);
+    
     /**
      * 
      * @param id

@@ -178,14 +178,20 @@ public class UserController {
     public String one(@PathVariable("id") Long id, Model model) {
 
         User user = userRepository.findOne(id);
+        //For individual visits
         List<ScheduledVisit> userVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
+        //For group visits
+        List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
+        List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
         List<Group> userGroups = groupRepository.findByUserId(id);
         
 
         model.addAttribute("user", user);
         model.addAttribute("userVisits", userVisits);
         model.addAttribute("paidVisits", paidVisits);
+        model.addAttribute("newGroupVisits", newGroupVisits);
+        model.addAttribute("groupVisits", groupVisits);
         model.addAttribute("userGroups", userGroups);
         
 
