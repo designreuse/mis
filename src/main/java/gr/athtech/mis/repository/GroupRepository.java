@@ -57,6 +57,12 @@ public class GroupRepository {
         return userGroups;
     }
     
+    public Long findGroupId(Long id){
+        Long groupId = repo.findGroupId(id);
+        
+        return groupId;
+    }
+    
     public Group save(Group group){
         return repo.save(group);
     }

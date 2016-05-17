@@ -181,9 +181,24 @@ public class UserController {
         //For individual visits
         List<ScheduledVisit> userVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
+        
         //For group visits
-        List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
+        List<Group> leadersSC = groupRepository.findByLeader(user);
+        List<Group> membersSC = groupRepository.findByUserId(id);
+        if(leadersSC.isEmpty()){
+            Long groupId = groupRepository.findGroupId(id);
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembers(groupId);
+            model.addAttribute("newGroupVisits", newGroupVisits);
+        }else if(membersSC.isEmpty()){
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
+            model.addAttribute("newGroupVisits", newGroupVisits);
+        }else{
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
+            model.addAttribute("newGroupVisits", newGroupVisits);
+        }
+        
         List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
+        
         //For group participation
         List<Group> leaders = groupRepository.findByLeader(user);
         List<Group> members = groupRepository.findByUserId(id);
@@ -203,7 +218,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("userVisits", userVisits);
         model.addAttribute("paidVisits", paidVisits);
-        model.addAttribute("newGroupVisits", newGroupVisits);
+        
         model.addAttribute("groupVisits", groupVisits);              
         
 

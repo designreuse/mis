@@ -26,4 +26,9 @@ public interface IGroupRepository extends JpaRepository<Group, Long>{
             + "JOIN g.members m "
             + "WHERE g.leader.id = ?1 OR m.id = ?1")
     List<Group> findAllGroups(Long id);
+    
+    @Query("SELECT g.id FROM Group g "
+            + "JOIN g.members m "
+            + "WHERE m.id = ?1")
+    Long findGroupId(Long id);
 }

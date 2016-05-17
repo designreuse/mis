@@ -83,6 +83,12 @@ public class ScheduledVisitRepository {
         return allCurrentVisits;
     }
     
+    public List<ScheduledVisit> findRelatedMembers(Long id){
+        List<ScheduledVisit> memberVisits = repo.findByGroupNumber(id);
+        
+        return memberVisits;
+    }
+    
 
     public List<ScheduledVisit> showVisitsByCycleId(Long id){
         Cycle cycle = cycleRepo.findOne(id);

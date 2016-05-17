@@ -28,18 +28,26 @@ public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit,
             + "AND s.cycle.endDate >= CURRENT_DATE AND md.id = ?1")
     List<ScheduledVisit> findByMedicalVisitorId(Long id);
 
+    
     @Query("SELECT s FROM ScheduledVisit as s "
             + "JOIN s.groups g "
             + "WHERE s.cycle.startDate <= CURRENT_DATE "
             + "AND s.cycle.endDate >= CURRENT_DATE "
             + "AND g.leader.id = ?1")
     List<ScheduledVisit> findByGroupId(Long id);
-    
+ 
     @Query("SELECT s FROM ScheduledVisit as s "
             + "WHERE s.cycle.startDate <= CURRENT_DATE "
             + "AND s.cycle.endDate >= CURRENT_DATE")
     public List<ScheduledVisit> findByCurrentCycle();
     
-    public List<ScheduledVisit> findScheduledVisitByCycle(Cycle cycle);
+    @Query("SELECT s FROM ScheduledVisit as s "
+            + "JOIN s.groups g "
+            + "WHERE s.cycle.startDate <= CURRENT_DATE "
+            + "AND s.cycle.endDate >= CURRENT_DATE "
+            + "AND g.id = ?1")
+    public List<ScheduledVisit> findByGroupNumber(Long id);
     
+    public List<ScheduledVisit> findScheduledVisitByCycle(Cycle cycle);
+      
 }
