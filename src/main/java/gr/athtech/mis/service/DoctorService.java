@@ -66,20 +66,35 @@ public class DoctorService {
      * @param doctors
      * @return
      */
-    @Transactional
     public List<Doctor> setPermissions(List<Doctor> doctors) {
-        boolean isAdmin = authService.isAdmin();
 
         for (Doctor doctor : doctors) {
-            if (isAdmin) {
-                doctor.setIsPermitted(true);
-            } else if (authService.canEditDoctor(doctor.getId())) {
-                doctor.setIsPermitted(true);
-            } else {
-                doctor.setIsPermitted(false);
-            }
+            setPermission(doctor);
         }
 
         return doctors;
     }
+
+    /**
+     * Set permissions for one doctor
+     *
+     * @param doctor
+     * @return
+     */
+    public Doctor setPermission(Doctor doctor) {
+        boolean isAdmin = authService.isAdmin();
+        if (isAdmin) {
+            doctor.setIsEditable(true);
+            doctor.setIsDeletable(true);
+        } else if (authService.canEditDoctor(doctor.getId())) {
+            doctor.setIsEditable(true);
+            doctor.setIsDeletable(false);
+        } else {
+            doctor.setIsEditable(false);
+            doctor.setIsDeletable(false);
+        }
+
+        return doctor;
+    }
+
 }

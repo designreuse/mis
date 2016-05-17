@@ -70,7 +70,9 @@ public class Doctor implements Serializable {
     private List<ScheduledVisit> scheduledVisits;
 
     @Transient
-    private boolean isPermitted;
+    private boolean editable;
+    @Transient
+    private boolean deletable;
     @Transient
     private String cityName;
     @Transient
@@ -194,12 +196,20 @@ public class Doctor implements Serializable {
         this.scheduledVisits = scheduledVisits;
     }
 
-    public boolean isIsPermitted() {
-        return isPermitted;
+    public boolean isEditable() {
+        return editable;
     }
 
-    public void setIsPermitted(boolean isPermitted) {
-        this.isPermitted = isPermitted;
+    public void setIsEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+    public boolean isDeletable() {
+        return deletable;
+    }
+
+    public void setIsDeletable(boolean deletable) {
+        this.deletable = deletable;
     }
 
     public String getCityName() {

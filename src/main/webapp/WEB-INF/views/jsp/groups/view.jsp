@@ -48,9 +48,6 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>
-                                                    <a href="<c:url value="/groups/info/${group.id}"/>" class="btn btn-info">
-                                                        <i class="fa fa-info"></i>
-                                                    </a>
                                                     <a href="<c:url value="/groups/edit/${group.id}"/>" class="btn btn-success">
                                                         <i class="fa fa-edit"></i>
                                                     </a>

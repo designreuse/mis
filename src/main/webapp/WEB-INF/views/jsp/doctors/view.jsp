@@ -109,9 +109,11 @@
                                                 <a href="<c:url value="/doctors/one/${doctor.id}"/>" class="btn btn-info btn-sm btn-30">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="<c:url value="/doctors/edit/${doctor.id}"/>">
-                                                    <button type="button" class="btn btn-sm btn-success btn-30"><i class="fa fa-edit"></i></button>
-                                                </a>
+                                                <c:if test="${doctor.editable}">
+                                                    <a href="<c:url value="/doctors/edit/${doctor.id}"/>">
+                                                        <button type="button" class="btn btn-sm btn-success btn-30"><i class="fa fa-edit"></i></button>
+                                                    </a>
+                                                </c:if>
                                                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                                                     <button type="button" class="btn btn-sm btn-danger btn-30 deleteDoctor" data-id="${doctor.id}"><i class="fa fa-trash"></i></button>
                                                     </sec:authorize>

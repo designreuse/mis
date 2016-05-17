@@ -29,10 +29,14 @@
                         <p><i class="fa fa-envelope"></i> <a href="mailto:${doctor.email}">${doctor.email}</a></p>
 
                         <div class="text-right">
-                        <a href="<c:url value="/doctors/edit/${doctor.id}"/>">
-                            <button type="button" class="btn btn-success btn-40"><i class="fa fa-edit"></i></button>
-                        </a>
-                        <button type="button" class="btn btn-danger btn-40 deleteDoctor" data-id="${doctor.id}"><i class="fa fa-trash"></i></button>
+                            <c:if test="${doctor.editable}">
+                                <a href="<c:url value="/doctors/edit/${doctor.id}"/>">
+                                    <button type="button" class="btn btn-success btn-40"><i class="fa fa-edit"></i></button>
+                                </a>
+                            </c:if>
+                            <c:if test="${doctor.deletable}">
+                                <button type="button" class="btn btn-danger btn-40 deleteDoctor" data-id="${doctor.id}"><i class="fa fa-trash"></i></button>
+                                </c:if>
                         </div>
                     </div><!-- /.box-body -->
                 </div>

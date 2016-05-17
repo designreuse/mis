@@ -122,10 +122,14 @@ $("#search").click(function (e) {
                 html += '<td>' + value.institutionName + '</td>';
                 html += '<td>' + value.specialtyName + '</td>';
                 html += '<td><a href="' + $("body").attr('data-url') + 'doctors/one/' + value.id + '" class="btn btn-info btn-sm btn-30"><i class="fa fa-eye"></i></a>';
-                html += '<a href="' + $("body").attr('data-url') + 'doctors/edit/' + value.id + '" class="btn btn-success btn-sm btn-30"><i class="fa fa-edit"></i></a>';
-                html += '<button type="button" class="btn btn-sm btn-danger btn-30 deleteDoctor" data-id="' + value.id + '"><i class="fa fa-trash"></i></button>';
+
+                if (value.editable)
+                    html += '<a href="' + $("body").attr('data-url') + 'doctors/edit/' + value.id + '" class="btn btn-success btn-sm btn-30"><i class="fa fa-edit"></i></a>';
+
+                if (value.deletable)
+                    html += '<button type="button" class="btn btn-sm btn-danger btn-30 deleteDoctor" data-id="' + value.id + '"><i class="fa fa-trash"></i></button>';
+
                 html += '</td></tr>';
-                console.log(html);
             });
             $("#doctorsTable tbody").html(html);
         }

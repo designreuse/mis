@@ -61,6 +61,8 @@ public class DoctorController {
         List<Institution> institutions = institutionRepository.findAll();
         List<DoctorSpecialty> doctorSpecialties = doctorSpecialtyRepository.findAll();
 
+        doctors = service.setPermissions(doctors);
+
         model.put("cities", cities);
         model.put("geolocationAreas", geolocationAreas);
         model.put("institutions", institutions);
@@ -81,6 +83,7 @@ public class DoctorController {
     public String one(@PathVariable("id") Long id, Model model) {
 
         Doctor doctor = repo.findOne(id);
+        doctor = service.setPermission(doctor);
 
         model.addAttribute("doctor", doctor);
 
@@ -228,8 +231,8 @@ public class DoctorController {
         if (!request.getParameter("specialtyId").isEmpty()) {
             doctorSpecialty = doctorSpecialtyRepository.findOne(Long.parseLong(request.getParameter("specialtyId")));
         }
-        
-         List<Doctor>  doctors = repo.search(
+
+        List<Doctor> doctors = repo.search(
                 request.getParameter("firstName"),
                 request.getParameter("lastName"),
                 request.getParameter("address"),

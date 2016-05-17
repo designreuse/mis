@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <content tag="title">View doctor</content>
 
@@ -29,12 +30,14 @@
 
                         <p><i class="fa fa-envelope"></i> <a href="mailto:${user.email}">${user.email}</a></p>
 
-                        <div class="text-right">
-                            <a href="<c:url value="/users/edit/${user.id}"/>">
-                                <button type="button" class="btn btn-success btn-40"><i class="fa fa-edit"></i></button>
-                            </a>
-                            <button type="button" class="btn btn-danger btn-40 deleteUser" data-id="${user.id}"><i class="fa fa-trash"></i></button>
-                        </div>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <div class="text-right">
+                                <a href="<c:url value="/users/edit/${user.id}"/>">
+                                    <button type="button" class="btn btn-success btn-40"><i class="fa fa-edit"></i></button>
+                                </a>
+                                <button type="button" class="btn btn-danger btn-40 deleteUser" data-id="${user.id}"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </sec:authorize>
                     </div><!-- /.box-body -->
                 </div>
                 <div class="box box-info">
@@ -95,7 +98,7 @@
                                 <a href="#paidGroup-pills" data-toggle="tab" aria-expanded="false">Paid Visits (${groupVisits.size()})</a>
                             </li>
                         </ul>
-                           <div class="tab-content"> 
+                        <div class="tab-content"> 
                             <div class="tab-pane fade active in" id="scheduledGroup-pills">    
                                 <table class="table">    
                                     <thead>
