@@ -40,7 +40,19 @@ public class GroupRepository {
     }
     
     public List<Group> findByUserId(Long id){
-        List<Group> userGroups = repo.findByLeaderOrMember(id);
+        List<Group> userGroups = repo.findByMember(id);
+        
+        return userGroups;
+    }
+    
+    public List<Group> findByLeaderId(Long id){
+        List<Group> userGroups = repo.findByLeaderSQL(id);
+        
+        return userGroups;
+    }
+    
+    public List<Group> findAllById(Long id){
+        List<Group> userGroups = repo.findAllGroups(id);
         
         return userGroups;
     }

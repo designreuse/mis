@@ -15,6 +15,15 @@ public interface IGroupRepository extends JpaRepository<Group, Long>{
     
     @Query("SELECT g FROM Group g "
             + "JOIN g.members m "
+            + "WHERE m.id = ?1")
+    List<Group> findByMember(Long id);
+    
+    @Query("SELECT g FROM Group g "
+            + "WHERE g.leader.id = ?1")
+    List<Group> findByLeaderSQL(Long id);
+    
+    @Query("SELECT g FROM Group g "
+            + "JOIN g.members m "
             + "WHERE g.leader.id = ?1 OR m.id = ?1")
-    List<Group> findByLeaderOrMember(Long id);
+    List<Group> findAllGroups(Long id);
 }
