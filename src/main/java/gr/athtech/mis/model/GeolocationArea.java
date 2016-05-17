@@ -6,6 +6,7 @@
 package gr.athtech.mis.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -33,9 +34,11 @@ public class GeolocationArea implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<City> cities;
 
     @OneToMany(mappedBy = "geolocationArea", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Institution> institutions;
 
     public GeolocationArea() {

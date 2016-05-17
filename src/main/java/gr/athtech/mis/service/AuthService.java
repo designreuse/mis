@@ -1,5 +1,7 @@
 package gr.athtech.mis.service;
 
+import gr.athtech.mis.model.Role;
+import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.SecurityUser;
 import gr.athtech.mis.model.User;
 import javax.annotation.Resource;
@@ -37,17 +39,45 @@ public class AuthService implements UserDetailsService {
     }
 
     /**
+     * Check if a logged in user is admin
+     *
+     * @param username
+     * @return
+     */
+    public boolean isAdmin() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUser user = new SecurityUser(repo.findByUsername(auth.getName()));
+
+        boolean flag = false;
+
+        for (Role role : user.getRoles()) {
+            if (role.getName().equals("ROLE_ADMIN")) {
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
+    }
+
+    /**
      * Check if the logged in user may edit a given doctor
      *
      * @param id
      * @return
      */
-    /*  public boolean canEditDoctor(Long id) {
+    public boolean canEditDoctor(Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.
-        User user = repo.findByUsername(username);
-        
+        User user = repo.findByUsername(auth.getName());
+        boolean flag = false;
 
+        for (ScheduledVisit scheduledVisit : user.getScheduledVisits()) {
+            if (id == scheduledVisit.getDoctor().getId()) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
-     */
+
 }

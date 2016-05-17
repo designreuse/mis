@@ -88,7 +88,34 @@ public class DoctorRepository {
     }
 
     public List<Doctor> search(String firstName, String lastName, String address, String phone, String position, String email, City city, GeolocationArea geolocationArea, Institution institution, DoctorSpecialty specialty) {
-        List<Doctor> doctors = repo.findByFirstNameLikeOrLastNameLikeOrAddressLikeOrPhoneLikeOrPositionLikeOrEmailLikeOrCityOrGeolocationAreaOrInstitutionOrSpecialty(firstName, lastName, address, phone, position, email, city, geolocationArea, institution, specialty);
+
+        List<Doctor> doctors;
+
+        logger.debug("======== firstname: {}", firstName);
+        logger.debug("======== lastName: {}", lastName);
+        // logger.debug("======== geolocationArea: {}", geolocationArea.getName());
+
+        //if no data was sent, fetch all doctors
+        if ((firstName.isEmpty() || "".equals(firstName))
+                && (lastName.isEmpty() || "".equals(lastName))
+                && (address.isEmpty() || "".equals(address))
+                && (phone.isEmpty() || "".equals(phone))
+                && (position.isEmpty() || "".equals(position))
+                && (email.isEmpty() || "".equals(email))
+                && city == null && geolocationArea == null && institution == null && specialty == null) {
+            doctors = repo.findAll();
+        } else {
+            doctors = repo.findByFirstNameLikeOrLastNameLikeOrAddressLikeOrPhoneLikeOrPositionLikeOrEmailLikeOrCityOrGeolocationAreaOrInstitutionOrSpecialty(firstName, lastName, address, phone, position, email, city, geolocationArea, institution, specialty);
+        }
+        // hack in order to display city, institution etc to json
+        // (problem with hibernate and jackson, not enough time to fix)
+        for (Doctor doctor : doctors) {
+            doctor.setInstitutionName(doctor.getInstitution().getName());
+            doctor.setCityName(doctor.getCity().getName());
+            doctor.setGeolocationAreaName(doctor.getGeolocationArea().getName());
+            doctor.setSpecialtyName(doctor.getSpecialty().getName());
+        }
+
         return doctors;
     }
 }

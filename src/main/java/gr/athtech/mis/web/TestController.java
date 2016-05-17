@@ -16,10 +16,8 @@ public class TestController {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String index(HttpServletRequest request, Principal principal, Map<String, Object> model) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode("admin1234");
+        String hashedPassword = passwordEncoder.encode("medical1234");
         return hashedPassword;
     }
-
-
 
 }

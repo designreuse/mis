@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -67,6 +68,17 @@ public class Doctor implements Serializable {
     @OneToMany(mappedBy = "doctor")
     @JsonIgnore
     private List<ScheduledVisit> scheduledVisits;
+
+    @Transient
+    private boolean isPermitted;
+    @Transient
+    private String cityName;
+    @Transient
+    private String geolocationAreaName;
+    @Transient
+    private String institutionName;
+    @Transient
+    private String specialtyName;
 
     public Doctor() {
     }
@@ -180,6 +192,46 @@ public class Doctor implements Serializable {
 
     public void setScheduledVisits(List<ScheduledVisit> scheduledVisits) {
         this.scheduledVisits = scheduledVisits;
+    }
+
+    public boolean isIsPermitted() {
+        return isPermitted;
+    }
+
+    public void setIsPermitted(boolean isPermitted) {
+        this.isPermitted = isPermitted;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getGeolocationAreaName() {
+        return geolocationAreaName;
+    }
+
+    public void setGeolocationAreaName(String geolocationAreaName) {
+        this.geolocationAreaName = geolocationAreaName;
+    }
+
+    public String getInstitutionName() {
+        return institutionName;
+    }
+
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
+    }
+
+    public String getSpecialtyName() {
+        return specialtyName;
+    }
+
+    public void setSpecialtyName(String specialtyName) {
+        this.specialtyName = specialtyName;
     }
 
 }

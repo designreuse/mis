@@ -352,5 +352,24 @@ insert into authorities (id, name) values (2, "ROLE_MEDICAL_VISITOR");
 insert into users (id, first_name, last_name, password, username, email, enabled) values (1, "Admin", "Admin", "$2a$10$bMaNOYGEwfNl2z6hg9lmRuc3s7uAgWxhRVzll2YguII6sBvVSX2qi", "admin", "admin@mis.gr", 1);
 insert into users_roles (user_id, role_id) values (1, 1);
 
-/* dummy doctor */
+/* medical visitors */
+insert into users (id, first_name, last_name, password, username, email, enabled) values (2, "Myles", "Avila", "$2a$10$P61sdsyWW0L4dLg9lmsQBeqg2THOLU/qxtKzApzF5LXbNfUDfhsuG", "medical1", "facilisis.lorem@semNulla.org", 1);
+insert into users (id, first_name, last_name, password, username, email, enabled) values (3, "Adena", "Moody", "$2a$10$P61sdsyWW0L4dLg9lmsQBeqg2THOLU/qxtKzApzF5LXbNfUDfhsuG", "medical2", "tellus.faucibus.leo@laoreetlibero.ca", 1);
+insert into users (id, first_name, last_name, password, username, email, enabled) values (4, "Eagan", "Weiss", "$2a$10$P61sdsyWW0L4dLg9lmsQBeqg2THOLU/qxtKzApzF5LXbNfUDfhsuG", "medical3", "nisi.magna.sed@nisi.com", 1);
+insert into users (id, first_name, last_name, password, username, email, enabled) values (5, "Pandora", "Aguirre", "$2a$10$P61sdsyWW0L4dLg9lmsQBeqg2THOLU/qxtKzApzF5LXbNfUDfhsuG", "medical4", "lorem@lectus.net", 1);
+
+insert into users_roles (user_id, role_id) values (2, 2);
+insert into users_roles (user_id, role_id) values (3, 2);
+insert into users_roles (user_id, role_id) values (4, 2);
+insert into users_roles (user_id, role_id) values (5, 2);
+
+
+/* dummy doctors */
 insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (1, "Test doctor", "Test doctor", "Test address", "210123456789", "test@doctor.gr", "Awesome position", 1, 1, 1, 1);
+insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (2, "Jason", "Fox", "P.O. Box 245, 1022 Erat. St.", "(527) 661-7839", "nec.enim.Nunc@sociisnatoque.com", "Nurse", 1, 1, 1, 11);
+insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (3, "Drew", "Tran", "Nunc Avenue", "775-7710", "diam.luctus@antelectus.org", "Doctor", 1, 1, 1, 11);
+insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (4, "Melodie", "Cotton", "Tempor Avenue", "(527) 661-7839", "tortor@inmagnaPhasellus.org", "Doctor", 1, 1, 1, 7);
+insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (5, "India", "Cooper", "P.O. Box 245, 1022 Erat. St.", "(527) 661-7839", "sagittis.Duis@pede.org", "Nurse", 1, 1, 1, 12);
+insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (6, "Matthew", "Sanchez", "P.O. Box 245, 1022 Erat. St.", "(527) 661-7839", "nec.enim.Nunc@sociisnatoque.com", "Doctor", 1, 1, 1, 6);
+insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (7, "Branden", ",", "P.O. Box 245, 1022 Erat. St.", "(527) 661-7839", "mus.Proin.vel@etmalesuadafames.co.uk", "Head Officer", 1, 1, 1, 3);
+insert into doctors (id, first_name, last_name, address, phone, email, position, city_id, geolocation_area_id, institution_id, specialty_id) values (8, "Aurora", "Chapman", " Enim Ave", "(527) 661-7839", "Fusce@erat.net", "MD", 1, 1, 1, 3);

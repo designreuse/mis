@@ -50,12 +50,12 @@
                             </div>                            
                             <div class="col-md-2">
                                 <select name="cityId" id="cityId" class="form-control" disabled>
-                                     <option value="0" selected="selected">City</option>
+                                    <option value="0" selected="selected">City</option>
                                 </select>  
                             </div>
                             <div class="col-md-2">
                                 <select name="institutionId" id="institutionId" class="form-control" disabled>
-                                     <option value="0" selected="selected">Institution</option>
+                                    <option value="0" selected="selected">Institution</option>
                                 </select>  
                             </div>
                             <div class="col-md-2">
@@ -68,7 +68,8 @@
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-info" id="search"><i class="fa fa-search"></i></button>
-                            </div>
+                                <button class="btn btn-danger" id="clear"><i class="fa fa-times"></i></button>
+                            </div>  
                         </div>                        
                     </div>
                 </div>
@@ -83,7 +84,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="doctorsTable">
                                 <thead>
                                     <tr>
                                         <th>#</th>

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import gr.athtech.mis.repository.InstitutionRepository;
+import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository("doctorService")
 public class DoctorService {
@@ -28,12 +30,14 @@ public class DoctorService {
     private InstitutionRepository institutionRepository;
     @Autowired
     private DoctorSpecialtyRepository doctorSpecialtyRepository;
+    @Autowired
+    private AuthService authService;
 
     /**
      * Create a doctor obj from request data
-     * 
+     *
      * @param request
-     * @return 
+     * @return
      */
     public Doctor getDataFromRequest(HttpServletRequest request, Doctor doctor) {
         City city = cityRepository.findOne(Long.parseLong(request.getParameter("cityId")));
@@ -53,5 +57,29 @@ public class DoctorService {
         doctor.setSpecialty(doctorSpecialty);
 
         return doctor;
+    }
+
+    /**
+     * For a given list of doctors, check if the logged in user may edit them
+     * (used in search, where we cannot use spring security, only JavaScript)
+     *
+     * @param doctors
+     * @return
+     */
+    @Transactional
+    public List<Doctor> setPermissions(List<Doctor> doctors) {
+        boolean isAdmin = authService.isAdmin();
+
+        for (Doctor doctor : doctors) {
+            if (isAdmin) {
+                doctor.setIsPermitted(true);
+            } else if (authService.canEditDoctor(doctor.getId())) {
+                doctor.setIsPermitted(true);
+            } else {
+                doctor.setIsPermitted(false);
+            }
+        }
+
+        return doctors;
     }
 }

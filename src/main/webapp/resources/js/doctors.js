@@ -84,7 +84,6 @@ $('#cycleIdGroup').on('change', function () {
 //search for doctors
 $("#search").click(function (e) {
 
-console.log($("#geolocationAreaId option:selected").val())
     var firstName = $("#firstName").val();
     var lastName = $("#lastName").val();
     var address = $("#address").val();
@@ -111,10 +110,46 @@ console.log($("#geolocationAreaId option:selected").val())
             institutionId: institutionId,
             specialtyId: specialtyId
         },
-        success: function(data){
-            console.log(data)
+        success: function (data) {
+            var html = '';
+            //draw the table again with the new data
+            $.each(data, function (i, value) {
+                html += '<tr>';
+                html += '<td>' + value.id + '</td>';
+                html += '<td>' + value.firstName + ' ' + value.lastName + '</td>';
+                html += '<td>' + value.email + '</td>';
+                html += '<td>' + value.position + '</td>';
+                html += '<td>' + value.institutionName + '</td>';
+                html += '<td>' + value.specialtyName + '</td>';
+                html += '<td><a href="' + $("body").attr('data-url') + 'doctors/one/' + value.id + '" class="btn btn-info btn-sm btn-30"><i class="fa fa-eye"></i></a>';
+                html += '<a href="' + $("body").attr('data-url') + 'doctors/edit/' + value.id + '" class="btn btn-success btn-sm btn-30"><i class="fa fa-edit"></i></a>';
+                html += '<button type="button" class="btn btn-sm btn-danger btn-30 deleteDoctor" data-id="' + value.id + '"><i class="fa fa-trash"></i></button>';
+                html += '</td></tr>';
+                console.log(html);
+            });
+            $("#doctorsTable tbody").html(html);
         }
     });
+});
+
+//clear all selections
+$("#clear").click(function () {
+    $("#firstName").val("");
+    $("#lastName").val("");
+    $("#address").val("");
+    $("#phone").val("");
+    $("#email").val("");
+    $("#position").val("");
+    $("#geolocationAreaId").val(0);
+    $("#cityId").append($('<option>', {value: 0, text: 'City'}));
+    $("#cityId").val(0);
+    $("#institutionId").append($('<option>', {value: 0, text: 'Institution'}));
+    $("#institutionId").val(0);
+    $("#specialtyId").val(0);
+
+    $("#cityId").prop('disabled', 'disabled');
+    $("#institutionId").prop('disabled', 'disabled');
+
 });
 
 //before saving a doctor, check that the first name, last name and address are unique

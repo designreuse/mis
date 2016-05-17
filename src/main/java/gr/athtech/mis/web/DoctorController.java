@@ -34,7 +34,7 @@ public class DoctorController {
     private final Logger logger = LoggerFactory.getLogger(DoctorController.class);
 
     @Autowired
-    private DoctorService doctorService;
+    private DoctorService service;
     @Autowired
     private DoctorRepository repo;
     @Autowired
@@ -148,7 +148,7 @@ public class DoctorController {
     public String store(HttpServletRequest request) {
 
         Doctor doctor = new Doctor();
-        doctor = doctorService.getDataFromRequest(request, doctor);
+        doctor = service.getDataFromRequest(request, doctor);
 
         repo.save(doctor);
 
@@ -165,7 +165,7 @@ public class DoctorController {
     public String update(HttpServletRequest request) {
 
         Doctor doctor = repo.findOne(Long.parseLong(request.getParameter("id")));
-        doctor = doctorService.getDataFromRequest(request, doctor);
+        doctor = service.getDataFromRequest(request, doctor);
 
         repo.update(doctor);
 
@@ -228,8 +228,8 @@ public class DoctorController {
         if (!request.getParameter("specialtyId").isEmpty()) {
             doctorSpecialty = doctorSpecialtyRepository.findOne(Long.parseLong(request.getParameter("specialtyId")));
         }
-
-        List<Doctor> doctors = repo.search(
+        
+         List<Doctor>  doctors = repo.search(
                 request.getParameter("firstName"),
                 request.getParameter("lastName"),
                 request.getParameter("address"),
@@ -238,6 +238,7 @@ public class DoctorController {
                 request.getParameter("email"),
                 city, geolocationArea, institution, doctorSpecialty);
 
+        doctors = service.setPermissions(doctors);
         return doctors;
     }
 }
