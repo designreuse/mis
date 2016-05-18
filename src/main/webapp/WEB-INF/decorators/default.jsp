@@ -104,11 +104,13 @@
                             </ul>
                         </li>
                         </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li>
                             <a href="#">
-                                <i class="fa fa-folder"></i> <span>Other stuff</span>
+                                <i class="fa fa-bar-chart"></i> <span>Reports</span>
                             </a>
                         </li>
+                        </sec:authorize>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
