@@ -112,7 +112,9 @@
                                                             <a href="<c:url value="/paidVisits/info/${groupVisit.id}"/>" class="btn btn-info">
                                                                 <i class="fa fa-info"></i>
                                                             </a>
-                                                            <button typ e="button" class="btn btn-danger deletePaidVisit" data-id="${groupVisit.id}"><i class="fa fa-trash"></i></button>    
+                                                            <sec:authorize access="hasRole('ROLE_ADMIN')">    
+                                                            <button typ e="button" class="btn btn-danger deletePaidVisit" data-id="${groupVisit.id}"><i class="fa fa-trash"></i></button>
+                                                            </sec:authorize>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>

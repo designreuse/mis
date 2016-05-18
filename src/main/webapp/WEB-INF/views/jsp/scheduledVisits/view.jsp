@@ -95,8 +95,10 @@
                                                         <td>  
                                                             <a href="<c:url value="/paidVisits/createGroup/${gvisit.id}"/>" class="btn btn-info">
                                                                 <i class="fa fa-check-square-o"></i>
-                                                            </a>  
-                                                            <button type="button" class="btn btn-danger deleteVisit" data-id="${gvisit.id}"><i class="fa fa-trash"></i></button>                               
+                                                            </a> 
+                                                            <sec:authorize access="hasRole('ROLE_ADMIN')">      
+                                                            <button type="button" class="btn btn-danger deleteVisit" data-id="${gvisit.id}"><i class="fa fa-trash"></i></button> 
+                                                            </sec:authorize>
                                                         </td>      
                                                     </tr>
                                                 </c:forEach>
