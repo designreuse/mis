@@ -57,8 +57,22 @@ public class PaidVisitRepository {
         
         return allUsersVisits;
     }
-    
-    
+     
+     public List<PaidVisit> findRelatedMembers(Long id)
+    {
+        List<PaidVisit> allMemberVisits = repo.findByScheduledGroupIdAndCurrentCycleForMembers(id);
+        
+        return allMemberVisits;
+    } 
+     
+      public List<PaidVisit> findEitherMemberOrLeader(Long id)
+    {
+        List<PaidVisit> allKindsOfVisits = repo.findByBothLeaderAndMember(id);
+        
+        return allKindsOfVisits;
+    } 
+     
+      
     public PaidVisit findById(Long id) {
 
         PaidVisit paidVisit = repo.findOne(id);

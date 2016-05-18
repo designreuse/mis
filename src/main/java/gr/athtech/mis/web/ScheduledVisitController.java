@@ -157,7 +157,7 @@ public class ScheduledVisitController {
         logger.debug("----- New user: ", schvst);
 
         scheduledVisitRepository.save(schvst);
-        return "redirect:/scheduledVisits/";
+        return "redirect:/scheduledVisits/allCycles";
     }
     
     /**
