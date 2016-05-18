@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <content tag="title">View scheduled visits</content>
 
@@ -53,8 +54,10 @@
                                                         <td>  
                                                             <a href="<c:url value="/paidVisits/create/${visit.id}"/>" class="btn btn-info">
                                                                 <i class="fa fa-check-square-o"></i>
-                                                            </a>  
-                                                            <button type="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>                               
+                                                            </a>
+                                                            <sec:authorize access="hasRole('ROLE_ADMIN')">    
+                                                            <button type="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>
+                                                            </sec:authorize>
                                                         </td>      
                                                     </tr>
                                                 </c:forEach>
