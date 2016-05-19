@@ -88,8 +88,6 @@ public class CycleController {
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {
         cycleRepository.delete(id);
-        logger.debug("------------------CYCLE DELETED");
-
         return "redirect:/cycles/";
     }
 }

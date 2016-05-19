@@ -36,7 +36,7 @@
                                                 <td><c:out value="${cycle.startDate}"/></td>
                                                 <td><c:out value="${cycle.endDate}"/></td>
                                                 <td>                                                  
-                                                    <button typ e="button" class="btn btn-danger deleteCycle" data-id="${cycle.id}"><i class="fa fa-trash"></i></button>    
+                                                    <button type="button" class="btn btn-danger deleteCycle" data-id="${cycle.id}"><i class="fa fa-trash"></i></button>    
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -54,6 +54,6 @@
     </section>
 </content>
 <content tag="footerScripts">
-    <script src="<c:url value='/resources/js/cycle.js'/>" type="text/javascript"></script>
+    <script src="<c:url value='/resources/js/cycles.js'/>" type="text/javascript"></script>
 </content>
 

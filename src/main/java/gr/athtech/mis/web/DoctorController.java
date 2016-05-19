@@ -5,6 +5,7 @@ import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.model.DoctorSpecialty;
 import gr.athtech.mis.model.GeolocationArea;
 import gr.athtech.mis.model.Institution;
+import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.repository.CityRepository;
 import gr.athtech.mis.repository.DoctorRepository;
 import gr.athtech.mis.repository.DoctorSpecialtyRepository;
@@ -175,17 +176,35 @@ public class DoctorController {
         return "redirect:/doctors/";
     }
 
+    /**
+     * Delete a doctor, if s/he doesn't have paid visits
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") Long id) {
+    public boolean delete(@PathVariable("id") Long id) {
 
-        repo.delete(id);
-        return "redirect:/doctors/";
+        boolean flag = false;
+        Doctor doctor = repo.findOne(id);
+        for (ScheduledVisit scheduledVisit : doctor.getScheduledVisits()) {
+            if ("Paid".equals(scheduledVisit.getStatus())) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            repo.delete(id);
+        }
+
+        return true;
     }
 
     @RequestMapping(value = "/byCycle/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Doctor> show(@PathVariable("id") Long id) {
+    public List<Doctor> show(@PathVariable("id") Long id
+    ) {
 
         List<Doctor> doctorList = repo.findDoctorByCycleId(id);
 
@@ -194,7 +213,8 @@ public class DoctorController {
 
     @RequestMapping(value = "/checkUnique", method = RequestMethod.GET)
     @ResponseBody
-    public List<Doctor> checkUnique(HttpServletRequest request) {
+    public List<Doctor> checkUnique(HttpServletRequest request
+    ) {
 
         List<Doctor> doctors = repo.findByNameOrAddress(request.getParameter("firstName"), request.getParameter("lastName"), request.getParameter("address"));
 
@@ -212,7 +232,8 @@ public class DoctorController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
-    public List<Doctor> search(HttpServletRequest request) {
+    public List<Doctor> search(HttpServletRequest request
+    ) {
 
         City city = null;
         GeolocationArea geolocationArea = null;

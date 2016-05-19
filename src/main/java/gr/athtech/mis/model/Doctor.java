@@ -68,6 +68,7 @@ public class Doctor implements Serializable {
     @OneToMany(mappedBy = "doctor")
     @JsonIgnore
     private List<ScheduledVisit> scheduledVisits;
+    
 
     @Transient
     private boolean editable;
