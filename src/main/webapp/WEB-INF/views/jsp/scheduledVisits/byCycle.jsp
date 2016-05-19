@@ -15,17 +15,22 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">New Visits List</h3>
+                        <h3 class="box-title">Scheduled Visits List</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">   
-                        <form role="form" action="<c:url value="/scheduledVisits/byCycle"/>" method="POST">                          
-                        <select name="cycleId" id="cycleId" class="form-control">
-                            <option value="0">[-- Cycle --]</option>
-                            <c:forEach var="cycle" items="${cyclesList}">
-                                <option value="${cycle.id}">${cycle.startDate} - ${cycle.endDate}</option>
-                            </c:forEach>
-                        </select>                         
-                        <button type="submit" class="btn btn-default">Select</button>
+                        <form role="form" action="<c:url value="/scheduledVisits/byCycle"/>" method="POST">                                          <div class="row" style="margin-bottom:20px;">
+                                <div class="col-md-3">
+                                    <select name="cycleId" id="cycleId" class="form-control">
+                                        <option value="0">[-- Select Cycle --]</option>
+                                        <c:forEach var="cycle" items="${cyclesList}">
+                                            <option value="${cycle.id}">Cycle: ${cycle.startDate} - ${cycle.endDate}</option>
+                                        </c:forEach>
+                                    </select>     
+                                </div>
+                                <div class="col-md-3">                     
+                                    <button type="submit" class="btn btn-default">Select</button>
+                                </div>
+                            </div>
                         </form>
                         <div class="tab-content">
                             <div class="table-responsive">                                                                             
@@ -48,7 +53,7 @@
                                                         <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
                                                     </c:forEach>
                                                     <c:forEach var="group" items="${visit.groups}">
-                                                       <td><c:out value="${group.name}"/></td>
+                                                        <td><c:out value="${group.name}"/></td>
                                                     </c:forEach>    
                                                     <td><c:out value="${visit.cycle.startDate}"/> - <c:out value="${visit.cycle.endDate}"/></td>
                                                     <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
