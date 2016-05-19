@@ -3,6 +3,7 @@ package gr.athtech.mis.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -65,7 +66,7 @@ public class Doctor implements Serializable {
     @JsonIgnore
     private Institution institution;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ScheduledVisit> scheduledVisits;
     

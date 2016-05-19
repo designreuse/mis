@@ -198,7 +198,7 @@ public class DoctorController {
             repo.delete(id);
         }
 
-        return true;
+        return flag;
     }
 
     @RequestMapping(value = "/byCycle/{id}", method = RequestMethod.GET)

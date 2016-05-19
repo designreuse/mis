@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 /**
  *
  * @author jmone
@@ -49,9 +48,8 @@ public class ScheduledVisitController {
     private DoctorRepository doctorRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired 
+    @Autowired
     private GroupRepository groupRepository;
-
 
     /**
      * Return the view that will display all the scheduled visits
@@ -67,16 +65,17 @@ public class ScheduledVisitController {
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
 
-       
         return "scheduledVisits/view";
 
     }
+
     /**
-     * Display only the cycles drop down 
+     * Display only the cycles drop down
+     *
      * @param model
-     * @return 
+     * @return
      */
-    
+
     @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
     public String showCycles(Map<String, Object> model) {
 
@@ -84,21 +83,22 @@ public class ScheduledVisitController {
         List<Cycle> cyclesList = cycleRepository.findAll();
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
-        model.put("cyclesList", cyclesList); 
+        model.put("cyclesList", cyclesList);
         return "scheduledVisits/byCycle";
 
     }
-    
+
     /**
      * Display the scheduled visits of the selected cycle
+     *
      * @param request
      * @param response
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/byCycle", method = RequestMethod.POST)
     public String showSelectedVisits(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-        
+
         Long id = Long.parseLong(request.getParameter("cycleId"));
         List<Cycle> cyclesList = cycleRepository.findAll();
         List<ScheduledVisit> newVisits = scheduledVisitRepository.showVisitsByCycleId(id);
@@ -106,7 +106,7 @@ public class ScheduledVisitController {
         model.put("newVisits", newVisits);
         return "scheduledVisits/byCycle";
     }
-    
+
     /**
      * Return the view that holds the create a new scheduled visit form
      *
@@ -144,7 +144,7 @@ public class ScheduledVisitController {
         Cycle cycle = cycleRepository.findOne(Long.parseLong(request.getParameter("cycleId")));
         User visitor = userRepository.findOne(Long.parseLong(request.getParameter("medicalVisitorId")));
         Doctor doctor = doctorRepository.findOne(Long.parseLong(request.getParameter("doctorId")));
-        
+
         List<User> users = new ArrayList<>();
         users.add(visitor);
 
@@ -159,7 +159,7 @@ public class ScheduledVisitController {
         scheduledVisitRepository.save(schvst);
         return "redirect:/scheduledVisits/allCycles";
     }
-    
+
     /**
      * Store a new scheduled visit
      *
@@ -174,12 +174,12 @@ public class ScheduledVisitController {
         Cycle cycle = cycleRepository.findOne(Long.parseLong(request.getParameter("cycleIdGroup")));
         Group group = groupRepository.findOne(Long.parseLong(request.getParameter("groupVisitorId")));
         Doctor doctor = doctorRepository.findOne(Long.parseLong(request.getParameter("doctorIdGroup")));
-        
+
         List<Group> groups = new ArrayList<>();
         groups.add(group);
-        
+
         ScheduledVisit schvst = new ScheduledVisit();
-        
+
         schvst.setCycle(cycle);
         schvst.setDoctor(doctor);
         schvst.setStatus("Pending");
@@ -190,12 +190,12 @@ public class ScheduledVisitController {
         scheduledVisitRepository.save(schvst);
         return "redirect:/scheduledVisits/";
     }
-    
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {
-           
-            scheduledVisitRepository.delete(id);   
+
+        scheduledVisitRepository.delete(id);
         return "redirect:/scheduledVisits/";
     }
 

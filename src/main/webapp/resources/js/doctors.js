@@ -1,15 +1,14 @@
 //confirm before deleting a doctor
 $(".deleteDoctor").click(function (e) {
-    console.log($("body").attr('data-url') + 'doctors/delete/' + $(this).attr('data-id'))
     if (confirm('Are you sure you want to delete the doctor?')) {
         $.ajax({
             url: $("body").attr('data-url') + 'doctors/delete/' + $(this).attr('data-id'),
             type: 'DELETE'
         }).done(function (data) {
-            if(data)
-            window.location.href = $("body").attr('data-url') + "doctors/";
-        else
-            alert("The doctor has paid visits and cannot be deleted");
+            if (!data)
+                window.location.href = $("body").attr('data-url') + "doctors/";
+            else
+                alert("The doctor has paid visits and cannot be deleted");
         });
     }
 });
