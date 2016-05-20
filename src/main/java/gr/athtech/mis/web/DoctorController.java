@@ -93,10 +93,10 @@ public class DoctorController {
         Doctor doctor = repo.findOne(id);
         doctor = service.setPermission(doctor);
         List<ScheduledVisit> newVisitsList = scheduledVisitRepository.showScheduledVisitsByDoctorId(id);
-        List<PaidVisit> paidVisits = paidVisitRepository.findAll();
+        List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisitsByDoctorId(id);
         
         model.addAttribute("doctor", doctor);
-        model.addAttribute("newVisitList", newVisitsList);
+        model.addAttribute("newVisitsList", newVisitsList);
         model.addAttribute("paidVisits", paidVisits);
 
         return "doctors/one";

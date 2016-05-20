@@ -6,11 +6,15 @@
 package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.Cycle;
+import gr.athtech.mis.model.Group;
 import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.ScheduledVisit;
+import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.CycleRepository;
+import gr.athtech.mis.repository.GroupRepository;
 import gr.athtech.mis.repository.PaidVisitRepository;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
+import gr.athtech.mis.repository.UserRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -43,6 +47,10 @@ public class PaidVisitController {
     private ScheduledVisitRepository scheduledVisitRepository;
     @Autowired
     private CycleRepository cycleRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private GroupRepository groupRepository;
     
     /**
      * Return the view that will display all the paid visits
@@ -106,11 +114,34 @@ public class PaidVisitController {
      @RequestMapping(value = "/{id}", method = RequestMethod.GET)
      public String indexSingle(@PathVariable("id") Long id, Map<String, Object> model){
          
+         User user = userRepository.findOne(id);
+         
+         //Individual visits
          List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisitsByCurrentCycle(id);
-         List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
+         
+         //Group visits
+         List<Group> leaders = groupRepository.findByLeader(user);
+         List<Group> members = groupRepository.findByUserId(id);
+         
+         if(leaders.isEmpty()){
+             
+            Long groupId = groupRepository.findGroupId(id); 
+            List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembers(groupId);
+            model.put("groupVisits", groupVisits);
+         }
+         else if(members.isEmpty()){
+             
+            List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
+            model.put("groupVisits", groupVisits);
+         }
+         else{
+             
+            List<PaidVisit> groupVisits = paidVisitRepository.findEitherMemberOrLeader(id);
+            model.put("groupVisits", groupVisits); 
+         }
+         
          logger.debug("------------------NEW VISITS");
          model.put("paidVisits", paidVisits);
-         model.put("groupVisits", groupVisits);
          return "paidVisits/view";    
      }
      

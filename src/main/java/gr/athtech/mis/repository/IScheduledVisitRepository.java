@@ -48,9 +48,9 @@ public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit,
     @Query("SELECT s FROM ScheduledVisit as s "
             + "JOIN s.groups g "
             + "JOIN g.members m "
-            + "WHERE s.cycle.startDate <= CURRENT_DATE "
+            + "WHERE m.id = ?1 OR g.leader.id = ?1 "
             + "AND s.cycle.endDate >= CURRENT_DATE "
-            + "AND m.id = ?1 OR g.leader.id = ?1")
+            + "AND s.cycle.startDate <= CURRENT_DATE")
     public List<ScheduledVisit> findByGroupLeaderAndId(Long id);
     
     

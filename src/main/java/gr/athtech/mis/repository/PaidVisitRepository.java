@@ -101,4 +101,11 @@ public class PaidVisitRepository {
         return allPaidVisits;
     }
     
+    //Doctor's view of paid visits
+    public List<PaidVisit> getAllPaidVisitsByDoctorId(Long id){
+        List<PaidVisit> doctorsPaidVisits = repo.findVisitsByDoctorId(id);
+        
+        return doctorsPaidVisits;
+    }
+    
 }

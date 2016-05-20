@@ -96,10 +96,10 @@
                                     <tbody> 
                                         <c:forEach var="pvisits" items="${paidVisits}">
                                             <tr>
-                                                <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">
+                                                <c:forEach var="visitor" items="${pvisits.scheduledVisit.medicalVisitors}">
                                                     <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
                                                 </c:forEach>
-                                                <c:forEach var="group" items="${paidVisit.scheduledVisit.groups}">
+                                                <c:forEach var="group" items="${pvisits.scheduledVisit.groups}">
                                                     <td><c:out value="${group.name}"/></td>
                                                 </c:forEach>    
                                                 <td><c:out value="${pvisits.scheduledVisit.cycle.startDate}"/> - <c:out value="${pvisits.scheduledVisit.cycle.endDate}"/></td> 

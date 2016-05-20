@@ -50,6 +50,7 @@ public class ScheduledVisitController {
     private UserRepository userRepository;
     @Autowired
     private GroupRepository groupRepository;
+    
 
     /**
      * Return the view that will display all the scheduled visits
@@ -210,11 +211,34 @@ public class ScheduledVisitController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String displayByUser(@PathVariable("id") Long id, Map<String, Object> model) {
 
+        User user = userRepository.findOne(id);
+        
+        //for individual visits
         List<ScheduledVisit> newVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
-        List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
+        
+        //For group visits
+        List<Group> leaders = groupRepository.findByLeader(user);
+        List<Group> members = groupRepository.findByUserId(id);
+        
+        if(leaders.isEmpty()){
+            
+            Long groupId = groupRepository.findGroupId(id);
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembers(groupId);
+            model.put("newGroupVisits", newGroupVisits);
+        }
+        else if(members.isEmpty()){
+            
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
+            model.put("newGroupVisits", newGroupVisits);
+        }
+        else{    
+            
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findByMemberAndLeader(id);
+            model.put("newGroupVisits", newGroupVisits);
+        }
+        
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
-        model.put("newGroupVisits", newGroupVisits);
         return "scheduledVisits/view";
 
     }
