@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <content tag="title">View doctor</content>
 
@@ -47,8 +48,70 @@
                         <h3 class="box-title">Visits etc</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        ...
-
+                        <ul class="nav nav-pills">  
+                            <li class="active">
+                                <a href="#scheduledGroup-pills" data-toggle="tab" aria-expanded="true">Scheduled Visits</a>
+                            </li>
+                            <li class>
+                                <a href="#paidGroup-pills" data-toggle="tab" aria-expanded="false">Paid Visits</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="scheduledGroup-pills">
+                                <table class="table">    
+                                    <thead>
+                                        <tr>
+                                            <th>Group/Name</th>
+                                            <th>Cycle</th>                            
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="schvisits" items="${newVisitsList}">
+                                            <tr>
+                                                <c:forEach var="visitor" items="${schvisits.medicalVisitors}">
+                                                    <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
+                                                </c:forEach>
+                                                <c:forEach var="gname" items="${schvisits.groups}">
+                                                    <td><c:out value="${gname.name}"/></td>
+                                                </c:forEach>                                             
+                                                <td><c:out value="${schvisits.cycle.startDate}"/> - <c:out value="${schvisits.cycle.endDate}"/></td>
+                                                <td><c:out value="${schvisits.status}"/> (<c:out value="${schvisits.paidVisits.size()}"/>)</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="paidGroup-pills"> 
+                                <table class="table">    
+                                    <thead>
+                                        <tr>
+                                            <th>Group/Name</th>
+                                            <th>Cycle</th>                            
+                                            <th>Date</th>
+                                            <th>Hour</th>
+                                            <th>Week</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <c:forEach var="pvisits" items="${paidVisits}">
+                                            <tr>
+                                                <c:forEach var="visitor" items="${paidVisit.scheduledVisit.medicalVisitors}">
+                                                    <td><c:out value="${visitor.firstName}"/> <c:out value="${visitor.lastName}"/></td>
+                                                </c:forEach>
+                                                <c:forEach var="group" items="${paidVisit.scheduledVisit.groups}">
+                                                    <td><c:out value="${group.name}"/></td>
+                                                </c:forEach>    
+                                                <td><c:out value="${pvisits.scheduledVisit.cycle.startDate}"/> - <c:out value="${pvisits.scheduledVisit.cycle.endDate}"/></td> 
+                                                <td><c:out value="${pvisits.date}"/></td>
+                                                <td><c:out value="${pvisits.hour}"/></td>
+                                                <td><c:out value="${pvisits.week}"/></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div><!-- /.box-body -->
                 </div>
             </div>

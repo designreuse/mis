@@ -60,5 +60,12 @@ public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit,
     public List<ScheduledVisit> findByCurrentCycle();
     
     public List<ScheduledVisit> findScheduledVisitByCycle(Cycle cycle);
+    
+    //Scheduled Visits for the doctor info
+    @Query("SELECT s FROM ScheduledVisit as s "
+            + "WHERE s.cycle.startDate <= CURRENT_DATE "
+            + "AND s.cycle.endDate >= CURRENT_DATE "
+            + "AND s.doctor.id = ?1")
+    public List<ScheduledVisit> findScheduledVisitsByDoctor(Long id);
       
 }

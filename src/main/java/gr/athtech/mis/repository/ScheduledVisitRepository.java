@@ -102,4 +102,11 @@ public class ScheduledVisitRepository {
         
         return selectedList;
     }
+    
+    //For doctor's view
+    public List<ScheduledVisit> showScheduledVisitsByDoctorId(Long id){
+        List<ScheduledVisit> selectedDoctorList = repo.findScheduledVisitsByDoctor(id);
+        
+        return selectedDoctorList;
+    }
 }

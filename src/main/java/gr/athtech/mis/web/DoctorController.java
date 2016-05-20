@@ -5,12 +5,15 @@ import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.model.DoctorSpecialty;
 import gr.athtech.mis.model.GeolocationArea;
 import gr.athtech.mis.model.Institution;
+import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.repository.CityRepository;
 import gr.athtech.mis.repository.DoctorRepository;
 import gr.athtech.mis.repository.DoctorSpecialtyRepository;
 import gr.athtech.mis.repository.GeolocationAreaRepository;
 import gr.athtech.mis.repository.InstitutionRepository;
+import gr.athtech.mis.repository.PaidVisitRepository;
+import gr.athtech.mis.repository.ScheduledVisitRepository;
 import gr.athtech.mis.service.DoctorService;
 import java.util.ArrayList;
 
@@ -46,6 +49,10 @@ public class DoctorController {
     private InstitutionRepository institutionRepository;
     @Autowired
     private DoctorSpecialtyRepository doctorSpecialtyRepository;
+     @Autowired
+    private PaidVisitRepository paidVisitRepository;
+    @Autowired 
+    private ScheduledVisitRepository scheduledVisitRepository;
 
     /**
      * Return the view that will display all the doctors
@@ -85,8 +92,12 @@ public class DoctorController {
 
         Doctor doctor = repo.findOne(id);
         doctor = service.setPermission(doctor);
-
+        List<ScheduledVisit> newVisitsList = scheduledVisitRepository.showScheduledVisitsByDoctorId(id);
+        List<PaidVisit> paidVisits = paidVisitRepository.findAll();
+        
         model.addAttribute("doctor", doctor);
+        model.addAttribute("newVisitList", newVisitsList);
+        model.addAttribute("paidVisits", paidVisits);
 
         return "doctors/one";
     }
