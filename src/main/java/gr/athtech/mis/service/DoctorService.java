@@ -1,13 +1,13 @@
 package gr.athtech.mis.service;
 
 import gr.athtech.mis.model.City;
-import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.model.DoctorSpecialty;
 import gr.athtech.mis.model.GeolocationArea;
 import gr.athtech.mis.model.Institution;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.repository.CityRepository;
+import gr.athtech.mis.repository.CycleRepository;
 import gr.athtech.mis.repository.DoctorSpecialtyRepository;
 import gr.athtech.mis.repository.GeolocationAreaRepository;
 import org.slf4j.Logger;
@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import gr.athtech.mis.repository.InstitutionRepository;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
 import gr.athtech.mis.repository.UserRepository;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,6 +43,8 @@ public class DoctorService {
     private UserRepository userRepository;
     @Resource
     private ScheduledVisitRepository scheduledVisitRepository;
+    @Resource
+    private CycleRepository cycleRepository;
 
     /**
      * Create a doctor obj from request data
@@ -72,14 +75,16 @@ public class DoctorService {
     /**
      * When a medical visitor creates a new user, create a new scheduled visit
      * and assign both the doctor and the medical user to it.
+     * The scheduled visit is assigned to the current cycle,
+     * that is the cycle that runs now.
      *
      * @param doctor
      * @return
      */
-    public Long assignDoctorToUser(Doctor doctor) {
+    public Long assignDoctorToUser(Doctor doctor) throws ParseException {
 
         ScheduledVisit scheduledVisit = new ScheduledVisit();
-        //scheduledVisit.setCycle(cycle);
+        scheduledVisit.setCycle(cycleRepository.getCurrentCycle());
         scheduledVisit.setMedicalVisitors(new ArrayList<>(Arrays.asList(userRepository.findOne(authService.getId()))));
         scheduledVisit.setDoctor(doctor);
         scheduledVisit.setStatus("Pending");

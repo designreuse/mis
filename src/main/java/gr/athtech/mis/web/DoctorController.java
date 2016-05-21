@@ -16,6 +16,7 @@ import gr.athtech.mis.repository.PaidVisitRepository;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
 import gr.athtech.mis.service.AuthService;
 import gr.athtech.mis.service.DoctorService;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -163,7 +164,7 @@ public class DoctorController {
      * @return
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public String store(HttpServletRequest request) {
+    public String store(HttpServletRequest request) throws ParseException {
 
         Doctor doctor = new Doctor();
         doctor = service.getDataFromRequest(request, doctor);

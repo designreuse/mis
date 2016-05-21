@@ -6,7 +6,7 @@
 package gr.athtech.mis.repository;
 
 import gr.athtech.mis.model.Cycle;
-import java.sql.Date;
+import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,6 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository("iCycleRepository")
 public interface ICycleRepository extends JpaRepository<Cycle, Long>{
     
-    @Query("SELECT c.id FROM Cycle as c WHERE endDate >= ?1 AND startDate <= ?1")
-    Long getCurrentCycleId(Date date);
+    @Query("SELECT c FROM Cycle as c WHERE CURRENT_DATE >= c.startDate AND CURRENT_DATE <= c.endDate")
+    Cycle getCurrentCycle();
 }

@@ -6,6 +6,10 @@
 package gr.athtech.mis.repository;
 
 import gr.athtech.mis.model.Cycle;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
@@ -18,28 +22,40 @@ import org.springframework.stereotype.Service;
  */
 @Service("cycleRepository")
 public class CycleRepository {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(Cycle.class);
-    
+
     @Resource
     ICycleRepository repo;
-    
-    public List<Cycle> findAll(){
+
+    public List<Cycle> findAll() {
         List<Cycle> cycles = repo.findAll();
         logger.info("---------CYCLES", cycles);
         return cycles;
     }
-    
-    public Cycle findOne(Long id){
+
+    public Cycle findOne(Long id) {
         Cycle cycle = repo.findOne(id);
         return cycle;
     }
-    
-    public Cycle save(Cycle cycle){
+
+    public Cycle save(Cycle cycle) {
         cycle = repo.save(cycle);
         return cycle;
-        
+
     }
+
+    public Cycle getCurrentCycle() throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        logger.debug("=====today: {}", dateFormat.parse(dateFormat.format(date)));
+        Cycle cycle = repo.getCurrentCycle();
+
+        logger.debug("======= current cycle: {}", cycle.getId());
+
+        return cycle;
+    }
+
     /**
      * Delete a paid visit based on Id
      *
@@ -48,5 +64,5 @@ public class CycleRepository {
     public void delete(Long id) {
         repo.delete(id);
     }
-    
+
 }

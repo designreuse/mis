@@ -91,10 +91,6 @@ public class DoctorRepository {
 
         List<Doctor> doctors;
 
-        logger.debug("======== firstname: {}", firstName);
-        logger.debug("======== lastName: {}", lastName);
-        // logger.debug("======== geolocationArea: {}", geolocationArea.getName());
-
         //if no data was sent, fetch all doctors
         if ((firstName.isEmpty() || "".equals(firstName))
                 && (lastName.isEmpty() || "".equals(lastName))
