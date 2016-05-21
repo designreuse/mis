@@ -14,6 +14,7 @@ import gr.athtech.mis.repository.GeolocationAreaRepository;
 import gr.athtech.mis.repository.InstitutionRepository;
 import gr.athtech.mis.repository.PaidVisitRepository;
 import gr.athtech.mis.repository.ScheduledVisitRepository;
+import gr.athtech.mis.service.AuthService;
 import gr.athtech.mis.service.DoctorService;
 import java.util.ArrayList;
 
@@ -38,6 +39,8 @@ public class DoctorController {
     private final Logger logger = LoggerFactory.getLogger(DoctorController.class);
 
     @Autowired
+    private AuthService authService;
+    @Autowired
     private DoctorService service;
     @Autowired
     private DoctorRepository repo;
@@ -49,9 +52,9 @@ public class DoctorController {
     private InstitutionRepository institutionRepository;
     @Autowired
     private DoctorSpecialtyRepository doctorSpecialtyRepository;
-     @Autowired
+    @Autowired
     private PaidVisitRepository paidVisitRepository;
-    @Autowired 
+    @Autowired
     private ScheduledVisitRepository scheduledVisitRepository;
 
     /**
@@ -94,7 +97,7 @@ public class DoctorController {
         doctor = service.setPermission(doctor);
         List<ScheduledVisit> newVisitsList = scheduledVisitRepository.showScheduledVisitsByDoctorId(id);
         List<PaidVisit> paidVisits = paidVisitRepository.getAllPaidVisitsByDoctorId(id);
-        
+
         model.addAttribute("doctor", doctor);
         model.addAttribute("newVisitsList", newVisitsList);
         model.addAttribute("paidVisits", paidVisits);
@@ -166,6 +169,11 @@ public class DoctorController {
         doctor = service.getDataFromRequest(request, doctor);
 
         repo.save(doctor);
+
+        //if the logged n user is a medical visitor, add a scheduleVisit
+        if (authService.isMedicalVisitor()) {
+            service.assignDoctorToUser(doctor);
+        }
 
         return "redirect:/doctors/";
     }

@@ -1,10 +1,12 @@
 package gr.athtech.mis.service;
 
 import gr.athtech.mis.model.City;
+import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.model.DoctorSpecialty;
 import gr.athtech.mis.model.GeolocationArea;
 import gr.athtech.mis.model.Institution;
+import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.repository.CityRepository;
 import gr.athtech.mis.repository.DoctorSpecialtyRepository;
 import gr.athtech.mis.repository.GeolocationAreaRepository;
@@ -14,8 +16,12 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import gr.athtech.mis.repository.InstitutionRepository;
+import gr.athtech.mis.repository.ScheduledVisitRepository;
+import gr.athtech.mis.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
+import javax.annotation.Resource;
 
 @Repository("doctorService")
 public class DoctorService {
@@ -32,6 +38,10 @@ public class DoctorService {
     private DoctorSpecialtyRepository doctorSpecialtyRepository;
     @Autowired
     private AuthService authService;
+    @Resource
+    private UserRepository userRepository;
+    @Resource
+    private ScheduledVisitRepository scheduledVisitRepository;
 
     /**
      * Create a doctor obj from request data
@@ -57,6 +67,25 @@ public class DoctorService {
         doctor.setSpecialty(doctorSpecialty);
 
         return doctor;
+    }
+
+    /**
+     * When a medical visitor creates a new user, create a new scheduled visit
+     * and assign both the doctor and the medical user to it.
+     *
+     * @param doctor
+     * @return
+     */
+    public Long assignDoctorToUser(Doctor doctor) {
+
+        ScheduledVisit scheduledVisit = new ScheduledVisit();
+        //scheduledVisit.setCycle(cycle);
+        scheduledVisit.setMedicalVisitors(new ArrayList<>(Arrays.asList(userRepository.findOne(authService.getId()))));
+        scheduledVisit.setDoctor(doctor);
+        scheduledVisit.setStatus("Pending");
+
+        scheduledVisitRepository.save(scheduledVisit);
+        return scheduledVisit.getId();
     }
 
     /**

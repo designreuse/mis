@@ -61,6 +61,39 @@ public class AuthService implements UserDetailsService {
     }
 
     /**
+     * Check if the logged in user is a medical visitor
+     *
+     * @return
+     */
+    public boolean isMedicalVisitor() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUser user = new SecurityUser(repo.findByUsername(auth.getName()));
+
+        boolean flag = false;
+
+        for (Role role : user.getRoles()) {
+            if (role.getName().equals("ROLE_MEDICAL_VISITOR")) {
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
+    }
+
+    /**
+     * Return the id of the logged in user
+     * 
+     * @return 
+     */
+    public Long getId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUser user = new SecurityUser(repo.findByUsername(auth.getName()));
+
+        return user.getId();
+    }
+
+    /**
      * Check if the logged in user may edit a given doctor
      *
      * @param id
