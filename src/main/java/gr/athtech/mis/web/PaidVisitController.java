@@ -214,8 +214,6 @@ public class PaidVisitController {
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {
         paidVisitRepository.delete(id);
-        logger.debug("------------------PAID VISIT DELETED");
-
         return "redirect:/paidVisits/allCycles";
     }
     
