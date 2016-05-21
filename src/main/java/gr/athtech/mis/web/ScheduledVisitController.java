@@ -189,7 +189,7 @@ public class ScheduledVisitController {
         logger.debug("----- New user: ", schvst);
 
         scheduledVisitRepository.save(schvst);
-        return "redirect:/scheduledVisits/";
+        return "redirect:/scheduledVisits/allCycles";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -197,7 +197,7 @@ public class ScheduledVisitController {
     public String delete(@PathVariable("id") Long id) {
 
         scheduledVisitRepository.delete(id);
-        return "redirect:/scheduledVisits/";
+        return "redirect:/scheduledVisits/allCycles";
     }
 
     /**

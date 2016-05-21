@@ -176,8 +176,8 @@ public class PaidVisitController {
     }
     
     
-    @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public String store(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
+    @RequestMapping(value = "/store/{id}", method = RequestMethod.POST)
+    public String store(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
 
         ScheduledVisit selectedSchv = scheduledVisitRepository.findById(Long.parseLong(request.getParameter("id")));
         selectedSchv.setStatus("Paid");
@@ -199,7 +199,7 @@ public class PaidVisitController {
         logger.debug("----- New user: ", pdvst);
 
         paidVisitRepository.save(pdvst);
-        return "scheduledVisits/view";
+        return "redirect:/paidVisits/{id}";
     }
     
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
@@ -216,7 +216,7 @@ public class PaidVisitController {
         paidVisitRepository.delete(id);
         logger.debug("------------------PAID VISIT DELETED");
 
-        return "redirect:/paidVisits/";
+        return "redirect:/paidVisits/allCycles";
     }
     
     
