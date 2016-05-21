@@ -67,17 +67,6 @@ public interface IPaidVisitRepository extends JpaRepository<PaidVisit, Long>{
     @Query("SELECT v FROM PaidVisit as v "
             + "JOIN v.scheduledVisit as s "
             + "JOIN s.groups as g "
-            + "WHERE s.cycle.startDate <= CURRENT_DATE "
-            + "AND s.cycle.endDate >= CURRENT_DATE AND g.id = ?1")
-    public List<PaidVisit> findByScheduledGroupIdAndCurrentCycleForMembers(Long id);
-    
-    /**
-     * @param id
-     * @return 
-     */
-    @Query("SELECT v FROM PaidVisit as v "
-            + "JOIN v.scheduledVisit as s "
-            + "JOIN s.groups as g "
             + "JOIN g.members as m "
             + "WHERE s.cycle.startDate <= CURRENT_DATE "
             + "AND s.cycle.endDate >= CURRENT_DATE "
@@ -113,5 +102,19 @@ public interface IPaidVisitRepository extends JpaRepository<PaidVisit, Long>{
             + "AND s.cycle.endDate >= CURRENT_DATE "
             + "AND s.doctor.id = ?1")
     public List<PaidVisit> findVisitsByDoctorId(Long id);
+    
+    //User is a member of a group
+    /**
+     * @param id
+     * @return 
+     */
+    @Query("SELECT v FROM PaidVisit as v "
+            + "JOIN v.scheduledVisit as s "
+            + "JOIN s.groups as g "
+            + "JOIN g.members as m "
+            + "WHERE s.cycle.startDate <= CURRENT_DATE "
+            + "AND s.cycle.endDate >= CURRENT_DATE "
+            + "AND m.id = ?1")
+    public List<PaidVisit> findByMemberId(Long id);
     
 }

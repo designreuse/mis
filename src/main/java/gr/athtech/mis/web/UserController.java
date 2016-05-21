@@ -192,13 +192,13 @@ public class UserController {
             model.addAttribute("userGroups", userGroups);
             
             //Visits
-            Long groupId = groupRepository.findGroupId(id);
+            Long memberId = groupRepository.findByUserIdUnique(id);
             //Scheduled Visits
-            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembers(groupId);
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembersId(memberId);
             model.addAttribute("newGroupVisits", newGroupVisits);
             
             //Paid visits
-            List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembers(groupId);
+            List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembersId(memberId);
             model.addAttribute("groupVisits", groupVisits);
             
         }else if(members.isEmpty()){  

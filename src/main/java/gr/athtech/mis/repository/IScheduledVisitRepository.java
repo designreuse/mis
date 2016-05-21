@@ -36,13 +36,6 @@ public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit,
             + "AND g.leader.id = ?1")
     List<ScheduledVisit> findByGroupId(Long id);
      
-     //User is a member of a group
-    @Query("SELECT s FROM ScheduledVisit as s "
-            + "JOIN s.groups g "
-            + "WHERE s.cycle.startDate <= CURRENT_DATE "
-            + "AND s.cycle.endDate >= CURRENT_DATE "
-            + "AND g.id = ?1")
-    public List<ScheduledVisit> findByGroupNumber(Long id);
     
     //User is a leader and also a member in different groups
     @Query("SELECT s FROM ScheduledVisit as s "
@@ -67,5 +60,14 @@ public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit,
             + "AND s.cycle.endDate >= CURRENT_DATE "
             + "AND s.doctor.id = ?1")
     public List<ScheduledVisit> findScheduledVisitsByDoctor(Long id);
-      
+    
+    //User is a member of a group
+    @Query("SELECT s FROM ScheduledVisit as s "
+            + "JOIN s.groups g "
+            + "JOIN g.members m "
+            + "WHERE s.cycle.startDate <= CURRENT_DATE "
+            + "AND s.cycle.endDate >= CURRENT_DATE "
+            + "AND m.id = ?1")
+    public List<ScheduledVisit> findByMemberID(Long id);
+
 }

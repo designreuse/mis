@@ -82,13 +82,7 @@ public class ScheduledVisitRepository {
         List<ScheduledVisit> allCurrentVisits = repo.findByCurrentCycle();
         return allCurrentVisits;
     }
-    
-    public List<ScheduledVisit> findRelatedMembers(Long id){
-        List<ScheduledVisit> memberVisits = repo.findByGroupNumber(id);
-        
-        return memberVisits;
-    }
-    
+  
     public List<ScheduledVisit> findByMemberAndLeader(Long id){
         List<ScheduledVisit> bothVisits = repo.findByGroupLeaderAndId(id);
         
@@ -108,5 +102,12 @@ public class ScheduledVisitRepository {
         List<ScheduledVisit> selectedDoctorList = repo.findScheduledVisitsByDoctor(id);
         
         return selectedDoctorList;
+    }
+    
+    //members view
+    public List<ScheduledVisit> findRelatedMembersId(Long id){
+        List<ScheduledVisit> memberVisits = repo.findByMemberID(id);
+        
+        return memberVisits;
     }
 }

@@ -125,8 +125,8 @@ public class PaidVisitController {
          
          if(leaders.isEmpty()){
              
-            Long groupId = groupRepository.findGroupId(id); 
-            List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembers(groupId);
+            Long memberId = groupRepository.findByUserIdUnique(id);
+            List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembersId(memberId);
             model.put("groupVisits", groupVisits);
          }
          else if(members.isEmpty()){

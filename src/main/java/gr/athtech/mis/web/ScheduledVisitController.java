@@ -222,8 +222,8 @@ public class ScheduledVisitController {
         
         if(leaders.isEmpty()){
             
-            Long groupId = groupRepository.findGroupId(id);
-            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembers(groupId);
+            Long memberId = groupRepository.findByUserIdUnique(id);
+            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembersId(memberId);
             model.put("newGroupVisits", newGroupVisits);
         }
         else if(members.isEmpty()){

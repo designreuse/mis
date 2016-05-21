@@ -57,12 +57,6 @@ public class GroupRepository {
         return userGroups;
     }
     
-    public Long findGroupId(Long id){
-        Long groupId = repo.findGroupId(id);
-        
-        return groupId;
-    }
-    
     public Group save(Group group){
         return repo.save(group);
     }
@@ -73,5 +67,11 @@ public class GroupRepository {
     
     public void delete(Long id){
         repo.delete(id);
+    }
+    
+    public Long findByUserIdUnique(Long id){
+        Long userGroups = repo.findByMemberUnique(id);
+        
+        return userGroups;
     }
 }

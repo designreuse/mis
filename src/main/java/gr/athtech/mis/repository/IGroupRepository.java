@@ -15,9 +15,9 @@ public interface IGroupRepository extends JpaRepository<Group, Long>{
     
     @Query("SELECT g FROM Group g "
             + "JOIN g.members m "
-            + "WHERE m.id = ?1")
+            + "WHERE m.id = ?1 ")
     List<Group> findByMember(Long id);
-    
+         
     @Query("SELECT g FROM Group g "
             + "WHERE g.leader.id = ?1")
     List<Group> findByLeaderSQL(Long id);
@@ -27,8 +27,9 @@ public interface IGroupRepository extends JpaRepository<Group, Long>{
             + "WHERE g.leader.id = ?1 OR m.id = ?1")
     List<Group> findAllGroups(Long id);
     
-    @Query("SELECT g.id FROM Group g "
+    @Query("SELECT m.id FROM Group g "
             + "JOIN g.members m "
-            + "WHERE m.id = ?1")
-    Long findGroupId(Long id);
+            + "WHERE m.id = ?1 "
+            + "GROUP BY m.id")
+    Long findByMemberUnique(Long id);
 }

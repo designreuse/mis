@@ -58,13 +58,6 @@ public class PaidVisitRepository {
         return allUsersVisits;
     }
      
-     public List<PaidVisit> findRelatedMembers(Long id)
-    {
-        List<PaidVisit> allMemberVisits = repo.findByScheduledGroupIdAndCurrentCycleForMembers(id);
-        
-        return allMemberVisits;
-    } 
-     
       public List<PaidVisit> findEitherMemberOrLeader(Long id)
     {
         List<PaidVisit> allKindsOfVisits = repo.findByBothLeaderAndMember(id);
@@ -107,5 +100,12 @@ public class PaidVisitRepository {
         
         return doctorsPaidVisits;
     }
+        
+    public List<PaidVisit> findRelatedMembersId(Long id)
+    {
+        List<PaidVisit> allMemberVisits = repo.findByMemberId(id);
+        
+        return allMemberVisits;
+    } 
     
 }
