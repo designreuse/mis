@@ -199,7 +199,7 @@ public class PaidVisitController {
         logger.debug("----- New user: ", pdvst);
 
         paidVisitRepository.save(pdvst);
-        return "redirect:/scheduledVisits/";
+        return "scheduledVisits/view";
     }
     
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)

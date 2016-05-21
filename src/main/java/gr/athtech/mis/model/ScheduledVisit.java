@@ -37,7 +37,7 @@ public class ScheduledVisit implements Serializable {
     @Column(nullable = false)
     private String status;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "individual_visits", joinColumns = @JoinColumn(name = "scheduled_visit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "medicalVisitor_id", referencedColumnName = "id"))
     private List<User> medicalVisitors;
 
