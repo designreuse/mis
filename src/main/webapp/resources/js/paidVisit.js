@@ -8,7 +8,7 @@ $(".deletePaidVisit").click(function (e) {
             url: $("body").attr('data-url') + 'paidVisits/delete/' + $(this).attr('data-id'),
             type: 'DELETE'
         }).done(function (data) {
-            window.location.href = $("body").attr('data-url') + "paidVisits/";
+            window.location.href = $("body").attr('data-url') + "paidVisits/allCycles";
         });
     }
 });

@@ -8,7 +8,7 @@ $(".deleteVisit").click(function (e) {
             url: $("body").attr('data-url') + 'scheduledVisits/delete/' + $(this).attr('data-id'),
             type: 'DELETE'
         }).done(function (data) {
-            window.location.href = $("body").attr('data-url') + "scheduledVisits/";
+            window.location.href = $("body").attr('data-url') + "scheduledVisits/allCycles";
         });
     }
 });
