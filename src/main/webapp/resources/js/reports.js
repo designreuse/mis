@@ -8,17 +8,20 @@ $("#medicalVisitorInd").change(function () {
     individualStatistics();
 });
 
+$("#medicalVisitorIndGroup").change(function () {
+    individualAndGroupStatistics();
+});
 
 function byGeolocation() {
     $.ajax({
-        url: $("body").attr('data-url') + "/reports/byGeolocation",
+        url: $("body").attr('data-url') + "reports/byGeolocation",
         method: 'GET',
         data: {
             medicalVisitorId: $("#medicalVisitorGeo option:selected").val()
         },
         success: function (result) {
             var data = [];
-            console.log(result);
+
             if ($.isEmptyObject(result)) {
                 $(".byGeolocation .noData").show();
                 $("#byGeolocation").hide();
@@ -43,7 +46,7 @@ function byGeolocation() {
 
 function individualStatistics() {
     $.ajax({
-        url: $("body").attr('data-url') + "/reports/individualStatistics",
+        url: $("body").attr('data-url') + "reports/individualStatistics",
         method: 'GET',
         data: {
             medicalVisitorId: $("#medicalVisitorInd option:selected").val()
@@ -70,7 +73,7 @@ function individualStatistics() {
                     } else {
                         html += '<td class="col-md-4">';
                         $.each(visit.paidVisits, function (k, paidVisit) {
-                            html += '<p><span class="label label-info">Paid visit</span> <i class="fa fa-calendar"></i> ' + paidVisit.date + ', Week ' + paidVisit.week + ',' + paidVisit.hour + '<br/><small>Comments: ' + paidVisit.comments + '</small></p>';
+                            html += '<p><span class="label label-success">Paid visit</span> <i class="fa fa-calendar"></i> ' + paidVisit.date + ', Week ' + paidVisit.week + ',' + paidVisit.hour + '<br/><small>Comments: ' + paidVisit.comments + '</small></p>';
                         });
                     }
 
@@ -87,6 +90,38 @@ function individualStatistics() {
                 $("#individualStatistics").show();
 
             }
+        }
+    });
+
+}
+
+
+function individualAndGroupStatistics() {
+    $.ajax({
+        url: $("body").attr('data-url') + "reports/individualAndGroupStatistics",
+        method: 'GET',
+        data: {
+            medicalVisitorId: $("#medicalVisitorIndGroup option:selected").val()
+        },
+        success: function (result) {
+            var html = '';
+            html += '<p>' + result.doctors + ' doctors</p>';
+            html += '<p><span class="label label-info">' + result.scheduledVisits + ' scheduled visits</span></p>';
+            html += '<p><span class="label label-success">' + result.paidVisits + ' paid visits</span></p>';
+            html += '<p><span class="label label-danger">' + result.extraVisits + ' extra visits</span></p>';
+
+            $("#individualMedStatistics").html(html);
+
+            if (result.isLeader === 1) {
+                html = '<p>' + result.groupDoctors + ' doctors</p>';
+                html += '<p><span class="label label-info">' + result.groupScheduledVisits + ' scheduled visits</span></p>';
+                html += '<p><span class="label label-success">' + result.groupPaidVisits + ' paid visits</span></p>';
+                html += '<p><span class="label label-danger">' + result.groupExtraVisits + ' extra visits</span></p>';
+
+                $("#groupStatistics").html(html);
+            } else
+                $("#groupStatistics").html("<p>The selected medical visitor is not leader at any group</p>");
+
         }
     });
 
@@ -141,3 +176,4 @@ Colors.random = function () {
 
 byGeolocation();
 individualStatistics();
+individualAndGroupStatistics();

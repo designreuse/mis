@@ -13,7 +13,7 @@
     <section class="content">
 
         <div class="row">
-            <div class="col-md-4 byGeolocation ">
+            <div class="col-md-6 byGeolocation ">
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Geographical Area by Medical Visitor</h3>
@@ -32,6 +32,39 @@
                             <div class="col-md-12">
                                 <p class="noData" style="display:none;">There are not scheduled visits for the selected medical visitor</p>
                                 <canvas id="byGeolocation"></canvas>               
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+
+            <div class="col-md-6 individualAndGroupStatistics ">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Individual and Group Statistics</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6 pull-right" style="margin-bottom:10px;">
+                                <select name="medicalVisitorIndGroup" id="medicalVisitorIndGroup" class="form-control">
+                                    <c:forEach var="medicalVisitor" items="${medicalVisitors}" varStatus="loop">
+                                        <option value="${medicalVisitor.id}" ${loop.index==0 ? 'selected' :''}>${medicalVisitor.firstName} ${medicalVisitor.lastName}</option>
+                                    </c:forEach>
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">                           
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Individual statistics</h5>
+                                        <div id="individualMedStatistics"></div>                     
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Group statistics</h5>
+                                        <div id="groupStatistics"></div>                     
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div><!-- /.box-body -->
