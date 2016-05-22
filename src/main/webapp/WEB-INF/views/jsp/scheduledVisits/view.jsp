@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="now" value="<%=new java.util.Date()%>" />
 
 <content tag="title">View scheduled visits</content>
 
@@ -52,12 +54,18 @@
                                                         <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
                                                         <td><c:out value="${visit.status}"/></td>                                        
                                                         <td>  
-                                                            <a href="<c:url value="/paidVisits/create/${visit.id}"/>" class="btn btn-info">
-                                                                <i class="fa fa-check-square-o"></i>
-                                                            </a>
-                                                            <sec:authorize access="hasRole('ROLE_ADMIN')">    
-                                                            <button type="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>
-                                                            </sec:authorize>
+                                                            <c:if test="${visit.status=='Pending'}">
+
+                                                                <a href="<c:url value="/paidVisits/create/${visit.id}"/>" class="btn btn-info">
+                                                                    <i class="fa fa-check-square-o"></i>
+                                                                </a>
+                                                                <sec:authorize access="hasRole('ROLE_MEDICAL_VISITOR')">   
+                                                                    <button type="button" class="btn btn-warning showExtraVisit" data-id="${visit.id}" data-extra-visits="${ visit.extraVisits.size() }"><i class="fa fa-exclamation"></i></button> 
+                                                                    </sec:authorize>
+                                                                    <sec:authorize access="hasRole('ROLE_ADMIN')">    
+                                                                    <button type="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>
+                                                                    </sec:authorize>
+                                                                </c:if>
                                                         </td>      
                                                     </tr>
                                                 </c:forEach>
@@ -93,12 +101,17 @@
                                                         <td><c:out value="${gvisit.doctor.firstName}"/> <c:out value="${gvisit.doctor.lastName}"/></td>                          
                                                         <td><c:out value="${gvisit.status}"/></td>                                        
                                                         <td>  
-                                                            <a href="<c:url value="/paidVisits/createGroup/${gvisit.id}"/>" class="btn btn-info">
-                                                                <i class="fa fa-check-square-o"></i>
-                                                            </a> 
-                                                            <sec:authorize access="hasRole('ROLE_ADMIN')">      
-                                                            <button type="button" class="btn btn-danger deleteVisit" data-id="${gvisit.id}"><i class="fa fa-trash"></i></button> 
-                                                            </sec:authorize>
+                                                            <c:if test="${gvisit.status=='Pending'}">   
+                                                                <a href="<c:url value="/paidVisits/createGroup/${gvisit.id}"/>" class="btn btn-info">
+                                                                    <i class="fa fa-check-square-o"></i>
+                                                                </a> 
+                                                                <sec:authorize access="hasRole('ROLE_MEDICAL_VISITOR')">   
+                                                                    <button type="button" class="btn btn-warning showExtraVisit" data-id="${gvisit.id}" data-extra-visits="${ gvisit.extraVisits.size() }"><i class="fa fa-exclamation"></i></button>
+                                                                    </sec:authorize>
+                                                                    <sec:authorize access="hasRole('ROLE_ADMIN')">      
+                                                                    <button type="button" class="btn btn-danger deleteVisit" data-id="${gvisit.id}"><i class="fa fa-trash"></i></button> 
+                                                                    </sec:authorize>
+                                                                </c:if>
                                                         </td>      
                                                     </tr>
                                                 </c:forEach>
@@ -116,9 +129,18 @@
             </div>
         </div>
     </section>
+    <%@include file="extraVisit.jsp" %>
+
 </content>
 
 <content tag="footerScripts">
     <script src="<c:url value='/resources/js/scheduledVisit.js'/>" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('.date').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            startDate: "<fmt:formatDate pattern="yyyy - MM - dd" value="${now}"/>"
+        });
+    </script>
 </content>
 

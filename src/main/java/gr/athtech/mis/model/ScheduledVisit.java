@@ -7,7 +7,6 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,13 +48,15 @@ public class ScheduledVisit implements Serializable {
     @JoinColumn(name = "cycle_id", nullable = false)
     private Cycle cycle;
 
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "scheduledVisit")
     private List<PaidVisit> paidVisits;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "groups_visits", joinColumns = @JoinColumn(name = "visit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
     private List<Group> groups;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scheduledVisit")
+    private List<ExtraVisit> extraVisits;
 
     public ScheduledVisit() {
     }
@@ -124,6 +125,14 @@ public class ScheduledVisit implements Serializable {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+
+    public List<ExtraVisit> getExtraVisits() {
+        return extraVisits;
+    }
+
+    public void setExtraVisits(List<ExtraVisit> extraVisits) {
+        this.extraVisits = extraVisits;
     }
 
 }

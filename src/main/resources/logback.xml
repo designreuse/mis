@@ -15,13 +15,14 @@
         <appender-ref ref="STDOUT" />
     </logger>
         
-    <logger name="org.hibernate.type" level="ALL" additivity="false">
-        <appender-ref ref="STDOUT" />
-    </logger>
-    <logger name="org.hibernate" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT" />
-    </logger>
-
+    <!--
+        <logger name="org.hibernate.type" level="ALL" additivity="false">
+            <appender-ref ref="STDOUT" />
+        </logger>
+        <logger name="org.hibernate" level="DEBUG" additivity="false">
+            <appender-ref ref="STDOUT" />
+        </logger>
+    -->
 	
     <logger name="gr.athtech.mis" level="debug" additivity="false">
         <appender-ref ref="STDOUT" />

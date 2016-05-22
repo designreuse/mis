@@ -13,29 +13,39 @@ $(".deleteVisit").click(function (e) {
     }
 });
 
-/**
-//when a cycle is selected, fetch the available doctors of this period
-$('#cycleId').on('change', function () {
-console.log($(this).val())
-        $.ajax({
-            url: $("body").attr('data-url') + 'scheduledVisits/byCycle/' + $(this).val(),
-            type: 'GET',
-            success: function (data) {
-                var td = "";
-                for(var i = 0; i < data.length; i++){
-                   td += "<tr>\n\
-<td>"+ data[i].id+"</td>\n\
-<td>"+ data[i].medicalVisitor+"</td>\n\
-<td>"+ data[i].cycle+"</td>\n\
-<td>"+ data[i].doctor+"</td>\n\
-<td>"+ data[i].status+"</td>\n\
-<td>\n\
-<a href='<c:url value='/paidVisits/create/'"+data[i].id+"''/>' class='btn btn-info'>\n\
-<i class='fa fa-check-square-o'></i>\n\
-</a><button type='button' class='btn btn-danger deleteVisit' data-id='"+data[i].id+"'><i class='fa fa-trash'></i></button></td></tr>";                  
-                }
-                $('#popTable').html(td);
-            }
-        });
+//before displaying the extra visit, fill the schedule id        
+$('.showExtraVisit').click(function () {
+    $('#extraVisit input[name=scheduledVisitId]').val($(this).attr('data-id'));
+    $('#extraVisit .extraVisitsNum').text($(this).attr('data-extra-visits'));
+    $('#extraVisit').modal('show');
 });
-*/
+
+
+
+
+/**
+ //when a cycle is selected, fetch the available doctors of this period
+ $('#cycleId').on('change', function () {
+ console.log($(this).val())
+ $.ajax({
+ url: $("body").attr('data-url') + 'scheduledVisits/byCycle/' + $(this).val(),
+ type: 'GET',
+ success: function (data) {
+ var td = "";
+ for(var i = 0; i < data.length; i++){
+ td += "<tr>\n\
+ <td>"+ data[i].id+"</td>\n\
+ <td>"+ data[i].medicalVisitor+"</td>\n\
+ <td>"+ data[i].cycle+"</td>\n\
+ <td>"+ data[i].doctor+"</td>\n\
+ <td>"+ data[i].status+"</td>\n\
+ <td>\n\
+ <a href='<c:url value='/paidVisits/create/'"+data[i].id+"''/>' class='btn btn-info'>\n\
+ <i class='fa fa-check-square-o'></i>\n\
+ </a><button type='button' class='btn btn-danger deleteVisit' data-id='"+data[i].id+"'><i class='fa fa-trash'></i></button></td></tr>";                  
+ }
+ $('#popTable').html(td);
+ }
+ });
+ });
+ */

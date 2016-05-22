@@ -6,7 +6,6 @@
 package gr.athtech.mis.repository;
 
 import gr.athtech.mis.model.Cycle;
-import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
