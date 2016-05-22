@@ -63,11 +63,12 @@ function individualStatistics() {
                     html += '<td>' + visit.doctor.address + ', ' + visit.doctor.cityName + ', ' + visit.doctor.geolocationAreaName + '</td>';
                     html += '<td>' + visit.doctor.position + ' at ' + visit.doctor.institutionName + '</td>';
                     html += '<td>' + visit.doctor.specialtyName + '</td>';
+                    html += '<td>' + visit.cycle.startDate + '-' + visit.cycle.endDate + '</td>';
 
                     if (visit.status == 'Pending') {
                         html += '<td><p><span class="label label-warning">Pending visit</span><p>';
                     } else {
-                        html+='<td class="col-md-4">';
+                        html += '<td class="col-md-4">';
                         $.each(visit.paidVisits, function (k, paidVisit) {
                             html += '<p><span class="label label-info">Paid visit</span> <i class="fa fa-calendar"></i> ' + paidVisit.date + ', Week ' + paidVisit.week + ',' + paidVisit.hour + '<br/><small>Comments: ' + paidVisit.comments + '</small></p>';
                         });
@@ -78,8 +79,7 @@ function individualStatistics() {
                             html += '<p><span class="label label-danger">Extra visit</span> <i class="fa fa-calendar"></i> ' + extraVisit.date + ', ' + extraVisit.time + '<br/><small>Comments: ' + extraVisit.comments + '</small></p>';
                         });
                     }
-                        html += '</td>';
-                    
+                    html += '</td>';
 
                     html += '</tr>';
                 });

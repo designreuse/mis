@@ -28,7 +28,7 @@
             <![endif]-->
 
     </head>
-    <body class="sidebar-mini skin-blue" data-url="<c:url value='/${user.id}'/>">
+            <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
         <div class="wrapper">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar">
