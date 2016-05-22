@@ -54,8 +54,6 @@
                                                         <td><c:out value="${visit.doctor.firstName}"/> <c:out value="${visit.doctor.lastName}"/></td>                          
                                                         <td><c:out value="${visit.status}"/></td>                                        
                                                         <td>  
-                                                            <c:if test="${visit.status=='Pending'}">
-
                                                                 <a href="<c:url value="/paidVisits/create/${visit.id}"/>" class="btn btn-info">
                                                                     <i class="fa fa-check-square-o"></i>
                                                                 </a>
@@ -65,7 +63,6 @@
                                                                     <sec:authorize access="hasRole('ROLE_ADMIN')">    
                                                                     <button type="button" class="btn btn-danger deleteVisit" data-id="${visit.id}"><i class="fa fa-trash"></i></button>
                                                                     </sec:authorize>
-                                                                </c:if>
                                                         </td>      
                                                     </tr>
                                                 </c:forEach>
@@ -101,7 +98,6 @@
                                                         <td><c:out value="${gvisit.doctor.firstName}"/> <c:out value="${gvisit.doctor.lastName}"/></td>                          
                                                         <td><c:out value="${gvisit.status}"/></td>                                        
                                                         <td>  
-                                                            <c:if test="${gvisit.status=='Pending'}">   
                                                                 <a href="<c:url value="/paidVisits/createGroup/${gvisit.id}"/>" class="btn btn-info">
                                                                     <i class="fa fa-check-square-o"></i>
                                                                 </a> 
@@ -111,7 +107,6 @@
                                                                     <sec:authorize access="hasRole('ROLE_ADMIN')">      
                                                                     <button type="button" class="btn btn-danger deleteVisit" data-id="${gvisit.id}"><i class="fa fa-trash"></i></button> 
                                                                     </sec:authorize>
-                                                                </c:if>
                                                         </td>      
                                                     </tr>
                                                 </c:forEach>
