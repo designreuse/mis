@@ -65,7 +65,7 @@
                 <div class="col-md-8">
                    <div class="box box-info">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Scheduled Visits Calendar</h3>
+                                <h3 class="box-title">Paid Visits Calendar</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body no-padding">
                                 <div id="calendar">
