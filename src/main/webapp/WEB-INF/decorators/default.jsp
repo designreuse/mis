@@ -106,11 +106,13 @@
                                 </ul>
                             </li>
                         </sec:authorize>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li class="treeview">
                             <a href="<c:url value='/reports/'/>">
                                 <i class="fa fa-bar-chart"></i> <span>Reports</span> 
                             </a>
                         </li>
+                       </sec:authorize>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
