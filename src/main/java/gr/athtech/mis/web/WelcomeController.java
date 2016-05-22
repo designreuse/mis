@@ -1,6 +1,7 @@
 package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.Group;
+import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.DoctorRepository;
@@ -51,10 +52,11 @@ public class WelcomeController {
         
         Long id = authService.getId();
         
-         User user = userRepository.findOne(id);
+        User user = userRepository.findOne(id);
         
         //for individual visits
         List<ScheduledVisit> newVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
+        List<PaidVisit> paidVisitsList = paidVisitRepository.getAllUserVisitsByCurrentCycle(id);
         
         //For group visits
         List<Group> leaders = groupRepository.findByLeader(user);
@@ -65,19 +67,26 @@ public class WelcomeController {
             Long memberId = groupRepository.findByUserIdUnique(id);
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembersId(memberId);
             model.addAttribute("newGroupVisits", newGroupVisits);
+            List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembersId(memberId);
+            model.addAttribute("groupVisits", groupVisits);
         }
         else if(members.isEmpty()){
             
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
             model.addAttribute("newGroupVisits", newGroupVisits);
+            List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
+            model.addAttribute("groupVisits", groupVisits);
         }
         else{    
             
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findByMemberAndLeader(id);
             model.addAttribute("newGroupVisits", newGroupVisits);
+            List<PaidVisit> groupVisits = paidVisitRepository.findEitherMemberOrLeader(id);
+            model.addAttribute("groupVisits", groupVisits); 
         }
         
         model.addAttribute("newVisits", newVisits);
+        model.addAttribute("paidVisitsList", paidVisitsList);
         
         return "index";
     }
