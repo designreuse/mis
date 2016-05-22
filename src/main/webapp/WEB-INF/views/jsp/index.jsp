@@ -59,7 +59,25 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </sec:authorize>
-            
+
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="row">
+                <div class="col-md-8">
+                   <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Scheduled Visits Calendar</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body no-padding">
+                                <div id="calendar">
+                                    </div>
+                                </div><!-- /.row -->
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                </div><!-- /.col -->
+            </div>
+        </sec:authorize>
+
+
         <sec:authorize access="hasRole('ROLE_MEDICAL_VISITOR')">
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-12">
@@ -110,7 +128,7 @@
                 <!-- Left col -->
                 <div class="col-md-12">
                     <!-- MAP & BOX PANE -->
-                    <div class="box box-success">
+                    <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Individual Scheduled Visits</h3>
                         </div><!-- /.box-header -->
@@ -156,7 +174,7 @@
                 <!-- Left col -->
                 <div class="col-md-12">
                     <!-- MAP & BOX PANE -->
-                    <div class="box box-success">
+                    <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Group Scheduled Visits</h3>
                         </div><!-- /.box-header -->
@@ -202,7 +220,7 @@
                 <!-- Left col -->
                 <div class="col-md-12">
                     <!-- MAP & BOX PANE -->
-                    <div class="box box-success">
+                    <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Individual Paid Visits</h3>
                         </div><!-- /.box-header -->
@@ -255,7 +273,7 @@
                 <!-- Left col -->
                 <div class="col-md-12">
                     <!-- MAP & BOX PANE -->
-                    <div class="box box-success">
+                    <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Group Paid Visits</h3>
                         </div><!-- /.box-header -->

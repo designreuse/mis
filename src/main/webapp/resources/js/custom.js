@@ -12,4 +12,37 @@ $(document).ready(function () {
             $(this).parent().parent().parent().addClass('active');
         }
     });
+    calendar();
 });
+
+//init the calendar
+function calendar() {
+    $.ajax({
+        url: $("body").attr('data-url') + "calendar",
+        method: 'GET',
+        success: function (result) {
+            var data = [];
+
+            var data = [];
+            $.each(result, function (key, value) {
+                data.push({
+                    title: key,
+                    start: value
+                });
+            });
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: data
+            });
+
+        }
+    });
+}
+

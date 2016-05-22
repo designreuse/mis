@@ -17,6 +17,8 @@
             <link href="<c:url value='/resources/theme/dist/css/skins/_all-skins.min.css'/>" rel="stylesheet" type="text/css" />
             <link href="<c:url value='/resources/theme/plugins/datepicker/datepicker3.css'/>" rel="stylesheet" type="text/css" />
             <link href="<c:url value='/resources/theme/plugins/dropzone/dropzone.css'/>" rel="stylesheet" type="text/css" />
+            <link href="<c:url value='/resources/theme/plugins/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet" type="text/css" />
+            <link href="<c:url value='/resources/theme/plugins/fullcalendar/fullcalendar.print.css'/>" rel="stylesheet" type="text/css" />
             <link href="<c:url value='/resources/theme/plugins/select2/select2.min.css'/>" rel="stylesheet" type="text/css" />
             <link href="<c:url value='/resources/css/custom.css'/>" rel="stylesheet" type="text/css" />
 
@@ -129,6 +131,8 @@
         <script src="<c:url value='/resources/theme/plugins/chartjs/Chart.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/theme/plugins/datepicker/bootstrap-datepicker.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/theme/plugins/dropzone/dropzone.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/theme/plugins/fullcalendar/moment.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/theme/plugins/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/theme/plugins/select2/select2.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
 

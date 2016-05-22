@@ -16,10 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WelcomeController {
@@ -40,55 +42,72 @@ public class WelcomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(HttpServletRequest request, Principal principal, Model model) {
 
+        List<ScheduledVisit> scheduledVisitsList = scheduledVisitRepository.findAll();
+
         int doctors = doctorRepository.findAll().size();
         int medicalVisitors = userRepository.getMedicalVisitors().size();
-        int scheduledVisits = scheduledVisitRepository.findAll().size();
+        int scheduledVisits = scheduledVisitsList.size();
         int paidVisits = paidVisitRepository.findAll().size();
 
         model.addAttribute("doctors", doctors);
         model.addAttribute("medicalVisitors", medicalVisitors);
         model.addAttribute("scheduledVisits", scheduledVisits);
         model.addAttribute("paidVisits", paidVisits);
-        
+
         Long id = authService.getId();
-        
+
         User user = userRepository.findOne(id);
-        
+
         //for individual visits
         List<ScheduledVisit> newVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
         List<PaidVisit> paidVisitsList = paidVisitRepository.getAllUserVisitsByCurrentCycle(id);
-        
+
         //For group visits
         List<Group> leaders = groupRepository.findByLeader(user);
         List<Group> members = groupRepository.findByUserId(id);
-        
-        if(leaders.isEmpty()){
-            
+
+        if (leaders.isEmpty()) {
+
             Long memberId = groupRepository.findByUserIdUnique(id);
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembersId(memberId);
             model.addAttribute("newGroupVisits", newGroupVisits);
             List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembersId(memberId);
             model.addAttribute("groupVisits", groupVisits);
-        }
-        else if(members.isEmpty()){
-            
+        } else if (members.isEmpty()) {
+
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
             model.addAttribute("newGroupVisits", newGroupVisits);
             List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
             model.addAttribute("groupVisits", groupVisits);
-        }
-        else{    
-            
+        } else {
+
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findByMemberAndLeader(id);
             model.addAttribute("newGroupVisits", newGroupVisits);
             List<PaidVisit> groupVisits = paidVisitRepository.findEitherMemberOrLeader(id);
-            model.addAttribute("groupVisits", groupVisits); 
+            model.addAttribute("groupVisits", groupVisits);
         }
-        
+
         model.addAttribute("newVisits", newVisits);
         model.addAttribute("paidVisitsList", paidVisitsList);
-        
+
         return "index";
     }
-    
+
+    @RequestMapping(value = "/calendar", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, String> calendar(HttpServletRequest request, Principal principal, Model model) {
+
+        List<ScheduledVisit> scheduledVisitsList = scheduledVisitRepository.findAll();
+        //calendari
+        Map<String, String> calendar = new HashMap<>();
+
+        for (ScheduledVisit sch : scheduledVisitsList) {
+            for (PaidVisit paid : sch.getPaidVisits()) {
+                calendar.put(sch.getDoctor().getFirstName() + " " + sch.getDoctor().getLastName(), paid.getDate().toString());
+            }
+        }
+
+        return calendar;
+    }
+
 }
