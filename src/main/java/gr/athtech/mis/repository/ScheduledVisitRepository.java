@@ -20,36 +20,35 @@ import org.springframework.stereotype.Service;
  */
 @Service("scheduledVisitRepository")
 public class ScheduledVisitRepository {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(ScheduledVisit.class);
-    
+
     @Resource
     IScheduledVisitRepository repo;
     @Resource
     UserRepository userRepo;
     @Resource
     ICycleRepository cycleRepo;
-    
+
     public List<ScheduledVisit> findAll() {
         List<ScheduledVisit> newVisits = repo.findAll();
 
         logger.info("---------New Visits", newVisits);
         return newVisits;
     }
-    
-    public ScheduledVisit save(ScheduledVisit schvst){
+
+    public ScheduledVisit save(ScheduledVisit schvst) {
         schvst = repo.save(schvst);
         return schvst;
-     }
-    
-     public ScheduledVisit findById(Long id) {
+    }
+
+    public ScheduledVisit findById(Long id) {
 
         ScheduledVisit schv = repo.findOne(id);
 
         return schv;
     }
-    
-    
+
     /**
      * Delete a scheduled visit based on Id
      *
@@ -58,56 +57,56 @@ public class ScheduledVisitRepository {
     public void delete(Long id) {
         repo.delete(id);
     }
-    
-    /**
-    public List<ScheduledVisit> getAllByVisitorId(Long id){
-        User selectedUser = userRepo.findOne(id);
-        List<ScheduledVisit> allVisits = repo.findByMedicalVisitor(selectedUser);
-        
+
+    public List<ScheduledVisit> findByMedicalVisitors(User user) {
+        return repo.findByMedicalVisitors(user);
+    }
+
+    public List<ScheduledVisit> findByMedicalVisitorId(Long id) {
+        List<ScheduledVisit> allVisits = repo.findByMedicalVisitorId(id);
+
         return allVisits;
     }
-    */
-    
-    public List<ScheduledVisit> getUsersFromCurrentCycle(Long id){
+
+    public List<ScheduledVisit> getUsersFromCurrentCycle(Long id) {
         List<ScheduledVisit> activeVisits = repo.findByMedicalVisitorId(id);
         return activeVisits;
     }
-    
-    public List<ScheduledVisit> getGroupsFromCurrentCycle(Long id){
+
+    public List<ScheduledVisit> getGroupsFromCurrentCycle(Long id) {
         List<ScheduledVisit> activeGroupVisits = repo.findByGroupId(id);
         return activeGroupVisits;
     }
-    
-    public List<ScheduledVisit> showByCurrentCycle(){
+
+    public List<ScheduledVisit> showByCurrentCycle() {
         List<ScheduledVisit> allCurrentVisits = repo.findByCurrentCycle();
         return allCurrentVisits;
     }
-  
-    public List<ScheduledVisit> findByMemberAndLeader(Long id){
+
+    public List<ScheduledVisit> findByMemberAndLeader(Long id) {
         List<ScheduledVisit> bothVisits = repo.findByGroupLeaderAndId(id);
-        
+
         return bothVisits;
     }
-    
 
-    public List<ScheduledVisit> showVisitsByCycleId(Long id){
+    public List<ScheduledVisit> showVisitsByCycleId(Long id) {
         Cycle cycle = cycleRepo.findOne(id);
         List<ScheduledVisit> selectedList = repo.findScheduledVisitByCycle(cycle);
-        
+
         return selectedList;
     }
-    
+
     //For doctor's view
-    public List<ScheduledVisit> showScheduledVisitsByDoctorId(Long id){
+    public List<ScheduledVisit> showScheduledVisitsByDoctorId(Long id) {
         List<ScheduledVisit> selectedDoctorList = repo.findScheduledVisitsByDoctor(id);
-        
+
         return selectedDoctorList;
     }
-    
+
     //members view
-    public List<ScheduledVisit> findRelatedMembersId(Long id){
+    public List<ScheduledVisit> findRelatedMembersId(Long id) {
         List<ScheduledVisit> memberVisits = repo.findByMemberID(id);
-        
+
         return memberVisits;
     }
 }

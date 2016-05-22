@@ -1,5 +1,6 @@
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -12,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +27,7 @@ public class User implements Serializable {
     private String username;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "first_name", nullable = false)
@@ -51,6 +52,7 @@ public class User implements Serializable {
     private List<Group> groups;
 
     @ManyToMany(mappedBy = "medicalVisitors")
+    @JsonIgnore
     private List<ScheduledVisit> scheduledVisits;
 
     public User() {

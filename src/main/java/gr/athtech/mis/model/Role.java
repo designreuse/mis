@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +34,7 @@ public class Role implements GrantedAuthority {
 
     //Used in order to create jointed tables for many to many relationships
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<User> users;
 
     @Transient

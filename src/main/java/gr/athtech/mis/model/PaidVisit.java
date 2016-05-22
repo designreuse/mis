@@ -5,9 +5,9 @@
  */
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.sql.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,6 +47,7 @@ public class PaidVisit implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "scheduled_visit_id", nullable = false)
+    @JsonIgnore
     private ScheduledVisit scheduledVisit;
 
     public PaidVisit() {

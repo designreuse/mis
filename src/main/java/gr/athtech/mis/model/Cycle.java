@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -35,6 +36,7 @@ public class Cycle implements Serializable {
     private Date endDate;
 
     @OneToMany(mappedBy = "cycle")
+    @JsonIgnore
     private List<ScheduledVisit> scheduledVisits;
 
     public Cycle() {

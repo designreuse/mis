@@ -1,7 +1,10 @@
 package gr.athtech.mis.web;
 
+import gr.athtech.mis.model.Doctor;
+import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.DoctorRepository;
+import gr.athtech.mis.repository.ScheduledVisitRepository;
 import gr.athtech.mis.repository.UserRepository;
 import gr.athtech.mis.service.UserService;
 
@@ -26,6 +29,8 @@ public class ReportController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ScheduledVisitRepository scheduledVisitRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(HttpServletRequest request, Principal principal, Model model) {
@@ -46,4 +51,23 @@ public class ReportController {
         return byGeolocation;
     }
 
+    @RequestMapping(value = "/individualStatistics", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ScheduledVisit> individualStatistics(HttpServletRequest request) {
+
+        User user = userRepository.findOne(Long.parseLong(request.getParameter("medicalVisitorId")));
+        
+        //for individual visits
+        List<ScheduledVisit> scheduledVisits = scheduledVisitRepository.getUsersFromCurrentCycle(Long.parseLong(request.getParameter("medicalVisitorId")));
+        
+        for (ScheduledVisit sch : scheduledVisits) {
+            sch.getDoctor().setInstitutionName(sch.getDoctor().getInstitution().getName());
+            sch.getDoctor().setCityName(sch.getDoctor().getCity().getName());
+            sch.getDoctor().setGeolocationAreaName(sch.getDoctor().getGeolocationArea().getName());
+            sch.getDoctor().setSpecialtyName(sch.getDoctor().getSpecialty().getName());
+        
+        }
+          
+        return scheduledVisits;
+    }
 }
