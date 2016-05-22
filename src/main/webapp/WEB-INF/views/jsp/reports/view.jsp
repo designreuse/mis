@@ -64,8 +64,8 @@
                                     <th>Doctor name</th>
                                     <th>Address</th>
                                     <th>Institution</th>
-                                    <th>Cycle</th>
                                     <th>Specialty</th>
+                                    <th>Cycle</th>
                                     <th>Visits info</th>
                                     </thead>
                                     <tbody></tbody>
