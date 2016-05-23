@@ -5,6 +5,7 @@
  */
 package gr.athtech.mis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -38,6 +39,7 @@ public class ScheduledVisit implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "individual_visits", joinColumns = @JoinColumn(name = "scheduled_visit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "medicalVisitor_id", referencedColumnName = "id"))
+    @JsonIgnore
     private List<User> medicalVisitors;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -53,6 +55,7 @@ public class ScheduledVisit implements Serializable {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "groups_visits", joinColumns = @JoinColumn(name = "visit_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+    @JsonIgnore
     private List<Group> groups;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "scheduledVisit")

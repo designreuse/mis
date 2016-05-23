@@ -49,6 +49,7 @@ public class User implements Serializable {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
+    @JsonIgnore
     private List<Group> groups;
 
     @ManyToMany(mappedBy = "medicalVisitors")
