@@ -183,10 +183,7 @@ public class ReportController {
         percentageFirst = (float) ((FirstPaidVisits.size() * 100)/doctorList.size());
         totalCount = FirstPaidVisits.size() + SecondPaidVisits.size() + ExtraPaidVisits.size();
         
-        //Overall visits by count - Group report
-        List<Group> leaders = groupRepository.findByLeader(user);
-        if(!leaders.isEmpty()){      
-            
+        //Overall visits by count - Group report       
             List<Group> userGroups = groupRepository.findByLeaderId(UserId);           
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.showGroupVisitsByCycleAndUserId(UserId, CycleId);
             List<PaidVisit> firstGroupVisits = paidVisitRepository.findTotalGroupFirstVisitCount(UserId, CycleId);
@@ -204,25 +201,7 @@ public class ReportController {
             model.put("groupTotalCount", groupTotalCount);
             model.put("groupPercentage", groupPercentage);
             model.put("groupPercentageFirst", groupPercentageFirst);
-        }else{
-           List<Group> userGroups = groupRepository.findByLeaderId(UserId);           
-            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.showGroupVisitsByCycleAndUserId(UserId, CycleId);
-            List<PaidVisit> firstGroupVisits = paidVisitRepository.findTotalGroupFirstVisitCount(UserId, CycleId);
-            List<PaidVisit> secondGroupVisits = paidVisitRepository.findTotalGroupSecondVisitCount(UserId, CycleId);
-            List<PaidVisit> extraGroupVisits = paidVisitRepository.findTotalGroupExtraVisitCount(UserId, CycleId);
-            groupPercentage = (float) ((newGroupVisits.size() * 100)/doctorList.size());
-            groupPercentageFirst = (float) ((firstGroupVisits.size() * 100)/doctorList.size());
-            groupTotalCount = firstGroupVisits.size() + secondGroupVisits.size() + extraGroupVisits.size();
-            
-            model.put("userGroups", userGroups);
-            model.put("newGroupVisits", newGroupVisits);
-            model.put("firstGroupVisits", firstGroupVisits);
-            model.put("secondGroupVisits", secondGroupVisits);
-            model.put("extraGroupVisits", extraGroupVisits);
-            model.put("groupTotalCount", groupTotalCount);
-            model.put("groupPercentage", groupPercentage);
-            model.put("groupPercentageFirst", groupPercentageFirst);
-        }
+       
         
         //for the dropdown
         model.put("cyclesList", cyclesList);

@@ -52,6 +52,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <c:if test="${not empty user}">
                                         <tr>
                                             <td>${user.firstName} ${user.lastName}</td>
                                             <td>${newVisits.size()}</td>
@@ -70,6 +71,9 @@
                                                 </ul>
                                             </td>                                                                                            
                                         </tr>
+                                         </c:if> 
+                                        <c:if test="${empty user}">  
+                                        </c:if>
                                         <c:if test="${not empty userGroups}">
                                             <tr>
                                                 <td>Group Total</td>
