@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Report 2</h3>
+                        <h3 class="box-title">Medical Visitor Statistics</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">   
                         <form role="form" action="<c:url value="/reports/byCycle"/>" method="POST">                                          <div class="row" style="margin-bottom:20px;">

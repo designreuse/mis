@@ -47,18 +47,16 @@ public class ReportController {
     private DoctorRepository doctorRepository;
     @Autowired
     private PaidVisitRepository paidVisitRepository;
-    
+
     //Individual statistics
     private float percentage;
     private float percentageFirst;
     private int totalCount;
-    
-    
+
     //Group statistics
     private float groupPercentage;
     private float groupPercentageFirst;
     private int groupTotalCount;
-
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(HttpServletRequest request, Principal principal, Model model) {
@@ -141,7 +139,7 @@ public class ReportController {
 
         return counts;
     }
-    
+
     //###REPORT 2
     @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
     public String showUserByCycles(Map<String, Object> model) {
@@ -153,7 +151,7 @@ public class ReportController {
         return "reports/report2";
 
     }
-    
+
     /**
      * Display the scheduled visits of the selected cycle
      *
@@ -167,46 +165,45 @@ public class ReportController {
 
         Long CycleId = Long.parseLong(request.getParameter("cycleId"));
         Long UserId = Long.parseLong(request.getParameter("userId"));
-        
+
         //for the dropdown
         List<Cycle> cyclesList = cycleRepository.findAll();
         List<User> userList = userRepository.findAll();
         List<Doctor> doctorList = doctorRepository.findAll();
-             
+
         //Overall visits by count - Individual Report
         User user = userRepository.findOne(UserId);
         List<ScheduledVisit> newVisits = scheduledVisitRepository.showVisitsByCycleAndUserId(UserId, CycleId);
-        List<PaidVisit> FirstPaidVisits = paidVisitRepository.findTotalFirstVisitCount(UserId, CycleId);    
-        List<PaidVisit> SecondPaidVisits = paidVisitRepository.findTotalSecondVisitCount(UserId, CycleId);      
+        List<PaidVisit> FirstPaidVisits = paidVisitRepository.findTotalFirstVisitCount(UserId, CycleId);
+        List<PaidVisit> SecondPaidVisits = paidVisitRepository.findTotalSecondVisitCount(UserId, CycleId);
         List<PaidVisit> ExtraPaidVisits = paidVisitRepository.findTotalExtraVisitCount(UserId, CycleId);
-        percentage = (float) ((newVisits.size() * 100)/doctorList.size());
-        percentageFirst = (float) ((FirstPaidVisits.size() * 100)/doctorList.size());
+        percentage = (float) ((newVisits.size() * 100) / doctorList.size());
+        percentageFirst = (float) ((FirstPaidVisits.size() * 100) / doctorList.size());
         totalCount = FirstPaidVisits.size() + SecondPaidVisits.size() + ExtraPaidVisits.size();
-        
+
         //Overall visits by count - Group report       
-            List<Group> userGroups = groupRepository.findByLeaderId(UserId);           
-            List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.showGroupVisitsByCycleAndUserId(UserId, CycleId);
-            List<PaidVisit> firstGroupVisits = paidVisitRepository.findTotalGroupFirstVisitCount(UserId, CycleId);
-            List<PaidVisit> secondGroupVisits = paidVisitRepository.findTotalGroupSecondVisitCount(UserId, CycleId);
-            List<PaidVisit> extraGroupVisits = paidVisitRepository.findTotalGroupExtraVisitCount(UserId, CycleId);
-            groupPercentage = (float) ((newGroupVisits.size() * 100)/doctorList.size());
-            groupPercentageFirst = (float) ((firstGroupVisits.size() * 100)/doctorList.size());
-            groupTotalCount = firstGroupVisits.size() + secondGroupVisits.size() + extraGroupVisits.size();
-            
-            model.put("userGroups", userGroups);
-            model.put("newGroupVisits", newGroupVisits);
-            model.put("firstGroupVisits", firstGroupVisits);
-            model.put("secondGroupVisits", secondGroupVisits);
-            model.put("extraGroupVisits", extraGroupVisits);
-            model.put("groupTotalCount", groupTotalCount);
-            model.put("groupPercentage", groupPercentage);
-            model.put("groupPercentageFirst", groupPercentageFirst);
-       
-        
+        List<Group> userGroups = groupRepository.findByLeaderId(UserId);
+        List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.showGroupVisitsByCycleAndUserId(UserId, CycleId);
+        List<PaidVisit> firstGroupVisits = paidVisitRepository.findTotalGroupFirstVisitCount(UserId, CycleId);
+        List<PaidVisit> secondGroupVisits = paidVisitRepository.findTotalGroupSecondVisitCount(UserId, CycleId);
+        List<PaidVisit> extraGroupVisits = paidVisitRepository.findTotalGroupExtraVisitCount(UserId, CycleId);
+        groupPercentage = (float) ((newGroupVisits.size() * 100) / doctorList.size());
+        groupPercentageFirst = (float) ((firstGroupVisits.size() * 100) / doctorList.size());
+        groupTotalCount = firstGroupVisits.size() + secondGroupVisits.size() + extraGroupVisits.size();
+
+        model.put("userGroups", userGroups);
+        model.put("newGroupVisits", newGroupVisits);
+        model.put("firstGroupVisits", firstGroupVisits);
+        model.put("secondGroupVisits", secondGroupVisits);
+        model.put("extraGroupVisits", extraGroupVisits);
+        model.put("groupTotalCount", groupTotalCount);
+        model.put("groupPercentage", groupPercentage);
+        model.put("groupPercentageFirst", groupPercentageFirst);
+
         //for the dropdown
         model.put("cyclesList", cyclesList);
         model.put("userList", userList);
-        
+
         //for the individual report
         model.put("newVisits", newVisits);
         model.put("user", user);
@@ -216,7 +213,7 @@ public class ReportController {
         model.put("FirstPaidVisits", FirstPaidVisits);
         model.put("SecondPaidVisits", SecondPaidVisits);
         model.put("ExtraPaidVisits", ExtraPaidVisits);
-        
+
         return "reports/report2";
     }
 
