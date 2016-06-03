@@ -1,12 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<content tag="title">View scheduled visits</content>
+<content tag="title">Report 2</content>
 
 <content tag="content">
     <section class="content-header">
         <h1>
-            View Scheduled Visits
+            Report 2
         </h1>
     </section>
     <section class="content">
@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Scheduled Visits List</h3>
+                        <h3 class="box-title">Report 2</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">   
                         <form role="form" action="<c:url value="/reports/byCycle"/>" method="POST">                                          <div class="row" style="margin-bottom:20px;">
