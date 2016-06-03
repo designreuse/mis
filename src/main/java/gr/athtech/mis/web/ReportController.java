@@ -142,7 +142,7 @@ public class ReportController {
         return counts;
     }
     
-    //###REPORT 2 REDONE - JMONE
+    //###REPORT 2
     @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
     public String showUserByCycles(Map<String, Object> model) {
 
