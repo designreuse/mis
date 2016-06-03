@@ -68,5 +68,20 @@ public interface IScheduledVisitRepository extends JpaRepository<ScheduledVisit,
             + "AND s.cycle.endDate >= CURRENT_DATE "
             + "AND m.id = ?1")
     public List<ScheduledVisit> findByMemberID(Long id);
+    
+    //REPORTS------------------------------------------------------------------
+    
+    //Report 2 - Individual
+    @Query("SELECT s FROM ScheduledVisit as s "
+            + "JOIN s.medicalVisitors md WHERE md.id = ?1 "
+            + "AND s.cycle.id = ?2")
+    public List<ScheduledVisit> findScheduledVisitByUserAndCycle(Long userId, Long cycleId);
+    
+    //Report 2 - Group
+    @Query("SELECT s FROM ScheduledVisit as s "
+            + "JOIN s.groups g "
+            + "WHERE g.leader.id = ?1 "
+            + "AND s.cycle.id = ?2")
+    public List<ScheduledVisit> findScheduledVisitByGroupAndCycle(Long userId, Long cycleId);
 
 }

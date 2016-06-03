@@ -44,6 +44,9 @@ public class PaidVisit implements Serializable {
 
     @Column(nullable = false)
     private String comments;
+    
+    @Column
+    private String visitCount;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "scheduled_visit_id", nullable = false)
@@ -53,13 +56,14 @@ public class PaidVisit implements Serializable {
     public PaidVisit() {
     }
 
-    public PaidVisit(Long id, String week, Date date, String hour, String isGroup, String comments, ScheduledVisit scheduledVisit) {
+    public PaidVisit(Long id, String week, Date date, String hour, String isGroup, String comments, String visitCount, ScheduledVisit scheduledVisit) {
         this.id = id;
         this.week = week;
         this.date = date;
         this.hour = hour;
         this.isGroup = isGroup;
         this.comments = comments;
+        this.visitCount = visitCount;
         this.scheduledVisit = scheduledVisit;
     }
 
@@ -109,6 +113,14 @@ public class PaidVisit implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+    
+    public String getVisitCount(String visitCount) {
+        return visitCount;
+    }
+
+    public void setVisitCount(String visitCount) {
+        this.visitCount = visitCount;
     }
 
     public ScheduledVisit getScheduledVisit() {

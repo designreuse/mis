@@ -193,8 +193,17 @@ public class PaidVisitController {
         pdvst.setHour(request.getParameter("hour"));
         pdvst.setIsGroup(request.getParameter("group"));
         pdvst.setDate(sqlDate);
-        pdvst.setComments(request.getParameter("comment"));
+        pdvst.setComments(request.getParameter("comment"));       
         pdvst.setScheduledVisit(selectedSchv);
+        
+        List<PaidVisit> paidCount = paidVisitRepository.findTotalCount(Long.parseLong(request.getParameter("id")));
+        if(paidCount.isEmpty()){
+            pdvst.setVisitCount("1");
+        }else if(paidCount.size() == 1){
+            pdvst.setVisitCount("2");
+        }else{
+            pdvst.setVisitCount("extra");
+        }
         
         logger.debug("----- New user: ", pdvst);
 

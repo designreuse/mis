@@ -109,4 +109,20 @@ public class ScheduledVisitRepository {
 
         return memberVisits;
     }
+    
+    //REPORTS------------------------------------------------------------------
+    
+    //REPORT2 - Individual
+    public List<ScheduledVisit> showVisitsByCycleAndUserId(Long userId, Long cycleId) {
+        List<ScheduledVisit> selectedList = repo.findScheduledVisitByUserAndCycle(userId, cycleId);
+
+        return selectedList;
+    }
+    
+    //REPORT2 - Group
+    public List<ScheduledVisit> showGroupVisitsByCycleAndUserId(Long userId, Long cycleId) {
+        List<ScheduledVisit> selectedGroupList = repo.findScheduledVisitByGroupAndCycle(userId, cycleId);
+
+        return selectedGroupList;
+    }
 }

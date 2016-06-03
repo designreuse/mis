@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="user" property="principal" />
 <content tag="title">Pay Visit</content>
 
 <content tag="content">
@@ -18,7 +19,7 @@
                         <h3 class="box-title">Pay Visit</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" action="<c:url value="/paidVisits/store" />" method="POST">
+                        <form role="form" action="<c:url value="/paidVisits/store/${user.id}" />" method="POST">
                             <div class="row">
                                 <input type="hidden" name="id" value="${schv.id}">
                                 <div class="col-md-4">

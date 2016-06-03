@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="user" property="principal" />
 <div class="modal fade" id="extraVisit" tabindex="-1" role="dialog" aria-labelledby="extraVisit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -5,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Note extra visit</h4>
             </div>
-            <form role="form" action="<c:url value='/extraVisits/store'/>" method="POST">
+            <form role="form" action="<c:url value='/extraVisits/store/${user.id}'/>" method="POST">
                 <div class="modal-body">
                     <p>In case you couldn't reach the doctor, note down the visit's info.</p>
                     <p class="text-danger"><span class="extraVisitsNum"></span> unsuccessful visits.</p>

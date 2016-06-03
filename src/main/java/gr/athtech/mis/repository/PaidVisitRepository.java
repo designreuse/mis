@@ -108,4 +108,58 @@ public class PaidVisitRepository {
         return allMemberVisits;
     } 
     
+    //REPORTS-----------------------------------------------------------------
+    
+    //Individual Visits
+    
+    public List<PaidVisit> findTotalCount(Long id){
+        List<PaidVisit> listCount = repo.countPaidVisits(id);
+        
+        return listCount;
+    }
+    
+    //First visits
+    public List<PaidVisit> findTotalFirstVisitCount(Long uId, Long cId){
+        List<PaidVisit> FirstListCount = repo.countFirstPaidVisits(uId, cId);
+        
+        return FirstListCount;
+    }
+    
+    //Second visits
+    public List<PaidVisit> findTotalSecondVisitCount(Long uId, Long cId){
+        List<PaidVisit> SecondListCount = repo.countSecondPaidVisits(uId, cId);
+        
+        return SecondListCount;
+    }
+    
+    //Extra visits
+    public List<PaidVisit> findTotalExtraVisitCount(Long uId, Long cId){
+        List<PaidVisit> ExtraListCount = repo.countExtraPaidVisits(uId, cId);
+        
+        return ExtraListCount;
+    }
+    
+    //Group Visits
+    
+    //First visits
+    public List<PaidVisit> findTotalGroupFirstVisitCount(Long uId, Long cId){
+        List<PaidVisit> FirstGroupListCount = repo.countFirstGroupPaidVisits(uId, cId);
+        
+        return FirstGroupListCount;
+    }
+    
+    //Second visits
+    public List<PaidVisit> findTotalGroupSecondVisitCount(Long uId, Long cId){
+        List<PaidVisit> SecondGroupListCount = repo.countSecondGroupPaidVisits(uId, cId);
+        
+        return SecondGroupListCount;
+    }
+    
+    //Extra visits
+    public List<PaidVisit> findTotalGroupExtraVisitCount(Long uId, Long cId){
+        List<PaidVisit> ExtraGroupListCount = repo.countExtraGroupPaidVisits(uId, cId);
+        
+        return ExtraGroupListCount;
+    }
+    
 }

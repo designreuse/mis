@@ -30,7 +30,7 @@
             <![endif]-->
 
     </head>
-            <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
+    <body class="sidebar-mini skin-blue" data-url="<c:url value='/'/>">
         <div class="wrapper">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar">
@@ -107,12 +107,17 @@
                             </li>
                         </sec:authorize>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <li class="treeview">
-                            <a href="<c:url value='/reports/'/>">
-                                <i class="fa fa-bar-chart"></i> <span>Reports</span> 
-                            </a>
-                        </li>
-                       </sec:authorize>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>Reports</span><i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="<c:url value='/reports/'/>"><i class="fa fa-circle-o"></i>Report 1</a></li>
+                                    <li><a href="<c:url value='/reports/allCycles'/>"><i class="fa fa-circle-o"></i>Report 2</a></li>
+                                </ul>                             
+                            </li>
+                        </sec:authorize>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
