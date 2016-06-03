@@ -66,6 +66,8 @@ public class PaidVisit implements Serializable {
         this.visitCount = visitCount;
         this.scheduledVisit = scheduledVisit;
     }
+    
+    
 
     public Long getId() {
         return id;
@@ -115,12 +117,12 @@ public class PaidVisit implements Serializable {
         this.comments = comments;
     }
     
-    public String getVisitCount(String visitCount) {
-        return visitCount;
-    }
-
     public void setVisitCount(String visitCount) {
         this.visitCount = visitCount;
+    }
+    
+    public String getVisitCount() {
+        return visitCount;
     }
 
     public ScheduledVisit getScheduledVisit() {
