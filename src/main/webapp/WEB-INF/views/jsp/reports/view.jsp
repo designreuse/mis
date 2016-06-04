@@ -30,6 +30,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                <p class="expl" style="display:none;">Hover over the colorful areas to view the statistics.</p>
                                 <p class="noData" style="display:none;">There are not scheduled visits for the selected medical visitor</p>
                                 <canvas id="byGeolocation"></canvas>               
                             </div>

@@ -24,8 +24,10 @@ function byGeolocation() {
 
             if ($.isEmptyObject(result)) {
                 $(".byGeolocation .noData").show();
+                $(".byGeolocation .expl").show();
                 $("#byGeolocation").hide();
             } else {
+                $(".byGeolocation .expl").show();
                 $(".byGeolocation .noData").hide();
                 $.each(result, function (key, value) {
                     colorPair = Colors.random();
