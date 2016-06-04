@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Uses the methods of the IDoctorRepository
+ * 
+ * @author xrist
+ */
 @Service("doctorRepository")
 @Transactional
 public class DoctorRepository {
@@ -24,7 +29,7 @@ public class DoctorRepository {
     /**
      * Return a list of all the doctors
      *
-     * @return
+     * @return List<Doctor> all the doctors  
      */
     public List<Doctor> findAll() {
         List<Doctor> doctors = repo.findAll();
@@ -35,8 +40,8 @@ public class DoctorRepository {
     /**
      * Return a doctor based on a given id
      *
-     * @param id
-     * @return
+     * @param id a doctor id
+     * @return Doctor a doctor based an a given id
      */
     public Doctor findOne(Long id) {
         Doctor doctor = repo.findOne(id);
@@ -56,37 +61,82 @@ public class DoctorRepository {
      * Save a new doctor instance
      *
      * @param doctor
-     * @return
+     * @return Doctor the saved doctor
      */
     public Doctor save(Doctor doctor) {
         doctor = repo.save(doctor);
         return doctor;
     }
 
+    /**
+     * Update an existing doctor
+     * 
+     * @param doctor
+     * @return Doctor the saved doctor
+     */
     public Doctor update(Doctor doctor) {
         doctor = repo.save(doctor);
         return doctor;
     }
 
+    /**
+     * Delete a doctor
+     * 
+     * @param id 
+     */
     public void delete(Long id) {
         repo.delete(id);
     }
 
+    /**
+     * Find the available doctors
+     * 
+     * @return List<Doctor>
+     */
     public List<Doctor> getAvailableDoctorList() {
         List<Doctor> doctorList = repo.getAvailableDoctors();
         return doctorList;
     }
 
+    /**
+     * Find doctors by cycle 
+     * 
+     * @param id
+     * @return List<Doctor> a list of doctors that are assigned to the provided cycle
+     */
     public List<Doctor> findDoctorByCycleId(Long id) {
         List<Doctor> doctorList = repo.getAvailableDoctorsList(id);
 
         return doctorList;
     }
 
+    /**
+     * Find doctors by a given name or address
+     * 
+     * @param firstName
+     * @param lastName
+     * @param address
+     * @return List<Doctor> the doctors found
+     */
     public List<Doctor> findByNameOrAddress(String firstName, String lastName, String address) {
         return repo.findByFirstNameLikeAndLastNameLikeOrAddressLike(firstName, lastName, address);
     }
 
+    /**
+     * Search doctors based on given criteria 
+     * 
+     * @param firstName
+     * @param lastName
+     * @param address
+     * @param phone
+     * @param position
+     * @param email
+     * @param city
+     * @param geolocationArea
+     * @param institution
+     * @param specialty
+     * @return List<Doctor> doctors found
+     */
     public List<Doctor> search(String firstName, String lastName, String address, String phone, String position, String email, City city, GeolocationArea geolocationArea, Institution institution, DoctorSpecialty specialty) {
 
         List<Doctor> doctors;

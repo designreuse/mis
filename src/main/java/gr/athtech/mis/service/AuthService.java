@@ -15,6 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+/**
+ * Responsible for authorization methods
+ * @author xrist
+ */
 @Service("authService")
 public class AuthService implements UserDetailsService {
 
@@ -27,7 +31,7 @@ public class AuthService implements UserDetailsService {
      * For spring security
      *
      * @param username
-     * @return
+     * @return UserDetails
      */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repo.findByUsername(username);
@@ -42,7 +46,7 @@ public class AuthService implements UserDetailsService {
      * Check if a logged in user is admin
      *
      * @param username
-     * @return
+     * @return true if user is admin
      */
     public boolean isAdmin() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -63,7 +67,7 @@ public class AuthService implements UserDetailsService {
     /**
      * Check if the logged in user is a medical visitor
      *
-     * @return
+     * @return true if user is medical visitor
      */
     public boolean isMedicalVisitor() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -84,7 +88,7 @@ public class AuthService implements UserDetailsService {
     /**
      * Return the id of the logged in user
      * 
-     * @return 
+     * @return Long
      */
     public Long getId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -97,7 +101,7 @@ public class AuthService implements UserDetailsService {
      * Check if the logged in user may edit a given doctor
      *
      * @param id
-     * @return
+     * @return true if the logged in user may edit a doctor
      */
     public boolean canEditDoctor(Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

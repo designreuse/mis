@@ -18,7 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- *
+ *  Described the cities associated with a geolocation area
+ * 
  * @author it-support
  */
 @Entity

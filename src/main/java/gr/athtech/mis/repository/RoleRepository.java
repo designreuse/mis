@@ -13,7 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Uses the IRoleRepository interface
+ * 
  * @author JurgenPC
  */
 @Service("roleRepository")
@@ -27,7 +28,7 @@ public class RoleRepository {
     /**
      * Return a list of all the roles
      *
-     * @return
+     * @return List<Role>
      */
     public List<Role> findAll() {
         List<Role> roles = repo.findAll();
@@ -38,7 +39,7 @@ public class RoleRepository {
      * Return a role based on a given id
      *
      * @param id
-     * @return
+     * @return Role
      */
     public Role findOne(Long id) {
         Role role = repo.findOne(id);
@@ -50,7 +51,7 @@ public class RoleRepository {
      * Return a role based on a given name
      *
      * @param name
-     * @return
+     * @return Role
      */
     public Role findByName(String name) {
         Role role = repo.findByName(name);

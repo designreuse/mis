@@ -1,6 +1,5 @@
 package gr.athtech.mis.web;
 
-import static com.mchange.v2.c3p0.impl.C3P0Defaults.user;
 import gr.athtech.mis.model.Cycle;
 import gr.athtech.mis.model.Doctor;
 import gr.athtech.mis.model.Group;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -58,6 +56,14 @@ public class ReportController {
     private float groupPercentageFirst;
     private int groupTotalCount;
 
+    /**
+     * Show the reports view
+     *
+     * @param request
+     * @param principal
+     * @param model
+     * @return String
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(HttpServletRequest request, Principal principal, Model model) {
 
@@ -68,6 +74,12 @@ public class ReportController {
         return "reports/view";
     }
 
+    /**
+     * Fetch the byGeoloction report data
+     *
+     * @param request
+     * @return Map<String, Integer>
+     */
     @RequestMapping(value = "/byGeolocation", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Integer> byGeolocation(HttpServletRequest request) {
@@ -77,6 +89,12 @@ public class ReportController {
         return byGeolocation;
     }
 
+    /**
+     * Fetch the individual statistics report data
+     *
+     * @param request
+     * @return List<ScheduledVisit>
+     */
     @RequestMapping(value = "/individualStatistics", method = RequestMethod.GET)
     @ResponseBody
     public List<ScheduledVisit> individualStatistics(HttpServletRequest request) {
@@ -96,6 +114,12 @@ public class ReportController {
         return scheduledVisits;
     }
 
+    /**
+     * Fetch the individual and group statistics data
+     *
+     * @param request
+     * @return Map<String, Integer>
+     */
     @RequestMapping(value = "/individualAndGroupStatistics", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Integer> individualAndGroupStatistics(HttpServletRequest request) {
@@ -140,7 +164,12 @@ public class ReportController {
         return counts;
     }
 
-    //###REPORT 2
+    /**
+     * Return the second report view
+     *
+     * @param model
+     * @return String
+     */
     @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
     public String showUserByCycles(Map<String, Object> model) {
 
@@ -158,7 +187,7 @@ public class ReportController {
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/byCycle", method = RequestMethod.POST)
     public String showSelectedUserVisits(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {

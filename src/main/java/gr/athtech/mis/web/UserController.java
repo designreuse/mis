@@ -46,16 +46,16 @@ public class UserController {
     private RoleRepository roleRepository;
     @Autowired
     private PaidVisitRepository paidVisitRepository;
-    @Autowired 
+    @Autowired
     private ScheduledVisitRepository scheduledVisitRepository;
-    @Autowired 
+    @Autowired
     private GroupRepository groupRepository;
 
     /**
      * Return the view that will display all the users
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
@@ -72,7 +72,7 @@ public class UserController {
      * Return the view that holds the create new user form
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
@@ -91,7 +91,7 @@ public class UserController {
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -120,7 +120,7 @@ public class UserController {
      *
      * @param id
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
@@ -137,7 +137,7 @@ public class UserController {
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public String update(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -166,13 +166,13 @@ public class UserController {
 
         return "redirect:/users/";
     }
-    
+
     /**
      * Show one user
-     * 
+     *
      * @param id
      * @param model
-     * @return 
+     * @return String
      */
     @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
     public String one(@PathVariable("id") Long id, Model model) {
@@ -181,61 +181,59 @@ public class UserController {
         //For individual visits
         List<ScheduledVisit> userVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
         List<PaidVisit> paidVisits = paidVisitRepository.getAllUserVisits(id);
-               
+
         //For group participation and visits
         List<Group> leaders = groupRepository.findByLeader(user);
         List<Group> members = groupRepository.findByUserId(id);
-        
-        if(leaders.isEmpty()){
+
+        if (leaders.isEmpty()) {
             //For group membership
             List<Group> userGroups = groupRepository.findByUserId(id);
             model.addAttribute("userGroups", userGroups);
-            
+
             //Visits
             Long memberId = groupRepository.findByUserIdUnique(id);
             //Scheduled Visits
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembersId(memberId);
             model.addAttribute("newGroupVisits", newGroupVisits);
-            
+
             //Paid visits
             List<PaidVisit> groupVisits = paidVisitRepository.findRelatedMembersId(memberId);
             model.addAttribute("groupVisits", groupVisits);
-            
-        }else if(members.isEmpty()){  
+
+        } else if (members.isEmpty()) {
             //For group membership
             List<Group> userGroups = groupRepository.findByLeaderId(id);
             model.addAttribute("userGroups", userGroups);
-            
+
             //Visits
             //Scheduled Visits
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
             model.addAttribute("newGroupVisits", newGroupVisits);
-            
+
             //Paid visits
             List<PaidVisit> groupVisits = paidVisitRepository.getAllGroupVisitsByCurrentCycle(id);
             model.addAttribute("groupVisits", groupVisits);
-            
-        }else{
+
+        } else {
             //For group membership
             List<Group> userGroups = groupRepository.findAllById(id);
             model.addAttribute("userGroups", userGroups);
-            
+
             //Visits
             //Scheduled Visits
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findByMemberAndLeader(id);
             model.addAttribute("newGroupVisits", newGroupVisits);
-            
+
             //Paid visits
             List<PaidVisit> groupVisits = paidVisitRepository.findEitherMemberOrLeader(id);
-            model.addAttribute("groupVisits", groupVisits); 
+            model.addAttribute("groupVisits", groupVisits);
         }
-     
-        
-        
+
         model.addAttribute("user", user);
         model.addAttribute("userVisits", userVisits);
-        model.addAttribute("paidVisits", paidVisits);             
-        
+        model.addAttribute("paidVisits", paidVisits);
+
         return "users/one";
     }
 

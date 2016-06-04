@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Uses the IPaidVisitRepository interface
  * @author JurgenPC
  */
 @Service("paidVisitRepository")
@@ -19,13 +19,22 @@ public class PaidVisitRepository {
     @Resource
     IPaidVisitRepository repo;
     
+    /**
+     * Find all paid visits
+     * @return List<PaidVisit>
+     */
     public List<PaidVisit> findAll() {
         List<PaidVisit> paidVisits = repo.findAll();
 
-        logger.info("---------New Visits", paidVisits);
         return paidVisits;
     }
     
+    /**
+     * Save a paid visit
+     * 
+     * @param pdvst
+     * @return  PaidVisit
+     */
     public PaidVisit save(PaidVisit pdvst){
         pdvst = repo.save(pdvst);
         return pdvst;

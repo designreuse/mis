@@ -17,7 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Used the methods of the ICycleRepository interface
+ * 
  * @author jmone
  */
 @Service("cycleRepository")
@@ -28,23 +29,46 @@ public class CycleRepository {
     @Resource
     ICycleRepository repo;
 
+    /**
+     * Find all cycles
+     * 
+     * @return List<Cycle>
+     */
     public List<Cycle> findAll() {
         List<Cycle> cycles = repo.findAll();
         logger.info("---------CYCLES", cycles);
         return cycles;
     }
 
+    /**
+     * Find one Cycle based on a given id
+     * 
+     * @param id
+     * @return Cycle
+     */
     public Cycle findOne(Long id) {
         Cycle cycle = repo.findOne(id);
         return cycle;
     }
 
+    /**
+     * Save a cycle
+     * 
+     * @param cycle
+     * @return Cycle
+     */
     public Cycle save(Cycle cycle) {
         cycle = repo.save(cycle);
         return cycle;
 
     }
 
+    /**
+     * Get the current cycle, that is the one that hasn't ended yet.
+     * 
+     * @return Cycle
+     * @throws ParseException 
+     */
     public Cycle getCurrentCycle() throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();

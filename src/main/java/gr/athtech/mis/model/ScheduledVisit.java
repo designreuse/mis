@@ -23,7 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- *
+ * Holds the scheduled visit information
+ * 
  * @author jmone
  */
 @Entity

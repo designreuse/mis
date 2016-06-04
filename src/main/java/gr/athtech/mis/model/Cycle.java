@@ -18,7 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- *
+ * Holds the information about a cycle, its start and end date
+ * 
  * @author jmone
  */
 @Entity

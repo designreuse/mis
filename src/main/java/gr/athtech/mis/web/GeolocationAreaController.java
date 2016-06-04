@@ -29,6 +29,12 @@ public class GeolocationAreaController {
     @Autowired
     private GeolocationAreaRepository repo;
 
+    /**
+     * Find a geolocation area by its if
+     * 
+     * @param id
+     * @return GeolocationArea
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public GeolocationArea show(@PathVariable("id") Long id) {

@@ -7,6 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+/**
+ * Uses the methods of ICityRepository interface
+ * 
+ * @author xrist
+ */
 @Service("cityRepository")
 public class CityRepository {
 
@@ -15,13 +20,23 @@ public class CityRepository {
     @Resource
     ICityRepository repo;
 
+    /**
+     * Find all cities
+     * 
+     * @return List<City> a list of cities
+     */
     public List<City> findAll() {
         List<City> cities = repo.findAll();
 
         return cities;
     }
     
-    
+    /**
+     * Find a city based on a given id
+     * 
+     * @param id
+     * @return City 
+     */
     public City findOne(Long id) {
         City city = repo.findOne(id);
 

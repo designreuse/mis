@@ -73,8 +73,10 @@ dependencies {
     providedCompile 'org.sitemesh:sitemesh:3.0.1'
     providedCompile 'com.fasterxml.jackson.core:jackson-annotations:2.3.0'
 	
-   // runtime 'org.sitemesh:sitemesh:3.0.1'
+    // runtime 'org.sitemesh:sitemesh:3.0.1'
 }
+
+
 
 //For Eclipse IDE only
 eclipse {

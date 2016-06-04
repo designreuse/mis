@@ -32,8 +32,16 @@ public class ExtraVisitController {
     @Autowired
     private ScheduledVisitRepository scheduledVisitRepository;
 
+    /**
+     * Store an extra visit
+     *
+     * @param id
+     * @param request
+     * @return String
+     * @throws ParseException
+     */
     @RequestMapping(value = "/store/{id}", method = RequestMethod.POST)
-    public String store(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
+    public String store(@PathVariable("id") Long id, HttpServletRequest request) throws ParseException {
 
         //Convert date parammeter to SQL date
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

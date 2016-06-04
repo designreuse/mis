@@ -6,17 +6,12 @@
 package gr.athtech.mis.web;
 
 import gr.athtech.mis.model.Group;
-import gr.athtech.mis.model.PaidVisit;
-import gr.athtech.mis.model.Role;
-import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
 import gr.athtech.mis.repository.GroupRepository;
 import gr.athtech.mis.repository.UserRepository;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -49,7 +44,7 @@ public class GroupController {
      * Return the view that will display all the groups
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
@@ -65,7 +60,7 @@ public class GroupController {
      * Return the view that holds the create new group form
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
@@ -82,7 +77,7 @@ public class GroupController {
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(@RequestParam(value = "members[]") String[] memberIds,
@@ -111,7 +106,7 @@ public class GroupController {
      *
      * @param id
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
@@ -127,10 +122,12 @@ public class GroupController {
     }
 
     /**
+     * Update a group
+     * 
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public String update(@RequestParam(value = "members[]") String[] memberIds, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -153,6 +150,12 @@ public class GroupController {
         return "redirect:/groups/";
     }
 
+    /**
+     * Delete a group 
+     * 
+     * @param id
+     * @return String
+     */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {
@@ -166,7 +169,7 @@ public class GroupController {
      *
      * @param id
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
     public String one(@PathVariable("id") Long id, Model model) {

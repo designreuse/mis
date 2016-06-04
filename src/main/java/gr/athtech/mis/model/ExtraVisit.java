@@ -14,7 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- *
+ * Describes the extra visits that were paid by a medical visitor
+ * apart from the paid visits.
+ *  
  * @author xrist
  */
 @Entity

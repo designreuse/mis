@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Holds the doctor institution information
  *
  * @author jmone
  */

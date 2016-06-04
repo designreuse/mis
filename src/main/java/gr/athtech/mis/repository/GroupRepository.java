@@ -8,6 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+/**
+ * Uses the methods of the IGroupRepository interface
+ * 
+ * @author xrist
+ */
 @Service("groupRepository")
 public class GroupRepository {
 
@@ -16,12 +21,23 @@ public class GroupRepository {
     @Resource
     IGroupRepository repo;
 
+    /**
+     * Find all groups
+     * 
+     * @return List<Group> 
+     */
     public List<Group> findAll() {
         List<Group> groups = repo.findAll();
 
         return groups;
     }
 
+    /**
+     * Find a group based on a given id
+     * 
+     * @param id
+     * @return Group
+     */
     public Group findOne(Long id) {
         Group group = repo.findOne(id);
         
@@ -33,12 +49,24 @@ public class GroupRepository {
         return group;
     }
     
+    /**
+     * Find groups by their leader
+     * 
+     * @param leader
+     * @return List<Group>
+     */
     public List<Group> findByLeader(User leader){
         List<Group> userGroups = repo.findByLeader(leader);
         
         return userGroups;
     }
     
+    /**
+     * Find groups by their members
+     * 
+     * @param id
+     * @return List<Group>
+     */
     public List<Group> findByUserId(Long id){
         List<Group> userGroups = repo.findByMember(id);
         
@@ -57,14 +85,31 @@ public class GroupRepository {
         return userGroups;
     }
     
+    /**
+     * Save a group
+     * 
+     * @param group
+     * @return Group
+     */
     public Group save(Group group){
         return repo.save(group);
     }
     
+    /**
+     * Update a group
+     * 
+     * @param group
+     * @return Group
+     */
     public Group update(Group group){
         return repo.save(group);
     }
     
+    /**
+     * Delete a group
+     * 
+     * @param id 
+     */
     public void delete(Long id){
         repo.delete(id);
     }

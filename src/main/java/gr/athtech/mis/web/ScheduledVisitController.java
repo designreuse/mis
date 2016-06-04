@@ -50,13 +50,12 @@ public class ScheduledVisitController {
     private UserRepository userRepository;
     @Autowired
     private GroupRepository groupRepository;
-    
 
     /**
      * Return the view that will display all the scheduled visits
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
@@ -74,9 +73,8 @@ public class ScheduledVisitController {
      * Display only the cycles drop down
      *
      * @param model
-     * @return
+     * @return String
      */
-
     @RequestMapping(value = "/allCycles", method = RequestMethod.GET)
     public String showCycles(Map<String, Object> model) {
 
@@ -95,7 +93,7 @@ public class ScheduledVisitController {
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/byCycle", method = RequestMethod.POST)
     public String showSelectedVisits(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
@@ -112,7 +110,7 @@ public class ScheduledVisitController {
      * Return the view that holds the create a new scheduled visit form
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String store(Model model) {
@@ -137,7 +135,7 @@ public class ScheduledVisitController {
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -167,7 +165,7 @@ public class ScheduledVisitController {
      * @param request
      * @param response
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/storeGroup", method = RequestMethod.POST)
     public String storeGroup(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -206,37 +204,35 @@ public class ScheduledVisitController {
      *
      * @param id
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String displayByUser(@PathVariable("id") Long id, Map<String, Object> model) {
 
         User user = userRepository.findOne(id);
-        
+
         //for individual visits
         List<ScheduledVisit> newVisits = scheduledVisitRepository.getUsersFromCurrentCycle(id);
-        
+
         //For group visits
         List<Group> leaders = groupRepository.findByLeader(user);
         List<Group> members = groupRepository.findByUserId(id);
-        
-        if(leaders.isEmpty()){
-            
+
+        if (leaders.isEmpty()) {
+
             Long memberId = groupRepository.findByUserIdUnique(id);
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findRelatedMembersId(memberId);
             model.put("newGroupVisits", newGroupVisits);
-        }
-        else if(members.isEmpty()){
-            
+        } else if (members.isEmpty()) {
+
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.getGroupsFromCurrentCycle(id);
             model.put("newGroupVisits", newGroupVisits);
-        }
-        else{    
-            
+        } else {
+
             List<ScheduledVisit> newGroupVisits = scheduledVisitRepository.findByMemberAndLeader(id);
             model.put("newGroupVisits", newGroupVisits);
         }
-        
+
         logger.debug("------------------NEW VISITS");
         model.put("newVisits", newVisits);
         return "scheduledVisits/view";

@@ -50,7 +50,7 @@ public class DoctorService {
      * Create a doctor obj from request data
      *
      * @param request
-     * @return
+     * @return Doctor
      */
     public Doctor getDataFromRequest(HttpServletRequest request, Doctor doctor) {
         City city = cityRepository.findOne(Long.parseLong(request.getParameter("cityId")));
@@ -79,7 +79,7 @@ public class DoctorService {
      * that is the cycle that runs now.
      *
      * @param doctor
-     * @return
+     * @return Long the scheduled visit id
      */
     public Long assignDoctorToUser(Doctor doctor) throws ParseException {
 
@@ -98,7 +98,7 @@ public class DoctorService {
      * (used in search, where we cannot use spring security, only JavaScript)
      *
      * @param doctors
-     * @return
+     * @return List<Doctor>
      */
     public List<Doctor> setPermissions(List<Doctor> doctors) {
 
@@ -113,7 +113,7 @@ public class DoctorService {
      * Set permissions for one doctor
      *
      * @param doctor
-     * @return
+     * @return Doctor
      */
     public Doctor setPermission(Doctor doctor) {
         boolean isAdmin = authService.isAdmin();

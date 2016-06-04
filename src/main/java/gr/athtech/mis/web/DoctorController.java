@@ -62,7 +62,7 @@ public class DoctorController {
      * Return the view that will display all the doctors
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
@@ -89,7 +89,7 @@ public class DoctorController {
      *
      * @param id
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/one/{id}", method = RequestMethod.GET)
     public String one(@PathVariable("id") Long id, Model model) {
@@ -110,7 +110,7 @@ public class DoctorController {
      * Return the view that holds the create new doctor form
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
@@ -134,7 +134,7 @@ public class DoctorController {
      *
      * @param id
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
@@ -160,8 +160,7 @@ public class DoctorController {
      * Store a new doctor
      *
      * @param request
-     * @param response
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request) throws ParseException {
@@ -183,7 +182,7 @@ public class DoctorController {
      * Update an existing doctor
      *
      * @param request
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public String update(HttpServletRequest request) {
@@ -200,7 +199,7 @@ public class DoctorController {
      * Delete a doctor, if s/he doesn't have paid visits
      *
      * @param id
-     * @return
+     * @return boolean true if the doctor can be deleted
      */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
@@ -221,6 +220,12 @@ public class DoctorController {
         return flag;
     }
 
+    /**
+     * Return the list of doctors for a certain cycle
+     *
+     * @param id
+     * @return List<Doctor>
+     */
     @RequestMapping(value = "/byCycle/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<Doctor> show(@PathVariable("id") Long id
@@ -231,6 +236,12 @@ public class DoctorController {
         return doctorList;
     }
 
+    /**
+     * Check if a doctor's name and address is unique
+     *
+     * @param request
+     * @return List<Doctor>
+     */
     @RequestMapping(value = "/checkUnique", method = RequestMethod.GET)
     @ResponseBody
     public List<Doctor> checkUnique(HttpServletRequest request
@@ -250,6 +261,12 @@ public class DoctorController {
         return doctors;
     }
 
+    /**
+     * Search doctors based on given criteria
+     *
+     * @param request
+     * @return List<Doctor>
+     */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
     public List<Doctor> search(HttpServletRequest request

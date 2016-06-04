@@ -7,6 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+/**
+ * Uses the methods of the IGeolocationAreaRepository interface
+ * 
+ * @author xrist
+ */
 @Service("geolocationAreaRepository")
 public class GeolocationAreaRepository {
 
@@ -15,12 +20,23 @@ public class GeolocationAreaRepository {
     @Resource
     IGeolocationAreaRepository repo;
 
+    /**
+     * Find all geolocation areas
+     * 
+     * @return List<GeolocationArea>
+     */
     public List<GeolocationArea> findAll() {
         List<GeolocationArea> geolocationAreas = repo.findAll();
 
         return geolocationAreas;
     }
 
+    /**
+     * Find one geolocation area based on a given id
+     * 
+     * @param id
+     * @return GeolocationArea
+     */
     public GeolocationArea findOne(Long id) {
         GeolocationArea geolocationArea = repo.findOne(id);
 
@@ -32,7 +48,7 @@ public class GeolocationAreaRepository {
      * institutions
      *
      * @param id
-     * @return
+     * @return GeolocationArea
      */
     public GeolocationArea findOneWithCitiesWithInstitutions(Long id) {
         GeolocationArea geolocationArea = repo.findOne(id);

@@ -7,8 +7,6 @@ package gr.athtech.mis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +20,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- *
+ * Holds the group information, group leader and members
+ * 
  * @author it-support
  */
 @Entity

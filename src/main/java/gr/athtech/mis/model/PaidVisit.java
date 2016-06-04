@@ -19,7 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- *
+ * Holds that paid visit information
+ * 
  * @author it-support
  */
 @Entity

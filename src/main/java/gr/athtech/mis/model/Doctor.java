@@ -17,7 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- *
+ * Holds the doctor information
+ * 
  * @author jmone
  */
 @Entity

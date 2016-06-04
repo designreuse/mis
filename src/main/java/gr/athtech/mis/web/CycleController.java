@@ -40,7 +40,7 @@ public class CycleController {
      * Return the view that will display all the users
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model) {
@@ -57,7 +57,7 @@ public class CycleController {
      * Return the view that holds the create new user form
      *
      * @param model
-     * @return
+     * @return String
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
@@ -65,6 +65,15 @@ public class CycleController {
         return "cycles/create";
     }
 
+    /**
+     * Store a cycle
+     * 
+     * @param request
+     * @param response
+     * @param model
+     * @return String
+     * @throws ParseException 
+     */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public String store(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
 
@@ -84,6 +93,12 @@ public class CycleController {
         return "redirect:/cycles/";
     }
 
+    /**
+     * Delete a cycle
+     * 
+     * @param id
+     * @return String
+     */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") Long id) {

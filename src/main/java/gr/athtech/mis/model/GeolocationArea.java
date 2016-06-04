@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Holds the geolocation area information
  *
  * @author jmone
  */

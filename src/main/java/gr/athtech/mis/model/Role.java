@@ -18,7 +18,8 @@ import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- *
+ * Holds the user roles
+ * 
  * @author it-support
  */
 @Entity

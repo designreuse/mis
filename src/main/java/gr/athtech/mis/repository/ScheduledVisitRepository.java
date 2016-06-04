@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Uses the methods of the IScheduledVisitRepository interface
  * @author jmone
  */
 @Service("scheduledVisitRepository")
@@ -30,18 +30,33 @@ public class ScheduledVisitRepository {
     @Resource
     ICycleRepository cycleRepo;
 
+    /**
+     * Find all scheduled visits
+     * 
+     * @return List<ScheduledVisit>
+     */
     public List<ScheduledVisit> findAll() {
         List<ScheduledVisit> newVisits = repo.findAll();
-
-        logger.info("---------New Visits", newVisits);
         return newVisits;
     }
 
+    /**
+     * Save a scheduled visit 
+     * 
+     * @param schvst
+     * @return ScheduledVisit
+     */
     public ScheduledVisit save(ScheduledVisit schvst) {
         schvst = repo.save(schvst);
         return schvst;
     }
 
+    /**
+     * Find a scheduled visit based on a given id
+     * 
+     * @param schvst
+     * @return ScheduledVisit
+     */
     public ScheduledVisit findById(Long id) {
 
         ScheduledVisit schv = repo.findOne(id);

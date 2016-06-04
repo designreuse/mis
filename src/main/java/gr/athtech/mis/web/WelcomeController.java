@@ -39,6 +39,14 @@ public class WelcomeController {
     @Autowired
     private AuthService authService;
 
+    /**
+     * Return the main dashboard view
+     *
+     * @param request
+     * @param principal
+     * @param model
+     * @return String
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(HttpServletRequest request, Principal principal, Model model) {
 
@@ -93,6 +101,14 @@ public class WelcomeController {
         return "index";
     }
 
+    /**
+     * Return the calendar data
+     *
+     * @param request
+     * @param principal
+     * @param model
+     * @return Map<String, String>
+     */
     @RequestMapping(value = "/calendar", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> calendar(HttpServletRequest request, Principal principal, Model model) {

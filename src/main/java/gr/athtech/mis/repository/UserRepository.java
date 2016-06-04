@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * Uses the methods of the IUserRepository interface
+ * @author xrist
+ */
 @Service("userRepository")
 public class UserRepository {
 
@@ -19,6 +23,11 @@ public class UserRepository {
     @Resource
     IRoleRepository roleRepo;
 
+    /**
+     * Finds all users
+     * 
+     * @return List<User>
+     */
     public List<User> findAll() {
         List<User> users = repo.findAll();
 
@@ -26,6 +35,12 @@ public class UserRepository {
         return users;
     }
 
+    /**
+     * Finds a user based on a given id
+     * 
+     * @param id
+     * @return User
+     */
     public User findOne(Long id) {
 
         User user = repo.findOne(id);
@@ -37,7 +52,7 @@ public class UserRepository {
      * Get users based on a certain role
      *
      * @param role
-     * @return
+     * @return List<User>
      */
     public List<User> findByRole(Role role) {
         List<User> users = repo.findByRoles(role);
@@ -48,7 +63,7 @@ public class UserRepository {
     /**
      * Return the users who have "medical visitor" as a role
      *
-     * @return
+     * @return List<User> 
      */
     public List<User> getMedicalVisitors() {
 
@@ -62,7 +77,7 @@ public class UserRepository {
      * Save a new user instance
      *
      * @param user
-     * @return
+     * @return User
      */
     public User save(User user) {
         user.setPassword(encodePassword(user.getPassword()));
@@ -74,7 +89,7 @@ public class UserRepository {
      * Update the user instance
      *
      * @param user
-     * @return
+     * @return User
      */
     public User update(User user) {
         user.setPassword(encodePassword(user.getPassword()));
@@ -95,7 +110,7 @@ public class UserRepository {
      * Encode the user's password 
      * 
      * @param password
-     * @return 
+     * @return String the encoded password
      */
     private String encodePassword(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

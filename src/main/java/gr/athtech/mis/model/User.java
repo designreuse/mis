@@ -15,6 +15,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+/**
+ * Holds the user information
+ * 
+ * @author xrist
+ */
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
