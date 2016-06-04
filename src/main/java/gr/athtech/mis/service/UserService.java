@@ -33,8 +33,14 @@ public class UserService {
         User medicalVisitor = userRepository.findOne(medicalVisitorId);
 
         for (ScheduledVisit scheduledVisit : medicalVisitor.getScheduledVisits()) {
+            
             geoLocationName = scheduledVisit.getDoctor().getGeolocationArea().getName();
+            
             if (byGeolocationArea.containsKey(geoLocationName)) {
+                
+                if("Paid".equals(scheduledVisit.getStatus())){
+                    
+                }
                 byGeolocationArea.put(geoLocationName, byGeolocationArea.get(geoLocationName) + 1);
             } else {
                 byGeolocationArea.put(geoLocationName, 1);

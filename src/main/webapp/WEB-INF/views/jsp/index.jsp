@@ -106,7 +106,7 @@
                     <div class="info-box">
                         <span class="info-box-icon bg-green"><i class="fa fa-clock-o"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Scheduled Visits</span>
+                            <span class="info-box-text">Group Sch. Visits</span>
                             <span class="info-box-number">${newGroupVisits.size()}</span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
@@ -115,7 +115,7 @@
                     <div class="info-box">
                         <span class="info-box-icon bg-yellow"><i class="fa fa-clock-o"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Paid Visits</span>
+                            <span class="info-box-text">Group Paid Visits</span>
                             <span class="info-box-number">${groupVisits.size()}</span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->

@@ -26,6 +26,7 @@ function byGeolocation() {
                 $(".byGeolocation .noData").show();
                 $("#byGeolocation").hide();
             } else {
+                $(".byGeolocation .noData").hide();
                 $.each(result, function (key, value) {
                     colorPair = Colors.random();
                     data.push({
