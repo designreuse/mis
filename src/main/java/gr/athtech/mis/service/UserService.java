@@ -2,6 +2,7 @@ package gr.athtech.mis.service;
 
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
+import gr.athtech.mis.model.dto.VisitsCount;
 import gr.athtech.mis.repository.UserRepository;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,23 +29,33 @@ public class UserService {
     public Map<String, Integer> byGeolocationArea(Long medicalVisitorId) {
 
         String geoLocationName = "";
-        Map<String, Integer> byGeolocationArea = new HashMap<>();
+        Map<String, VisitsCount> byGeolocationAreaCount = new HashMap<>();
 
         User medicalVisitor = userRepository.findOne(medicalVisitorId);
 
         for (ScheduledVisit scheduledVisit : medicalVisitor.getScheduledVisits()) {
-            
+
             geoLocationName = scheduledVisit.getDoctor().getGeolocationArea().getName();
-            
-            if (byGeolocationArea.containsKey(geoLocationName)) {
-                
-                if("Paid".equals(scheduledVisit.getStatus())){
-                    
+
+            if (byGeolocationAreaCount.containsKey(geoLocationName)) {
+
+                if ("Paid".equals(scheduledVisit.getStatus())) {
+                    byGeolocationAreaCount.get(geoLocationName).setPaidVisitsCount(byGeolocationAreaCount.get(geoLocationName).getPaidVisitsCount() + 1);
+                } else {
+                    byGeolocationAreaCount.get(geoLocationName).setScheduledVisitsCount(byGeolocationAreaCount.get(geoLocationName).getScheduledVisitsCount() + 1);
                 }
-                byGeolocationArea.put(geoLocationName, byGeolocationArea.get(geoLocationName) + 1);
             } else {
-                byGeolocationArea.put(geoLocationName, 1);
+                byGeolocationAreaCount.put(geoLocationName, new VisitsCount(1, 1));
             }
+        }
+
+        Map<String, Integer> byGeolocationArea = new HashMap<>();
+
+        for (Map.Entry<String, VisitsCount> area : byGeolocationAreaCount.entrySet()) {
+            logger.debug(" ======================{},{}", area.getValue().getPaidVisitsCount(), area.getValue().getScheduledVisitsCount());
+            int percent = (area.getValue().getPaidVisitsCount() * 100) / area.getValue().getScheduledVisitsCount();
+
+            byGeolocationArea.put(area.getKey(), percent);
         }
 
         return byGeolocationArea;

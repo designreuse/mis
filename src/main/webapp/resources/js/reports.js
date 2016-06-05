@@ -30,12 +30,13 @@ function byGeolocation() {
                 $(".byGeolocation .expl").show();
                 $(".byGeolocation .noData").hide();
                 $.each(result, function (key, value) {
+                    console.log(value.scheduledVisitsCount)
                     colorPair = Colors.random();
                     data.push({
                         value: value,
                         color: Colors.pairs[colorPair][0],
                         highlight: Colors.pairs[colorPair][1],
-                        label: key
+                        label: key + " coverage %"
                     });
                 });
 
@@ -143,7 +144,7 @@ function initGeolocationChart(dataset) {
         animationEasing: "linear",
         animateRotate: true,
         animateScale: false,
-        responsive: true
+        responsive: true,
     });
 }
 

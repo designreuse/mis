@@ -77,6 +77,9 @@ dependencies {
 }
 
 
+javadoc {
+    source = sourceSets.main.allJava
+}
 
 //For Eclipse IDE only
 eclipse {

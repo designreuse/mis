@@ -6,6 +6,7 @@ import gr.athtech.mis.model.Group;
 import gr.athtech.mis.model.PaidVisit;
 import gr.athtech.mis.model.ScheduledVisit;
 import gr.athtech.mis.model.User;
+import gr.athtech.mis.model.dto.VisitsCount;
 import gr.athtech.mis.repository.CycleRepository;
 import gr.athtech.mis.repository.DoctorRepository;
 import gr.athtech.mis.repository.GroupRepository;
