@@ -40,7 +40,7 @@ public class UserService {
             if (byGeolocationAreaCount.containsKey(geoLocationName)) {
 
                 if ("Paid".equals(scheduledVisit.getStatus())) {
-                    byGeolocationAreaCount.get(geoLocationName).setPaidVisitsCount(byGeolocationAreaCount.get(geoLocationName).getPaidVisitsCount() + 1);
+                    byGeolocationAreaCount.get(geoLocationName).setPaidVisitsCount(1);
                 } else {
                     byGeolocationAreaCount.get(geoLocationName).setScheduledVisitsCount(byGeolocationAreaCount.get(geoLocationName).getScheduledVisitsCount() + 1);
                 }
@@ -52,7 +52,6 @@ public class UserService {
         Map<String, Integer> byGeolocationArea = new HashMap<>();
 
         for (Map.Entry<String, VisitsCount> area : byGeolocationAreaCount.entrySet()) {
-            logger.debug(" ======================{},{}", area.getValue().getPaidVisitsCount(), area.getValue().getScheduledVisitsCount());
             int percent = (area.getValue().getPaidVisitsCount() * 100) / area.getValue().getScheduledVisitsCount();
 
             byGeolocationArea.put(area.getKey(), percent);
