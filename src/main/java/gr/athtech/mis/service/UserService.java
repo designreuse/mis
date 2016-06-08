@@ -40,7 +40,7 @@ public class UserService {
             if (byGeolocationAreaCount.containsKey(geoLocationName)) {
 
                 if ("Paid".equals(scheduledVisit.getStatus())) {
-                    byGeolocationAreaCount.get(geoLocationName).setPaidVisitsCount(1);
+                    byGeolocationAreaCount.get(geoLocationName).setPaidVisitsCount(byGeolocationAreaCount.get(geoLocationName).getPaidVisitsCount()+1);
                 } else {
                     byGeolocationAreaCount.get(geoLocationName).setScheduledVisitsCount(byGeolocationAreaCount.get(geoLocationName).getScheduledVisitsCount() + 1);
                 }
